@@ -52,6 +52,70 @@ runtime guardrail before a model output is used in a real process.
 AOS addresses this category as a runtime assurance layer: evaluate an output or
 metadata, produce a conservative decision, and create an audit trail.
 
+## Explainable/Verifiable AI Control Layer
+
+The public demonstrator frames AOS as an explainable and verifiable AI control
+layer. It separates four different objects that should not be collapsed into
+one claim:
+
+- model output
+- AOS decision
+- human decision
+- clinical or operational claim
+
+The public core demonstrates a deterministic `PASS` / `WARN` / `BLOCK` gate,
+demo audit evidence, and a small Lean proof surface for abstract verdict logic.
+It does not prove model correctness, production audit security, or clinical
+validity.
+
+## Radiology Reference Scenario
+
+The reference medical scenario is AI-assisted brain tumor radiology triage:
+
+```text
+model output -> uncertainty -> AOS PASS/WARN/BLOCK
+  -> audit evidence -> human review or escalation
+```
+
+Radiology is referenced only as a domain-adapter example. It is not a product in
+this public repository and is not a medical-device or clinical-validation claim.
+
+The specialist radiology system can be understood as an example of how a
+domain-specific AOS profile could be built on top of the general control-layer
+pattern. In this public repository, it is used only as utility evidence for the
+architecture: one core control pattern can support multiple specialist systems.
+It is not published here as the full specialist system.
+
+## Offline Evaluation Evidence
+
+The repository includes aggregate local/offline evidence summaries for BraTS,
+TCGA_LGG-labeled local artifacts, and Yale Brain Mets artifacts where aggregate
+values were available. Missing fields are explicitly marked as
+`not available in current evidence`.
+
+No patient data, images, masks, DICOM/NIfTI files, checkpoints, local paths,
+private thresholds, or per-case records are redistributed.
+
+## Customer Value
+
+The customer value is not a better segmentation model claim. The value is a
+control layer around model outputs: explainable gating, audit evidence, human
+review triggers, escalation support, and a clearer separation between model
+behavior and workflow decisions.
+
+## Regulatory Readiness, Not Compliance
+
+This repository may help organize evidence for future regulatory work, but it
+does not claim EU AI Act compliance, MDR/MDSW compliance, CE marking, ISO
+certification, production readiness, or clinical evaluation completion.
+
+## Data Redistribution Disclaimer
+
+This public repository redistributes no medical datasets, patient files, scans,
+segmentations, masks, DICOM/NIfTI files, model checkpoints, or private audit
+records. Dataset provenance fields are included only when supported by current
+local evidence; otherwise they are marked as `not available in current evidence`.
+
 ## Boundary Claims
 
 This public demonstrator:
@@ -112,6 +176,25 @@ See:
 - [Commercialization direction](docs/COMMERCIALIZATION.md)
 - [Development transparency](docs/DEVELOPMENT_TRANSPARENCY.md)
 - [Clean-room test](docs/CLEAN_ROOM_TEST.md)
+- [Radiology reference system](docs/RADIOLOGY_REFERENCE_SYSTEM.md)
+- [Offline evaluation results](docs/OFFLINE_EVALUATION_RESULTS.md)
+- [Dataset provenance](docs/DATASET_PROVENANCE.md)
+- [Customer value](docs/CUSTOMER_VALUE.md)
+- [Regulatory readiness](docs/REGULATORY_READINESS.md)
+
+## Technical Advantage Evidence
+
+The public evidence layer compares the AOS demo gate with simple guardrail
+baselines on synthetic scenarios. It shows how a deterministic interval gate can
+block uncertainty-crossing cases that threshold-only, schema-only, or prompt-only
+guards may pass.
+
+See:
+
+- [Technical advantage](docs/TECHNICAL_ADVANTAGE.md)
+- [Benchmark summary](benchmarks/results/summary.md)
+- [Lean proof surface](lean/AOSPublicCore.lean)
+- [Radiology offline evidence JSON](evidence/radiology_offline_evaluation.json)
 
 ## Development Transparency
 
@@ -127,6 +210,9 @@ direction or technical ownership.
 python -m pip install -r requirements-dev.txt
 python -m ruff check .
 python -m pytest tests -q
+python benchmarks/run_benchmarks.py
+python -m json.tool benchmarks/results/metrics.json
+python -m json.tool evidence/radiology_offline_evaluation.json
 lake build AOSPublicCore
 python -m json.tool evidence/demonstrator_manifest.json
 ```

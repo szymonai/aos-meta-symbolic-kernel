@@ -1,0 +1,118 @@
+{
+  "schema_version": "radiology-offline-evidence/v1",
+  "claim_flags": {
+    "clinical_claim": false,
+    "medical_device_claim": false,
+    "regulatory_compliance_claim": false,
+    "data_redistributed_in_repo": false,
+    "production_ready_claim": false
+  },
+  "interpretation_boundary": {
+    "model_output": "segmentation or risk-related numeric output from a domain model",
+    "aos_decision": "PASS/WARN/BLOCK control decision over output metadata or uncertainty",
+    "human_decision": "radiologist or workflow-owner review outside this repository",
+    "clinical_claim": false
+  },
+  "offline_evaluations": [
+    {
+      "id": "local-brats-2024-aggregate",
+      "dataset_name": "BraTS 2024 Adult Glioma",
+      "sample_count": 10,
+      "split": "not available in current evidence",
+      "usage": "offline evaluation artifact only",
+      "metrics": {
+        "dice_mean": 0.1136,
+        "dice_std": 0.0693,
+        "dice_median": 0.1268,
+        "hd95_mean_mm": 47.85,
+        "hd95_max_mm": 62.41,
+        "sensitivity_recall": "not available in current evidence",
+        "specificity": "not available in current evidence",
+        "precision": "not available in current evidence",
+        "fnr": "not available in current evidence",
+        "fpr": "not available in current evidence",
+        "calibration_uncertainty": "not available in current evidence",
+        "baselines": "not available in current evidence"
+      },
+      "source_artifact": "EXTERNAL_VALIDATION_REPORT_2024.md",
+      "publication_note": "Aggregate metrics only. No image, mask, DICOM, NIfTI, checkpoint, local path, or per-case patient record is redistributed."
+    },
+    {
+      "id": "local-tcga-lgg-brats-pipeline-aggregate",
+      "dataset_name": "TCGA_LGG label in local BraTS pipeline artifact",
+      "sample_count": 88,
+      "split": "all",
+      "usage": "offline paired aggregate evaluation artifact only",
+      "metrics": {
+        "model_a_dice_mean": 0.1277,
+        "model_b_dice_mean": 0.1457,
+        "model_a_recall_mean": 0.3189,
+        "model_b_recall_mean": 0.4493,
+        "model_a_precision_mean": 0.1202,
+        "model_b_precision_mean": 0.0998,
+        "model_a_hd95_mean": 66.9153,
+        "model_b_hd95_mean": 67.9033,
+        "specificity": "not available in current evidence",
+        "fnr": "not available in current evidence",
+        "fpr": "not available in current evidence",
+        "calibration_uncertainty": "not available in current evidence",
+        "baselines": "model_a/model_b labels preserved only as anonymized aggregate comparators"
+      },
+      "source_artifact": "TCGA_LGG_EXTERNAL_VALIDATION.json",
+      "publication_note": "Aggregate metrics only. Local paths, hostnames, thresholds, hashes, and private labels are not redistributed."
+    },
+    {
+      "id": "local-yale-brain-mets-aggregate",
+      "dataset_name": "Yale Brain Mets Longitudinal",
+      "sample_count": 100,
+      "split": "not available in current evidence",
+      "usage": "offline aggregate artifact only",
+      "metrics": {
+        "dice_mean": 0.9279,
+        "hd95_mean_mm": 3.011,
+        "total_false_alarms": 7,
+        "sensitivity_recall": "not available in current evidence",
+        "specificity": "not available in current evidence",
+        "precision": "not available in current evidence",
+        "fnr": "not available in current evidence",
+        "fpr": "not available in current evidence",
+        "calibration_uncertainty": "not available in current evidence",
+        "baselines": "not available in current evidence"
+      },
+      "source_artifact": "final_yale_report_gold.json",
+      "publication_note": "Aggregate metrics only. Per-case identifiers, hashes, local paths, images, masks, DICOM/NIfTI files, and checkpoints are not redistributed."
+    }
+  ],
+  "dataset_provenance": [
+    {
+      "name": "BraTS 2024 Adult Glioma",
+      "version": "2024 label in local artifact",
+      "source": "not available in current evidence",
+      "access_date": "not available in current evidence",
+      "usage": "offline aggregate evaluation artifact",
+      "terms_license": "not available in current evidence",
+      "citations": "not available in current evidence",
+      "redistribution_status": "not redistributed in this repository"
+    },
+    {
+      "name": "TCGA_LGG label in local BraTS pipeline artifact",
+      "version": "not available in current evidence",
+      "source": "not available in current evidence",
+      "access_date": "not available in current evidence",
+      "usage": "offline aggregate evaluation artifact",
+      "terms_license": "not available in current evidence",
+      "citations": "not available in current evidence",
+      "redistribution_status": "not redistributed in this repository"
+    },
+    {
+      "name": "Yale Brain Mets Longitudinal",
+      "version": "not available in current evidence",
+      "source": "not available in current evidence",
+      "access_date": "not available in current evidence",
+      "usage": "offline aggregate evaluation artifact",
+      "terms_license": "not available in current evidence",
+      "citations": "not available in current evidence",
+      "redistribution_status": "not redistributed in this repository"
+    }
+  ]
+}

@@ -6,9 +6,12 @@
   "contains_real_clinical_thresholds": false,
   "contains_specialist_validation_stack": false,
   "claim_boundary": {
+    "clinical_claim": false,
+    "clinical_validation_claim": false,
     "external_validation_completed": false,
     "medical_device_claim": false,
-    "clinical_validation_claim": false,
+    "regulatory_compliance_claim": false,
     "production_runtime_claim": false
-  }
+  },
+  "data_redistributed_in_repo": false
 }

@@ -4,6 +4,9 @@ on:
   push:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -16,10 +19,16 @@ jobs:
         run: python -m pip install -r requirements-dev.txt
       - name: Ruff lint
         run: python -m ruff check .
+      - name: Run synthetic benchmarks
+        run: python benchmarks/run_benchmarks.py
+      - name: Validate benchmark metrics
+        run: python -m json.tool benchmarks/results/metrics.json > /dev/null
       - name: Python tests
         run: python -m pytest tests -q
       - name: Validate demonstrator manifest
         run: python -m json.tool evidence/demonstrator_manifest.json > /dev/null
+      - name: Validate radiology offline evidence
+        run: python -m json.tool evidence/radiology_offline_evaluation.json > /dev/null
       - name: Install Lean
         run: |
           curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh \
@@ -32,4 +41,4 @@ jobs:
             exit 1
           fi
       - name: Lean build
-        run: lake build AOSPublicCore
+        run: lake build

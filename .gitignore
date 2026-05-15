@@ -16,3 +16,24 @@ build/
 .env
 .env.*
 public_release_exports/
+
+# Medical or model artifacts must not be committed to the public demonstrator.
+data/
+datasets/
+images/
+masks/
+models/
+checkpoints/
+*.dcm
+*.dicom
+*.nii
+*.nii.gz
+*.nrrd
+*.mha
+*.mhd
+*.mgz
+*.ckpt
+*.pt
+*.pth
+*.onnx
+*.safetensors

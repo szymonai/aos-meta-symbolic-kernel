@@ -6,9 +6,8 @@ as `not available in current evidence`.
 
 | Dataset or artifact label | Version | Source | Access date | Usage | Terms/license | Citations | Redistribution status |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| BraTS 2024 Adult Glioma | 2024 label in local artifact | not available in current evidence | not available in current evidence | offline aggregate evaluation artifact | not available in current evidence | not available in current evidence | not redistributed in this repository |
-| TCGA_LGG label in local BraTS pipeline artifact | not available in current evidence | not available in current evidence | not available in current evidence | offline aggregate evaluation artifact | not available in current evidence | not available in current evidence | not redistributed in this repository |
-| Yale Brain Mets Longitudinal | not available in current evidence | not available in current evidence | not available in current evidence | offline aggregate evaluation artifact | not available in current evidence | not available in current evidence | not redistributed in this repository |
+| BraTS 2025 | not available in current public evidence | not available in current public evidence | not available in current public evidence | pending refreshed aggregate verification | not available in current public evidence | not available in current public evidence | not redistributed in this repository |
+| Older BraTS/TCGA_LGG/Yale local aggregate artifacts | historical/superseded | not available in current public evidence | not available in current public evidence | evidence inventory only, not current performance claim | not available in current public evidence | not available in current public evidence | not redistributed in this repository |
 
 ## Non-Redistribution
 

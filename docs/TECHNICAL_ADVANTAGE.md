@@ -47,6 +47,29 @@ This repository still does not prove:
 
 The Lean proof surface covers abstract verdict ordering and interval logic only.
 
+## Radiology Reference Scenario
+
+The radiology reference scenario uses the same control pattern:
+
+```text
+model output -> uncertainty -> AOS PASS/WARN/BLOCK
+  -> audit evidence -> human review/escalation
+```
+
+This makes the control layer explainable: reviewers can distinguish the model's
+numeric output from the AOS decision and from any later human decision. It also
+makes the control layer verifiable at the demonstrator level: the public Lean
+surface covers abstract verdict invariants, while the Python benchmark records
+deterministic replay and audit-digest presence.
+
+This remains a reference scenario only. It is not a clinical-validity,
+medical-device, regulatory-compliance, or production-readiness claim.
+
+The useful technical signal is that the same AOS pattern can be instantiated as
+a specialist radiology profile while preserving the separation between model
+output, control decision, audit evidence, and human review. That is utility
+evidence for the architecture, not publication of the private specialist system.
+
 ## Comparison
 
 | Approach | What It Checks | Handles Uncertainty | Audit Evidence | Formal Invariants | Expected Weakness |
@@ -62,4 +85,5 @@ See:
 
 - [Benchmark summary](../benchmarks/results/summary.md)
 - [Benchmark metrics JSON](../benchmarks/results/metrics.json)
+- [Radiology offline evidence](../evidence/radiology_offline_evaluation.json)
 - [Lean proof surface](../lean/AOSPublicCore.lean)

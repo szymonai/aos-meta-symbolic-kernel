@@ -27,6 +27,8 @@ jobs:
         run: python -m pytest tests -q
       - name: Validate demonstrator manifest
         run: python -m json.tool evidence/demonstrator_manifest.json > /dev/null
+      - name: Validate radiology offline evidence
+        run: python -m json.tool evidence/radiology_offline_evaluation.json > /dev/null
       - name: Install Lean
         run: |
           curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh \

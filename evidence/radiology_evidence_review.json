@@ -1,0 +1,121 @@
+{
+  "schema_version": "radiology-evidence-review/v1",
+  "claim_flags": {
+    "clinical_claim": false,
+    "clinical_validation_claim": false,
+    "medical_device_claim": false,
+    "regulatory_compliance_claim": false,
+    "production_ready_claim": false,
+    "sota_claim": false,
+    "sil_claim": false,
+    "data_redistributed_in_repo": false
+  },
+  "review_scope": {
+    "purpose": "bounded review of selected private radiology artifacts",
+    "public_role": "domain-adapter evidence inventory only",
+    "aos_role": "explainable/verifiable control layer around model outputs",
+    "kernel_positioning": "one domain-agnostic AOS control kernel can support many specialist profiles",
+    "radiology_instance": "Instance 01: AI-assisted brain tumor triage reference profile",
+    "radiology_product_claim": false
+  },
+  "public_milestones": {
+    "internal_cohort_n": 484,
+    "internal_cohort_dice_wt": 0.8108,
+    "internal_cohort_dice_et": 0.8033,
+    "internal_cohort_recall_et": 0.8065,
+    "dataset832_fold_label2_dice": 0.8843,
+    "dataset832_fold_label2_recall": 0.9085,
+    "dataset832_fold_label2_precision": 0.8665,
+    "dataset832_fold_sample_count": 2,
+    "formal_tasks_completed": 3292,
+    "formal_tasks_total": 3292,
+    "lake_root_build_exit_code": 0,
+    "manifest_payload_sha512": "c4124f59cec5d587a41563b7780a4e6b878a559b669ec293958ab04418899e1b580c1396905f3a731ac5009dab46220ccefce0699c93e65316a9b96133b89133",
+    "publication_boundary": "internal/offline evidence milestones only; not clinical validation, production readiness, regulatory compliance, SOTA, or SIL equivalence"
+  },
+  "shadow_benchmarking": {
+    "definition": "continuous comparison of model outputs, uncertainty signals, control envelopes, audit records, and formal artifacts",
+    "public_scope": "synthetic benchmarks, evidence JSON, and public SHA-512 integrity anchor",
+    "private_scope_withheld": [
+      "private thresholds",
+      "calibration curves",
+      "policy semantics",
+      "domain workflows",
+      "physical-vs-formal audit implementation"
+    ]
+  },
+  "verified_internal_artifacts": [
+    {
+      "id": "dataset832_fold0_validation_label2",
+      "source_artifact": "summary.json",
+      "dataset_label": "Dataset832_BraTS2024_GLI",
+      "sample_count": 2,
+      "label_mapping": "label 2 is SNFH in local dataset metadata",
+      "metrics": {
+        "dice": 0.8843,
+        "recall": 0.9085,
+        "precision": 0.8665
+      },
+      "publication_boundary": "selected small-fold model-output evidence only; not cohort-level performance; not published as Whole Tumor or BraTS 2025 evidence"
+    },
+    {
+      "id": "internal_cohort_report_mdr83",
+      "source_artifact": "CLINICAL_VALIDATION_REPORT_MDR83.md",
+      "sample_count": 484,
+      "metrics": {
+        "dice_wt": 0.8108,
+        "dice_et": 0.8033,
+        "dice_et_ci95_low": 0.786,
+        "dice_et_ci95_high": 0.8206,
+        "recall_sensitivity_et": 0.8065,
+        "outlier_count_et_dice_below_0_5": 36
+      },
+      "publication_boundary": "internal in-silico cohort report only; not clinical validation, certification, compliance, or production-readiness evidence"
+    },
+    {
+      "id": "private_formal_integrity_status",
+      "source_artifact": "verification_status.txt",
+      "formal_tasks_completed": 3292,
+      "formal_tasks_total": 3292,
+      "lake_root_build_exit_code": 0,
+      "manifest_algorithms": [
+        "SHA-512",
+        "Ed25519"
+      ],
+      "manifest_payload_sha512": "c4124f59cec5d587a41563b7780a4e6b878a559b669ec293958ab04418899e1b580c1396905f3a731ac5009dab46220ccefce0699c93e65316a9b96133b89133",
+      "audited_core_placeholder_count": 0,
+      "publication_boundary": "private formal-integrity evidence only; not Python-to-Lean refinement, segmentation correctness, clinical safety, or production audit proof"
+    }
+  ],
+  "not_confirmed_or_withheld": [
+    {
+      "claim": "Detection rate 92.56 percent as cohort-level radiology metric",
+      "status": "not confirmed in current public evidence"
+    },
+    {
+      "claim": "Recall 0.9085 as n=484 cohort sensitivity",
+      "status": "not confirmed; the n=484 internal report lists ET recall as 0.8065"
+    },
+    {
+      "claim": "BraTS 2025 current performance metrics",
+      "status": "not available in current public evidence"
+    },
+    {
+      "claim": "SOTA or broad comparative radiology performance superiority",
+      "status": "withheld; requires external comparison protocol and independent validation"
+    },
+    {
+      "claim": "SIL-equivalent safety",
+      "status": "withheld; not established by this public demonstrator"
+    },
+    {
+      "claim": "MDR, AI Act, CE, ISO, or medical-device compliance",
+      "status": "withheld; regulatory readiness only"
+    },
+    {
+      "claim": "Trust index or revenue ledger as market validation",
+      "status": "withheld; internal commercial metadata is not independent market evidence"
+    }
+  ],
+  "safe_public_summary": "Private internal artifacts include selected promising radiology model-output metrics and a successful formal-integrity build, but this repository does not publish clinical validation, production readiness, regulatory compliance, or SOTA claims."
+}

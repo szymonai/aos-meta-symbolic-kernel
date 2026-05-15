@@ -1,0 +1,11 @@
+AOS Limited Public Demonstrator
+
+Copyright (c) 2026 Szymon Hetnar. All rights reserved.
+
+This repository is a limited public demonstrator. It intentionally omits the
+proprietary AOS Core, specialist systems, policy semantics, calibration
+pipeline, private proof stack, optimization layers, private benchmarks, and
+commercial SDK/API.
+
+SzymonAI is the GitHub account name only. It is not the legal copyright holder
+unless separately stated.

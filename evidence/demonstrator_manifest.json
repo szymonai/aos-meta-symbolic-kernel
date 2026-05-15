@@ -1,0 +1,14 @@
+{
+  "schema_version": "limited-demonstrator/v1",
+  "status": "limited_public_proof_of_capability",
+  "contains_full_aos_core": false,
+  "contains_private_policy_logic": false,
+  "contains_real_clinical_thresholds": false,
+  "contains_specialist_validation_stack": false,
+  "claim_boundary": {
+    "external_validation_completed": false,
+    "medical_device_claim": false,
+    "clinical_validation_claim": false,
+    "production_runtime_claim": false
+  }
+}

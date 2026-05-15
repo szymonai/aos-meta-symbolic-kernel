@@ -1,0 +1,35 @@
+name: AOS Limited Demonstrator CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install development dependencies
+        run: python -m pip install -r requirements-dev.txt
+      - name: Ruff lint
+        run: python -m ruff check .
+      - name: Python tests
+        run: python -m pytest tests -q
+      - name: Validate demonstrator manifest
+        run: python -m json.tool evidence/demonstrator_manifest.json > /dev/null
+      - name: Install Lean
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh \
+            | sh -s -- -y --default-toolchain "$(cat lean-toolchain)"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Lean placeholder scan
+        run: |
+          if grep -R -nE '\b(admit|sorry)\b' lean lakefile.lean; then
+            echo "Lean proof placeholder detected"
+            exit 1
+          fi
+      - name: Lean build
+        run: lake build AOSPublicCore

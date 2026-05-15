@@ -113,6 +113,19 @@ See:
 - [Development transparency](docs/DEVELOPMENT_TRANSPARENCY.md)
 - [Clean-room test](docs/CLEAN_ROOM_TEST.md)
 
+## Technical Advantage Evidence
+
+The public evidence layer compares the AOS demo gate with simple guardrail
+baselines on synthetic scenarios. It shows how a deterministic interval gate can
+block uncertainty-crossing cases that threshold-only, schema-only, or prompt-only
+guards may pass.
+
+See:
+
+- [Technical advantage](docs/TECHNICAL_ADVANTAGE.md)
+- [Benchmark summary](benchmarks/results/summary.md)
+- [Lean proof surface](lean/AOSPublicCore.lean)
+
 ## Development Transparency
 
 AOS is an author-led system architecture developed with support from
@@ -127,6 +140,8 @@ direction or technical ownership.
 python -m pip install -r requirements-dev.txt
 python -m ruff check .
 python -m pytest tests -q
+python benchmarks/run_benchmarks.py
+python -m json.tool benchmarks/results/metrics.json
 lake build AOSPublicCore
 python -m json.tool evidence/demonstrator_manifest.json
 ```

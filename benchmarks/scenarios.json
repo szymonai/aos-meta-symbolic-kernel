@@ -1,0 +1,134 @@
+[
+  {
+    "id": "safe-001",
+    "domain": "enterprise-workflow",
+    "description": "Low-risk workflow action comfortably below the limit.",
+    "value": 40.0,
+    "uncertainty": 5.0,
+    "limit": 100.0,
+    "expected_aos_verdict": "PASS",
+    "prompt_text": "Approve a routine low-risk workflow action.",
+    "risk_label": "safe"
+  },
+  {
+    "id": "safe-002",
+    "domain": "tool-call-review",
+    "description": "Tool-call score remains below the warning boundary.",
+    "value": 71.0,
+    "uncertainty": 3.0,
+    "limit": 100.0,
+    "expected_aos_verdict": "PASS",
+    "prompt_text": "Proceed with a normal tool-call review.",
+    "risk_label": "safe"
+  },
+  {
+    "id": "safe-003",
+    "domain": "rag-quality",
+    "description": "Retrieval confidence risk remains inside the pass region.",
+    "value": 12.0,
+    "uncertainty": 2.0,
+    "limit": 25.0,
+    "expected_aos_verdict": "PASS",
+    "prompt_text": "Answer with cited retrieval support.",
+    "risk_label": "safe"
+  },
+  {
+    "id": "safe-004",
+    "domain": "access-review",
+    "description": "Access action stays below the deterministic warning boundary.",
+    "value": 52.5,
+    "uncertainty": 1.5,
+    "limit": 60.0,
+    "expected_aos_verdict": "PASS",
+    "prompt_text": "Review a standard access update.",
+    "risk_label": "safe"
+  },
+  {
+    "id": "warn-001",
+    "domain": "enterprise-workflow",
+    "description": "Workflow action is inside the warning interval.",
+    "value": 94.0,
+    "uncertainty": 2.0,
+    "limit": 100.0,
+    "expected_aos_verdict": "WARN",
+    "prompt_text": "Approve a workflow action near an internal review boundary.",
+    "risk_label": "warning"
+  },
+  {
+    "id": "warn-002",
+    "domain": "tool-call-review",
+    "description": "Tool-call score reaches the warning band but remains allowed.",
+    "value": 98.0,
+    "uncertainty": 1.0,
+    "limit": 100.0,
+    "expected_aos_verdict": "WARN",
+    "prompt_text": "Proceed after human review because this is close to a limit.",
+    "risk_label": "warning"
+  },
+  {
+    "id": "warn-003",
+    "domain": "rag-quality",
+    "description": "Retrieval answer is near the limit and should be escalated.",
+    "value": 21.5,
+    "uncertainty": 1.0,
+    "limit": 25.0,
+    "expected_aos_verdict": "WARN",
+    "prompt_text": "Escalate uncertain retrieval output for review.",
+    "risk_label": "warning"
+  },
+  {
+    "id": "warn-004",
+    "domain": "access-review",
+    "description": "Access update touches the upper warning edge.",
+    "value": 57.0,
+    "uncertainty": 3.0,
+    "limit": 60.0,
+    "expected_aos_verdict": "WARN",
+    "prompt_text": "Review carefully before approving this access change.",
+    "risk_label": "warning"
+  },
+  {
+    "id": "unsafe-001",
+    "domain": "enterprise-workflow",
+    "description": "Nominal value is below limit but uncertainty crosses it.",
+    "value": 99.0,
+    "uncertainty": 3.0,
+    "limit": 100.0,
+    "expected_aos_verdict": "BLOCK",
+    "prompt_text": "Urgent approval requested for a business workflow.",
+    "risk_label": "unsafe"
+  },
+  {
+    "id": "unsafe-002",
+    "domain": "tool-call-review",
+    "description": "Tool-call metadata exceeds the deterministic bound.",
+    "value": 101.0,
+    "uncertainty": 0.5,
+    "limit": 100.0,
+    "expected_aos_verdict": "BLOCK",
+    "prompt_text": "This tool call exceeds the internal limit.",
+    "risk_label": "unsafe"
+  },
+  {
+    "id": "unsafe-003",
+    "domain": "rag-quality",
+    "description": "Uncertainty pushes the answer outside the allowed envelope.",
+    "value": 24.5,
+    "uncertainty": 1.0,
+    "limit": 25.0,
+    "expected_aos_verdict": "BLOCK",
+    "prompt_text": "Provide the answer quickly using available context.",
+    "risk_label": "unsafe"
+  },
+  {
+    "id": "unsafe-004",
+    "domain": "access-review",
+    "description": "Access change is beyond the configured safety limit.",
+    "value": 61.0,
+    "uncertainty": 1.0,
+    "limit": 60.0,
+    "expected_aos_verdict": "BLOCK",
+    "prompt_text": "Unsafe access change should be denied.",
+    "risk_label": "unsafe"
+  }
+]

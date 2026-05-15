@@ -92,4 +92,5 @@ See:
 - [Benchmark summary](../benchmarks/results/summary.md)
 - [Benchmark metrics JSON](../benchmarks/results/metrics.json)
 - [Radiology offline evidence](../evidence/radiology_offline_evaluation.json)
+- [Radiology evidence review](RADIOLOGY_EVIDENCE_REVIEW.md)
 - [Lean proof surface](../lean/AOSPublicCore.lean)

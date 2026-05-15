@@ -47,15 +47,20 @@ workflow policy.
 
 ## Current Metrics Boundary
 
-This public repository does not publish active radiology performance metrics as
-current results. Updated internal results, including any BraTS 2025 runs, should
-be published only after a clean aggregate evidence packet is available. The
-packet must include dataset provenance, split definition, sample count,
-calibration method, baseline definition, reproducibility metadata, and explicit
-non-claim flags.
+This public repository includes a sanitized evidence review for selected
+private artifacts. The review separates a small fold validation summary, an
+internal cohort report, and private formal-integrity status. Those items are
+evidence inventory, not clinical validation or product evidence.
 
-This avoids presenting historical or superseded metrics as the current system
-state.
+Updated internal results, including any BraTS 2025 runs, should be published
+only after a clean aggregate evidence packet is available. The packet must
+include dataset provenance, split definition, sample count, calibration method,
+baseline definition, reproducibility metadata, and explicit non-claim flags.
+
+This avoids presenting historical, partial, or superseded metrics as the
+current system state.
+
+See [Radiology evidence review](RADIOLOGY_EVIDENCE_REVIEW.md).
 
 ## Specialist System Interpretation
 

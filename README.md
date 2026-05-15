@@ -88,14 +88,20 @@ It is not published here as the full specialist system.
 
 ## Offline Evaluation Evidence
 
-The public repository does not currently publish active radiology performance
-metrics as current results. Earlier aggregate artifacts are treated as
-historical and superseded, because newer internal runs may exist and must be
-verified with dataset provenance, split definition, sample count, calibration
-method, baselines, and reproducible summary artifacts before publication.
+The public repository now includes a sanitized evidence review for selected
+private radiology artifacts. It records which values were locally confirmed,
+which values belong to a small validation fold, which values belong to an
+internal cohort report, and which claims remain withheld.
 
-BraTS 2025 results are therefore marked as `not available in current public
-evidence` until a clean, aggregate-only evidence packet is prepared.
+The review does not publish a clinical performance claim. It also does not
+claim SOTA, medical-device status, MDR/AI Act compliance, SIL equivalence,
+production readiness, or external validation.
+
+BraTS 2025 current results remain marked as `not available in current public
+evidence` until a clean, aggregate-only evidence packet is prepared. The
+verified local validation artifact currently referenced in the public evidence
+review is a Dataset832/BraTS2024-labelled fold summary, not a confirmed BraTS
+2025 aggregate package.
 
 No patient data, images, masks, DICOM/NIfTI files, checkpoints, local paths,
 private thresholds, or per-case records are redistributed.
@@ -191,6 +197,7 @@ See:
 - [Clean-room test](docs/CLEAN_ROOM_TEST.md)
 - [Radiology reference system](docs/RADIOLOGY_REFERENCE_SYSTEM.md)
 - [Offline evaluation results](docs/OFFLINE_EVALUATION_RESULTS.md)
+- [Radiology evidence review](docs/RADIOLOGY_EVIDENCE_REVIEW.md)
 - [Dataset provenance](docs/DATASET_PROVENANCE.md)
 - [Customer value](docs/CUSTOMER_VALUE.md)
 - [Regulatory readiness](docs/REGULATORY_READINESS.md)
@@ -209,6 +216,7 @@ See:
 - [Benchmark summary](benchmarks/results/summary.md)
 - [Lean proof surface](lean/AOSPublicCore.lean)
 - [Radiology offline evidence JSON](evidence/radiology_offline_evaluation.json)
+- [Radiology evidence review JSON](evidence/radiology_evidence_review.json)
 
 ## Development Transparency
 
@@ -227,6 +235,7 @@ python -m pytest tests -q
 python benchmarks/run_benchmarks.py
 python -m json.tool benchmarks/results/metrics.json
 python -m json.tool evidence/radiology_offline_evaluation.json
+python -m json.tool evidence/radiology_evidence_review.json
 lake build AOSPublicCore
 python -m json.tool evidence/demonstrator_manifest.json
 ```

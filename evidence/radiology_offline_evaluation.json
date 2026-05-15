@@ -15,9 +15,10 @@
     "clinical_claim": false
   },
   "current_public_evidence_status": {
-    "radiology_metrics_publication_status": "withheld pending refreshed aggregate verification",
+    "radiology_metrics_publication_status": "sanitized internal evidence review only",
     "brats_2025_results": "not available in current public evidence",
-    "reason": "Earlier local aggregate artifacts are historical and may be superseded by newer internal runs. Updated public metrics require a clean aggregate evidence packet with provenance, split definition, sample count, calibration method, baselines, and reproducibility metadata.",
+    "reason": "Selected private artifacts were reviewed, but public interpretation remains limited to internal offline evidence inventory. Updated current metrics require a clean aggregate evidence packet with provenance, split definition, sample count, calibration method, baselines, and reproducibility metadata.",
+    "evidence_review": "evidence/radiology_evidence_review.json",
     "publication_policy": "Do not publish stale or unproven radiology performance numbers as current results."
   },
   "historical_artifacts": [

@@ -67,6 +67,7 @@ def load_json(relative_path: str) -> dict[str, object]:
 def test_evidence_json_files_are_valid_and_claim_flags_are_false() -> None:
     manifest = load_json("evidence/demonstrator_manifest.json")
     radiology = load_json("evidence/radiology_offline_evaluation.json")
+    radiology_review = load_json("evidence/radiology_evidence_review.json")
 
     claim_boundary = manifest["claim_boundary"]
     assert isinstance(claim_boundary, dict)
@@ -99,6 +100,28 @@ def test_evidence_json_files_are_valid_and_claim_flags_are_false() -> None:
     )
     assert "offline_evaluations" not in radiology
 
+    review_flags = radiology_review["claim_flags"]
+    assert isinstance(review_flags, dict)
+    for key in (
+        "clinical_claim",
+        "clinical_validation_claim",
+        "medical_device_claim",
+        "regulatory_compliance_claim",
+        "production_ready_claim",
+        "sota_claim",
+        "sil_claim",
+        "data_redistributed_in_repo",
+    ):
+        assert review_flags[key] is False
+
+    reviewed = radiology_review["verified_internal_artifacts"]
+    assert isinstance(reviewed, list)
+    assert {item["id"] for item in reviewed if isinstance(item, dict)} == {
+        "dataset832_fold0_validation_label2",
+        "internal_cohort_report_mdr83",
+        "private_formal_integrity_status",
+    }
+
 
 def test_readme_links_public_evidence_docs() -> None:
     readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
@@ -106,12 +129,14 @@ def test_readme_links_public_evidence_docs() -> None:
     for link in (
         "docs/RADIOLOGY_REFERENCE_SYSTEM.md",
         "docs/OFFLINE_EVALUATION_RESULTS.md",
+        "docs/RADIOLOGY_EVIDENCE_REVIEW.md",
         "docs/DATASET_PROVENANCE.md",
         "docs/CUSTOMER_VALUE.md",
         "docs/REGULATORY_READINESS.md",
         "docs/CALIBRATION_AND_OPTIMIZATION.md",
         "docs/TECHNICAL_ADVANTAGE.md",
         "evidence/radiology_offline_evaluation.json",
+        "evidence/radiology_evidence_review.json",
     ):
         assert link in readme
 

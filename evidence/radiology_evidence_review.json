@@ -14,7 +14,35 @@
     "purpose": "sanitized review of selected private radiology artifacts",
     "public_role": "domain-adapter evidence inventory only",
     "aos_role": "explainable/verifiable control layer around model outputs",
+    "kernel_positioning": "one domain-agnostic AOS control kernel can support many specialist profiles",
+    "radiology_instance": "Instance 01: AI-assisted brain tumor triage reference profile",
     "radiology_product_claim": false
+  },
+  "public_milestones": {
+    "internal_cohort_n": 484,
+    "internal_cohort_dice_wt": 0.8108,
+    "internal_cohort_dice_et": 0.8033,
+    "internal_cohort_recall_et": 0.8065,
+    "dataset832_fold_label2_dice": 0.8843,
+    "dataset832_fold_label2_recall": 0.9085,
+    "dataset832_fold_label2_precision": 0.8665,
+    "dataset832_fold_sample_count": 2,
+    "formal_tasks_completed": 3292,
+    "formal_tasks_total": 3292,
+    "lake_root_build_exit_code": 0,
+    "manifest_payload_sha512": "c4124f59cec5d587a41563b7780a4e6b878a559b669ec293958ab04418899e1b580c1396905f3a731ac5009dab46220ccefce0699c93e65316a9b96133b89133",
+    "publication_boundary": "internal/offline evidence milestones only; not clinical validation, production readiness, regulatory compliance, SOTA, or SIL equivalence"
+  },
+  "shadow_benchmarking": {
+    "definition": "continuous comparison of model outputs, uncertainty signals, control envelopes, audit records, and formal artifacts",
+    "public_scope": "synthetic benchmarks, evidence JSON, and public SHA-512 integrity anchor",
+    "private_scope_withheld": [
+      "private thresholds",
+      "calibration curves",
+      "policy semantics",
+      "domain workflows",
+      "physical-vs-formal audit implementation"
+    ]
   },
   "verified_internal_artifacts": [
     {
@@ -54,6 +82,7 @@
         "SHA-512",
         "Ed25519"
       ],
+      "manifest_payload_sha512": "c4124f59cec5d587a41563b7780a4e6b878a559b669ec293958ab04418899e1b580c1396905f3a731ac5009dab46220ccefce0699c93e65316a9b96133b89133",
       "audited_core_placeholder_count": 0,
       "publication_boundary": "private formal-integrity evidence only; not Python-to-Lean refinement, segmentation correctness, clinical safety, or production audit proof"
     }

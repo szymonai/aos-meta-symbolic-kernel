@@ -8,6 +8,21 @@ Radiology remains a domain-adapter example. It is not a product in this public
 repository and is not a medical-device, clinical-validation, MDR compliance,
 SIL, SOTA, or production-readiness claim.
 
+## Public Milestones
+
+The public repository can safely disclose selected milestones when they remain
+bounded as internal/offline evidence:
+
+- Internal n=484 cohort report: Dice WT `0.8108`, Dice ET `0.8033`, ET recall
+  `0.8065`.
+- Selected Dataset832 fold artifact: label-2 Dice `0.8843`, label-2 recall
+  `0.9085`, label-2 precision `0.8665` on 2 validation cases.
+- Formal-integrity status: Lean/Lake `3292/3292` tasks, root build exit code
+  `0`, signed SHA-512/Ed25519 manifest metadata.
+
+The `0.8843` fold value is not relabeled here as Whole Tumor cohort
+performance. The n=484 report milestone for Whole Tumor is `0.8108`.
+
 ## Verified Internal Artifacts
 
 | Artifact class | Locally confirmed values | Public interpretation |
@@ -28,6 +43,29 @@ The following items were not accepted as public claims:
 - MDR, AI Act, CE, ISO, or medical-device compliance.
 - Trust-index or revenue-ledger values as independent market validation.
 - Domain-specific private audit examples as production-grade public signatures.
+
+## Integrity Anchor
+
+The private formal-integrity status references a SHA-512 payload hash for the
+latest reviewed manifest snapshot:
+
+```text
+c4124f59cec5d587a41563b7780a4e6b878a559b669ec293958ab04418899e1b580c1396905f3a731ac5009dab46220ccefce0699c93e65316a9b96133b89133
+```
+
+This is a public anchor only. It does not expose weights, data, thresholds,
+private policies, proof sources, or the manifest body.
+
+## Shadow Benchmarking
+
+Shadow benchmarking is the continuous comparison of model outputs, uncertainty
+signals, control envelopes, audit records, and formal artifacts before any
+claim of deployment readiness. It is useful because AOS is a control layer over
+model use rather than a model-only benchmark.
+
+In this public repository, shadow benchmarking is represented only by synthetic
+benchmarks, evidence JSON, and the integrity anchor above. Private
+physical-vs-formal audit workflows are not published.
 
 ## Calibration And Optimization Boundary
 

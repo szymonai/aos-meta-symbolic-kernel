@@ -6,12 +6,14 @@ policy semantics, specialist adapters, private proof stack, or NDA materials.
 
 ## Technical Thesis
 
-AOS is demonstrated here as a small deterministic runtime assurance pattern:
+AOS is demonstrated here as a small deterministic runtime assurance pattern and
+positioned as a universal control-kernel architecture:
 
 ```text
+one domain-agnostic AOS kernel -> many specialist profiles
+
 model output + uncertainty -> deterministic gate -> PASS / WARN / BLOCK
-                                  -> audit evidence
-                                  -> abstract formal invariants
+  -> audit evidence -> abstract formal invariants
 ```
 
 The advantage over simple guardrails is not that the public demonstrator is a
@@ -20,6 +22,11 @@ production system. The advantage is the combined control pattern:
 - a deterministic runtime gate that evaluates uncertainty before use
 - audit evidence attached to each demo decision
 - formal invariants over the abstract verdict logic
+- a repeatable path from one control kernel to many specialist instances
+
+The radiology reference scenario is best read as Instance 01: a specialist
+profile demonstrating the utility of the control layer. It is not the only
+target domain and it is not the full private specialist product.
 
 ## Demonstrator Evidence Scope
 
@@ -46,6 +53,22 @@ This repository still does not prove:
 - correctness of an upstream AI model
 
 The Lean proof surface covers abstract verdict ordering and interval logic only.
+
+## Shadow Benchmarking
+
+Shadow benchmarking means running model outputs and workflow decisions against
+AOS control envelopes while preserving a strict separation between:
+
+- model performance metrics
+- AOS control decisions
+- formal-integrity artifacts
+- human or operational decisions
+- clinical, regulatory, or production claims
+
+The public demonstrator shows this idea through synthetic benchmarks and
+machine-readable evidence files. The private system can extend the same
+discipline into continuous physical-vs-formal audit without publishing private
+thresholds, calibration logic, policy semantics, or domain workflows.
 
 ## Radiology Reference Scenario
 

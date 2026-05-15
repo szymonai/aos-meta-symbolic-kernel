@@ -44,6 +44,8 @@ FORBIDDEN_TEXT_PATTERNS = [
         r"YALE-\d",
         r"GLI24_\d",
         r"BraTS-GLI-\d",
+        "SIL-3 " + "equivalent",
+        "SIL-3 " + "equivalence",
     )
 ]
 
@@ -122,6 +124,19 @@ def test_evidence_json_files_are_valid_and_claim_flags_are_false() -> None:
         "private_formal_integrity_status",
     }
 
+    milestones = radiology_review["public_milestones"]
+    assert isinstance(milestones, dict)
+    assert milestones["internal_cohort_dice_wt"] == 0.8108
+    assert milestones["internal_cohort_dice_et"] == 0.8033
+    assert milestones["dataset832_fold_label2_dice"] == 0.8843
+    assert milestones["dataset832_fold_label2_recall"] == 0.9085
+    assert milestones["formal_tasks_completed"] == 3292
+
+    manifest_hash = milestones["manifest_payload_sha512"]
+    assert isinstance(manifest_hash, str)
+    assert len(manifest_hash) == 128
+    assert all(character in "0123456789abcdef" for character in manifest_hash)
+
 
 def test_readme_links_public_evidence_docs() -> None:
     readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
@@ -130,6 +145,7 @@ def test_readme_links_public_evidence_docs() -> None:
         "docs/RADIOLOGY_REFERENCE_SYSTEM.md",
         "docs/OFFLINE_EVALUATION_RESULTS.md",
         "docs/RADIOLOGY_EVIDENCE_REVIEW.md",
+        "docs/UNIVERSAL_KERNEL_POSITIONING.md",
         "docs/DATASET_PROVENANCE.md",
         "docs/CUSTOMER_VALUE.md",
         "docs/REGULATORY_READINESS.md",

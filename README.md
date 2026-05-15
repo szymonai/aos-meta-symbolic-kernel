@@ -15,6 +15,28 @@ AOS is not another AI model. AOS is a control layer around AI model outputs.
 The goal is to help convert uncertain model output into auditable decisions:
 allow, warn, block, or escalate.
 
+## Universal AOS Kernel
+
+The public positioning is:
+
+```text
+one domain-agnostic control kernel -> many specialist profiles
+```
+
+AOS is intended as a sector-agnostic runtime assurance kernel. A specialist
+profile can adapt the same control pattern to a domain:
+
+```text
+model output -> uncertainty or quality signal -> deterministic gate
+  -> audit evidence -> human review, escalation, or workflow hold
+```
+
+Radiology is treated here as **Instance 01**: a reference specialist profile for
+AI-assisted brain tumor triage. Other profiles could target LLM/RAG workflows,
+industrial monitoring, enterprise approvals, cyber-defense, edge systems, or
+other regulated decision workflows. This public repository does not publish
+those specialist products or the private AOS Core.
+
 ## What Is Public Here
 
 This repository contains only:
@@ -93,6 +115,15 @@ private radiology artifacts. It records which values were locally confirmed,
 which values belong to a small validation fold, which values belong to an
 internal cohort report, and which claims remain withheld.
 
+Public evidence milestones:
+
+- internal n=484 cohort report: Dice WT `0.8108`, Dice ET `0.8033`, ET recall
+  `0.8065`;
+- selected Dataset832 fold artifact: label-2 Dice `0.8843`, label-2 recall
+  `0.9085`, label-2 precision `0.8665` on 2 validation cases;
+- formal-integrity status: Lean/Lake `3292/3292` tasks, root build exit code
+  `0`, and public SHA-512 anchor for the private integrity manifest.
+
 The review does not publish a clinical performance claim. It also does not
 claim SOTA, medical-device status, MDR/AI Act compliance, SIL equivalence,
 production readiness, or external validation.
@@ -112,6 +143,11 @@ The customer value is not a better segmentation model claim. The value is a
 control layer around model outputs: explainable gating, audit evidence, human
 review triggers, escalation support, and a clearer separation between model
 behavior and workflow decisions.
+
+The broader commercial signal is scalability: one control kernel can support
+many specialist profiles. The public demonstrator shows the repeatable shape of
+the control layer; private variants would add domain calibration, policy
+semantics, integration contracts, evidence stores, and deployment optimization.
 
 ## Regulatory Readiness, Not Compliance
 
@@ -182,6 +218,26 @@ public demonstrator only describes this capability at a high level. It does not
 publish calibration curves, real clinical thresholds, benchmark traces,
 deployment settings, or low-level optimization code.
 
+## Shadow Benchmarking
+
+Shadow benchmarking means evaluating model outputs and workflow decisions
+against AOS control envelopes without claiming autonomous clinical or regulated
+operation. In the public repository, this is represented by synthetic benchmark
+comparisons, evidence JSON, and a public SHA-512 integrity anchor. In the
+private system, the same idea can support continuous physical-vs-formal audit:
+model outputs, uncertainty, policy boundaries, formal artifacts, and audit
+records are compared over time without exposing private thresholds or data.
+
+The current public SHA-512 integrity anchor is:
+
+```text
+c4124f59cec5d587a41563b7780a4e6b878a559b669ec293958ab04418899e1b580c1396905f3a731ac5009dab46220ccefce0699c93e65316a9b96133b89133
+```
+
+This hash is evidence of a private manifest snapshot. It is not the manifest,
+not a model weight hash, not a clinical validation claim, and not a production
+signature scheme.
+
 ## Radiology Note
 
 Radiology is referenced only as a domain-adapter example. It is not a product in
@@ -192,6 +248,7 @@ this public repository and is not a medical-device or clinical-validation claim.
 See:
 
 - [Public boundary](docs/PUBLIC_BOUNDARY.md)
+- [Universal kernel positioning](docs/UNIVERSAL_KERNEL_POSITIONING.md)
 - [Commercialization direction](docs/COMMERCIALIZATION.md)
 - [Development transparency](docs/DEVELOPMENT_TRANSPARENCY.md)
 - [Clean-room test](docs/CLEAN_ROOM_TEST.md)
@@ -213,6 +270,7 @@ guards may pass.
 See:
 
 - [Technical advantage](docs/TECHNICAL_ADVANTAGE.md)
+- [Universal kernel positioning](docs/UNIVERSAL_KERNEL_POSITIONING.md)
 - [Benchmark summary](benchmarks/results/summary.md)
 - [Lean proof surface](lean/AOSPublicCore.lean)
 - [Radiology offline evidence JSON](evidence/radiology_offline_evaluation.json)

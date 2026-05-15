@@ -16,6 +16,11 @@ It separates small-fold validation metrics, an internal cohort report, and
 private formal-integrity evidence. None of these are published as clinical
 validation, compliance, production readiness, SOTA, or medical-device evidence.
 
+The safe public milestone is the internal n=484 cohort Dice WT `0.8108`, with
+Dice ET `0.8033` and ET recall `0.8065`. A separate Dataset832 fold artifact
+shows label-2 Dice `0.8843` and label-2 recall `0.9085` on 2 validation cases;
+it is not relabeled as cohort-level Whole Tumor performance.
+
 | Evidence item | Current public status | Reason |
 | --- | --- | --- |
 | Dataset832/BraTS2024-labelled fold validation summary | selected internal artifact reviewed | Confirms label-2 Dice 0.8843, recall 0.9085, precision 0.8665 on 2 validation cases; this is not a cohort-level result and not BraTS 2025 evidence |

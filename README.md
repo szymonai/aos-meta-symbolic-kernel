@@ -88,10 +88,14 @@ It is not published here as the full specialist system.
 
 ## Offline Evaluation Evidence
 
-The repository includes aggregate local/offline evidence summaries for BraTS,
-TCGA_LGG-labeled local artifacts, and Yale Brain Mets artifacts where aggregate
-values were available. Missing fields are explicitly marked as
-`not available in current evidence`.
+The public repository does not currently publish active radiology performance
+metrics as current results. Earlier aggregate artifacts are treated as
+historical and superseded, because newer internal runs may exist and must be
+verified with dataset provenance, split definition, sample count, calibration
+method, baselines, and reproducible summary artifacts before publication.
+
+BraTS 2025 results are therefore marked as `not available in current public
+evidence` until a clean, aggregate-only evidence packet is prepared.
 
 No patient data, images, masks, DICOM/NIfTI files, checkpoints, local paths,
 private thresholds, or per-case records are redistributed.
@@ -163,6 +167,15 @@ Private/commercial variants may support multi-level runtime optimization across
 Python, C++, CUDA/PTX, assembler-level, or other low-level execution layers.
 No optimization code, benchmark, or implementation detail is published here.
 
+## Calibration And Optimization
+
+In the private system, calibration and optimization are part of the specialist
+profile lifecycle: model output quality, uncertainty, control thresholds,
+latency, throughput, and deployment envelope can be tuned per domain. The
+public demonstrator only describes this capability at a high level. It does not
+publish calibration curves, real clinical thresholds, benchmark traces,
+deployment settings, or low-level optimization code.
+
 ## Radiology Note
 
 Radiology is referenced only as a domain-adapter example. It is not a product in
@@ -181,6 +194,7 @@ See:
 - [Dataset provenance](docs/DATASET_PROVENANCE.md)
 - [Customer value](docs/CUSTOMER_VALUE.md)
 - [Regulatory readiness](docs/REGULATORY_READINESS.md)
+- [Calibration and optimization](docs/CALIBRATION_AND_OPTIMIZATION.md)
 
 ## Technical Advantage Evidence
 

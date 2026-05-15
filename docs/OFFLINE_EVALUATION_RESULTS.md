@@ -9,13 +9,36 @@ The repository intentionally publishes only aggregate values. It does not
 redistribute patient data, images, masks, DICOM/NIfTI files, checkpoints,
 per-case records, local paths, private thresholds, or private audit logs.
 
-## Available Aggregate Evidence
+## Current Public Evidence Status
 
-| Evidence item | Sample count | Split | Confirmed metrics | Missing metrics |
-| --- | ---: | --- | --- | --- |
-| BraTS 2024 Adult Glioma aggregate | 10 | not available in current evidence | Dice mean 0.1136, Dice std 0.0693, Dice median 0.1268, HD95 mean 47.85 mm, HD95 max 62.41 mm | sensitivity/recall, specificity, precision, FNR/FPR, calibration/uncertainty, baselines |
-| TCGA_LGG-labeled local BraTS pipeline aggregate | 88 | all | Model A/B Dice mean 0.1277/0.1457, recall mean 0.3189/0.4493, precision mean 0.1202/0.0998, HD95 mean 66.9153/67.9033 | specificity, FNR/FPR, calibration/uncertainty, named baselines |
-| Yale Brain Mets aggregate | 100 | not available in current evidence | Dice mean 0.9279, HD95 mean 3.011 mm, total false alarms 7 | sensitivity/recall, specificity, precision, FNR/FPR, calibration/uncertainty, baselines |
+The current public repository does not publish radiology performance numbers as
+active results. Earlier local aggregates found during preparation are treated as
+historical, superseded artifacts and are not used as current performance
+evidence.
+
+| Evidence item | Current public status | Reason |
+| --- | --- | --- |
+| BraTS 2025 current results | not available in current public evidence | A clean aggregate artifact with dataset provenance, split, sample count, metrics, calibration method, baselines, and reproducibility metadata is not present in this public repo |
+| Older BraTS/TCGA_LGG/Yale aggregate artifacts | historical/superseded, not current result claims | Newer internal runs may exist; publishing stale numbers would misrepresent the current system |
+| Calibration and uncertainty evidence | high-level capability only | Private calibration curves, thresholds, and policy logic are not public |
+| Optimization and runtime evidence | high-level capability only | Private benchmark traces and low-level implementation details are not public |
+
+## Required Evidence Before Publishing Updated Metrics
+
+Updated radiology metrics should be published only when an aggregate-only
+evidence packet is available with:
+
+- dataset name and version
+- source and access date
+- usage terms or license status
+- train/validation/test or external split definition
+- sample count
+- Dice, sensitivity/recall, specificity, precision, FNR/FPR, HD95
+- calibration or uncertainty method
+- baseline definition
+- run date and reproducibility metadata
+- explicit flags that no clinical, medical-device, compliance, CE, or
+  production-readiness claim is being made
 
 ## Interpretation Boundary
 

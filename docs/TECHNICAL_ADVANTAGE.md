@@ -70,6 +70,12 @@ a specialist radiology profile while preserving the separation between model
 output, control decision, audit evidence, and human review. That is utility
 evidence for the architecture, not publication of the private specialist system.
 
+Current radiology performance numbers are intentionally not presented as active
+public results. Newer internal runs, including any BraTS 2025 evidence, require
+a refreshed aggregate evidence packet before publication. The technical
+advantage described here is the control-layer pattern, not a public SOTA or
+clinical-performance claim.
+
 ## Comparison
 
 | Approach | What It Checks | Handles Uncertainty | Audit Evidence | Formal Invariants | Expected Weakness |

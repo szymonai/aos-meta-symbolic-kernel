@@ -25,6 +25,12 @@ In the radiology reference scenario, AOS is useful as a workflow-control pattern
 This is customer value for governance and workflow assurance. It is not a claim
 that the public repository is a clinical product.
 
+The commercial value is strongest when the specialist profile can be calibrated
+and optimized over time: better uncertainty estimates, clearer escalation
+bands, lower latency, higher throughput, and deployment-specific envelopes. The
+public repo describes that product direction without publishing private
+calibration data, thresholds, implementation details, or benchmark traces.
+
 ## Specialist System Multiplier
 
 The radiology scenario is also a concrete example of the wider commercial

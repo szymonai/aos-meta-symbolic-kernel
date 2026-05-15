@@ -87,8 +87,17 @@ def test_evidence_json_files_are_valid_and_claim_flags_are_false() -> None:
         "regulatory_compliance_claim",
         "data_redistributed_in_repo",
         "production_ready_claim",
+        "sota_claim",
     ):
         assert claim_flags[key] is False
+
+    current_status = radiology["current_public_evidence_status"]
+    assert isinstance(current_status, dict)
+    assert (
+        current_status["brats_2025_results"]
+        == "not available in current public evidence"
+    )
+    assert "offline_evaluations" not in radiology
 
 
 def test_readme_links_public_evidence_docs() -> None:
@@ -100,10 +109,23 @@ def test_readme_links_public_evidence_docs() -> None:
         "docs/DATASET_PROVENANCE.md",
         "docs/CUSTOMER_VALUE.md",
         "docs/REGULATORY_READINESS.md",
+        "docs/CALIBRATION_AND_OPTIMIZATION.md",
         "docs/TECHNICAL_ADVANTAGE.md",
         "evidence/radiology_offline_evaluation.json",
     ):
         assert link in readme
+
+
+def test_radiology_public_evidence_does_not_publish_stale_metrics() -> None:
+    radiology = load_json("evidence/radiology_offline_evaluation.json")
+
+    historical = radiology["historical_artifacts"]
+    assert isinstance(historical, list)
+    assert historical
+    for item in historical:
+        assert isinstance(item, dict)
+        assert item["status"] == "historical_superseded_not_current"
+        assert item["metrics_published_as_current"] is False
 
 
 def test_no_medical_data_images_masks_or_checkpoints_are_committed() -> None:

@@ -17,7 +17,7 @@
   "current_public_evidence_status": {
     "radiology_metrics_publication_status": "bounded internal evidence review only",
     "brats_2025_results": "not available in current public evidence",
-    "reason": "Selected private artifacts were reviewed, but public interpretation remains limited to internal offline evidence inventory. Updated current metrics require a clean aggregate evidence packet with provenance, split definition, sample count, calibration method, baselines, and reproducibility metadata.",
+    "reason": "Selected internal artifacts were reviewed, but public interpretation remains limited to internal offline evidence inventory. Updated current metrics require a clean aggregate evidence packet with provenance, split definition, sample count, baselines, and reproducibility metadata.",
     "evidence_review": "evidence/radiology_evidence_review.json",
     "publication_policy": "Do not publish stale or unproven radiology performance numbers as current results."
   },
@@ -46,16 +46,14 @@
     "fnr",
     "fpr",
     "hd95",
-    "calibration_uncertainty",
+    "uncertainty_summary",
     "baselines",
     "run_date",
     "reproducibility_metadata"
   ],
-  "calibration_and_optimization": {
-    "calibration_status": "private capability described at high level only",
-    "optimization_status": "private capability described at high level only",
-    "public_thresholds": "not available in current public evidence",
-    "public_calibration_curves": "not available in current public evidence",
+  "performance_and_evaluation": {
+    "non_public_evaluation_status": "not available in current public evidence",
+    "private_performance_status": "not available in current public evidence",
     "public_latency_or_throughput_benchmarks": "not available in current public evidence"
   },
   "kernel_positioning": {

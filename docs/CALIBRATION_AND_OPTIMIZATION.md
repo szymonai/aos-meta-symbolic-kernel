@@ -1,35 +1,28 @@
-# Calibration And Optimization
+# Performance And Evaluation Boundary
 
-This public demonstrator describes calibration and optimization only at the
-capability level. The private AOS Core and specialist profiles may use
-calibration, uncertainty estimation, and runtime optimization to make
-PASS/WARN/BLOCK decisions more useful in real workflows.
+This public demonstrator reports only bounded, reproducible public evidence.
+Customer-specific evaluation, deployment engineering, and private performance
+evidence remain outside this repository unless separately cleared for public
+release.
 
-## Calibration Boundary
+## Public Boundary
 
-Calibration can support:
+The public repository may discuss:
 
-- uncertainty-aware review triggers
-- conservative warning bands
-- domain-specific escalation policies
-- drift monitoring
-- human-review thresholds
+- synthetic benchmark behavior;
+- public CI and test results;
+- aggregate evidence summaries;
+- explicit claim limitations;
+- clean-room review steps.
 
-The public repository does not publish real calibration curves, thresholds,
-clinical policy logic, data lineage, or private validation workflow.
+It does not publish non-public implementation material, restricted evidence
+packages, customer-specific deployment details, or private performance claims.
 
-## Optimization Boundary
+## Evaluation Rule
 
-Private/commercial variants may optimize:
-
-- latency
-- throughput
-- memory use
-- edge or on-prem deployment profile
-- Python/C++/CUDA/PTX or other low-level execution layers
-
-The public repository does not publish optimization code, benchmark traces,
-hardware-specific tuning, deployment settings, or private performance claims.
+Performance-related claims should be published only when the evidence packet is
+current, aggregate-only, reproducible, and explicitly bounded as public
+engineering evidence.
 
 ## Publication Rule For Metrics
 

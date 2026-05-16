@@ -34,14 +34,12 @@
     "publication_boundary": "internal/offline evidence milestones only; not clinical validation, production readiness, regulatory compliance, SOTA, or SIL equivalence"
   },
   "shadow_benchmarking": {
-    "definition": "continuous comparison of model outputs, uncertainty signals, control envelopes, audit records, and formal artifacts",
+    "definition": "bounded evaluation of model outputs and workflow decisions against AOS control envelopes",
     "public_scope": "synthetic benchmarks, evidence JSON, and public SHA-512 integrity anchor",
     "private_scope_withheld": [
-      "private thresholds",
-      "calibration curves",
-      "policy semantics",
-      "domain workflows",
-      "physical-vs-formal audit implementation"
+      "non-public technical material",
+      "restricted evidence packages",
+      "customer-specific materials"
     ]
   },
   "verified_internal_artifacts": [

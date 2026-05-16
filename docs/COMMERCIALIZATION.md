@@ -1,6 +1,6 @@
 # Commercialization Direction
 
-AOS is positioned as an AI Runtime Assurance / AI Control Layer.
+AOS is positioned as a deterministic AI control and audit layer.
 
 The private product path is proprietary enterprise software. Specialist systems
 built on the private AOS Core are the main commercialization route.
@@ -22,12 +22,6 @@ Possible product segmentation:
 - AOS Enterprise: evidence store, integrations, governance
 - AOS Critical: formal stack, on-prem/VPC, domain validation
 
-Publicly discuss optimization only at a high level:
-
-```text
-Private/commercial variants may support multi-level runtime optimization across
-Python, C++, CUDA/PTX, assembler-level or other low-level execution layers.
-```
-
-Do not publish optimization code, low-level implementation details, or private
-benchmarks.
+Publicly discuss performance and deployment only through bounded public
+evidence. Do not publish non-public implementation material, restricted evidence
+packages, or private performance claims.

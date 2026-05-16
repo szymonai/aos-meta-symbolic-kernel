@@ -10,6 +10,6 @@ lake build AOSPublicCore
 python -m json.tool evidence/demonstrator_manifest.json
 ```
 
-It does not test the private AOS Core, specialist systems, policy semantics,
-adapter protocols, validation stack, private proof stack, datasets, thresholds,
-or commercial SDK/API.
+It does not test the private AOS Core, specialist systems, restricted evidence
+packages, non-public implementation material, datasets, or commercial delivery
+materials.

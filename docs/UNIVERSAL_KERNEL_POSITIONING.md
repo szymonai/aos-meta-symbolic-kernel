@@ -1,6 +1,6 @@
 # Universal Kernel Positioning
 
-AOS is positioned as a domain-agnostic AI runtime assurance kernel:
+AOS is positioned as a deterministic AI control and audit layer:
 
 ```text
 one AOS control kernel -> many specialist profiles
@@ -24,6 +24,10 @@ model outputs. That distinction is commercially important because the same
 runtime assurance layer can be adapted across domains where organizations need
 traceability, review triggers, escalation logic, and evidence discipline before
 AI output enters a real workflow.
+
+AOS is domain-neutral by design and can be adapted to different AI workflows,
+including enterprise automation, governance, cybersecurity, industrial systems,
+research pipelines, and regulated domains.
 
 ## Instance 01: Radiology
 
@@ -54,8 +58,9 @@ The same kernel pattern can support:
 - edge deployment guardrails
 - regulated decision-support workflows
 
-The public repository does not publish private adapters, policy semantics,
-specialist thresholds, validation workflows, or commercial SDK/API material.
+The public repository does not publish non-public implementation material,
+restricted evidence packages, specialist-system material, or commercial delivery
+materials.
 
 ## Safety Boundary
 

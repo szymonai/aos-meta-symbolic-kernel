@@ -29,7 +29,7 @@ The commercial value is strongest when the specialist profile can be calibrated
 and optimized over time: better uncertainty estimates, clearer escalation
 bands, lower latency, higher throughput, and deployment-specific envelopes. The
 public repo describes that product direction without publishing private
-calibration data, thresholds, implementation details, or benchmark traces.
+evaluation material, implementation details, or benchmark traces.
 
 ## Specialist System Multiplier
 
@@ -40,5 +40,5 @@ specialist systems could apply the same core separation of model output, control
 decision, audit evidence, and human review.
 
 The public repo demonstrates this product logic without exposing private
-specialist adapters, calibration, thresholds, workflow policy, or validation
-stack.
+specialist-system material, restricted evidence packages, or implementation
+details.

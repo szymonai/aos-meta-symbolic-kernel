@@ -1,6 +1,6 @@
 # AOS Limited Public Demonstrator
 
-AI Runtime Assurance / AI Control Layer.
+AOS = deterministic AI control and audit layer.
 
 TL;DR:
 
@@ -11,9 +11,8 @@ AI output -> simple gate -> PASS / WARN / BLOCK -> demo audit record
 This repository is a **limited proof-of-capability demonstrator**. It is not the
 full proprietary AOS Core and is not a production SDK.
 
-AOS is not another AI model. AOS is a control layer around AI model outputs.
-The goal is to help convert uncertain model output into auditable decisions:
-allow, warn, block, or escalate.
+AOS is not another AI model. AOS turns uncertain model outputs into auditable
+`PASS` / `WARN` / `BLOCK` decisions.
 
 ## Universal AOS Kernel
 
@@ -23,8 +22,10 @@ The public positioning is:
 one domain-agnostic control kernel -> many specialist profiles
 ```
 
-AOS is intended as a sector-agnostic runtime assurance kernel. A specialist
-profile can adapt the same control pattern to a domain:
+AOS is domain-neutral by design and can be adapted to different AI workflows,
+including enterprise automation, governance, cybersecurity, industrial systems,
+research pipelines, and regulated domains. A specialist profile can adapt the
+same control pattern to a domain:
 
 ```text
 model output -> uncertainty or quality signal -> deterministic gate
@@ -52,18 +53,11 @@ This repository contains only:
 
 This repository does not contain:
 
-- full AOS Core
-- full audit contract
-- policy semantics
-- adapter protocol
-- validation stack
-- specialist systems
-- real thresholds or calibration logic
-- private formal proof stack
-- private benchmark evidence
-- CUDA/PTX/C++/assembler optimization code
-- commercial SDK/API
-- the private data -> calibration -> policy -> workflow -> validation path
+- the full proprietary AOS Core
+- non-public implementation material
+- restricted evidence packages or evaluation artifacts
+- production security, deployment, or commercial delivery materials
+- customer, partner, patient, model, or dataset artifacts
 
 ## Problem
 
@@ -135,7 +129,7 @@ review is a Dataset832/BraTS2024-labelled fold summary, not a confirmed BraTS
 2025 aggregate package.
 
 No patient data, images, masks, DICOM/NIfTI files, checkpoints, local paths,
-private thresholds, or per-case records are redistributed.
+restricted technical artifacts, or per-case records are redistributed.
 
 ## Customer Value
 
@@ -145,9 +139,9 @@ review triggers, escalation support, and a clearer separation between model
 behavior and workflow decisions.
 
 The broader commercial signal is scalability: one control kernel can support
-many specialist profiles. The public demonstrator shows the repeatable shape of
-the control layer; private variants would add domain calibration, policy
-semantics, integration contracts, evidence stores, and deployment optimization.
+many specialist profiles. The public demonstrator shows the repeatable public
+shape of the control layer while keeping non-public technical material outside
+the repository.
 
 ## Regulatory Readiness, Not Compliance
 
@@ -205,28 +199,23 @@ Possible product segmentation:
 - **AOS Enterprise**: evidence store, integrations, governance
 - **AOS Critical**: formal stack, on-prem/VPC, domain validation
 
-Private/commercial variants may support multi-level runtime optimization across
-Python, C++, CUDA/PTX, assembler-level, or other low-level execution layers.
-No optimization code, benchmark, or implementation detail is published here.
+Private/commercial variants may include deployment-specific engineering and
+performance work. No non-public implementation material or private performance
+evidence is published here.
 
-## Calibration And Optimization
+## Performance And Evaluation Boundary
 
-In the private system, calibration and optimization are part of the specialist
-profile lifecycle: model output quality, uncertainty, control thresholds,
-latency, throughput, and deployment envelope can be tuned per domain. The
-public demonstrator only describes this capability at a high level. It does not
-publish calibration curves, real clinical thresholds, benchmark traces,
-deployment settings, or low-level optimization code.
+The public demonstrator reports only bounded, reproducible public evidence.
+Customer-specific evaluation, deployment engineering, and private performance
+evidence remain outside this repository unless separately cleared for public
+release.
 
 ## Shadow Benchmarking
 
 Shadow benchmarking means evaluating model outputs and workflow decisions
 against AOS control envelopes without claiming autonomous clinical or regulated
 operation. In the public repository, this is represented by synthetic benchmark
-comparisons, evidence JSON, and a public SHA-512 integrity anchor. In the
-private system, the same idea can support continuous physical-vs-formal audit:
-model outputs, uncertainty, policy boundaries, formal artifacts, and audit
-records are compared over time without exposing private thresholds or data.
+comparisons, evidence JSON, and a public SHA-512 integrity anchor.
 
 The current public SHA-512 integrity anchor is:
 
@@ -258,7 +247,7 @@ See:
 - [Dataset provenance](docs/DATASET_PROVENANCE.md)
 - [Customer value](docs/CUSTOMER_VALUE.md)
 - [Regulatory readiness](docs/REGULATORY_READINESS.md)
-- [Calibration and optimization](docs/CALIBRATION_AND_OPTIMIZATION.md)
+- [Performance and evaluation boundary](docs/CALIBRATION_AND_OPTIMIZATION.md)
 
 ## Technical Advantage Evidence
 
@@ -276,13 +265,10 @@ See:
 - [Radiology offline evidence JSON](evidence/radiology_offline_evaluation.json)
 - [Radiology evidence review JSON](evidence/radiology_evidence_review.json)
 
-## Development Transparency
+## Development Note
 
-AOS is an author-led system architecture developed with support from
-AI-assisted coding environments such as VS Code, Codex, Kilo Code and Google
-Antigravity. These tools assist implementation, refactoring and verification
-workflows, but do not define the system architecture, IP strategy, product
-direction or technical ownership.
+AOS is an author-led system architecture. Technical ownership, publication
+boundaries, IP strategy, and product direction remain with the maintainer.
 
 ## Run The Demonstrator
 

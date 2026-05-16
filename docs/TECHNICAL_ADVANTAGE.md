@@ -2,7 +2,8 @@
 
 This document describes the technical advantage demonstrated by the public AOS
 limited demonstrator. It does not describe the private AOS Core, production
-policy semantics, specialist adapters, private proof stack, or NDA materials.
+system internals, specialist-system material, restricted evidence packages, or
+NDA materials.
 
 ## Technical Thesis
 
@@ -66,9 +67,8 @@ AOS control envelopes while preserving a strict separation between:
 - clinical, regulatory, or production claims
 
 The public demonstrator shows this idea through synthetic benchmarks and
-machine-readable evidence files. The private system can extend the same
-discipline into continuous physical-vs-formal audit without publishing private
-thresholds, calibration logic, policy semantics, or domain workflows.
+machine-readable evidence files. Non-public evaluation material remains outside
+the repository.
 
 ## Radiology Reference Scenario
 

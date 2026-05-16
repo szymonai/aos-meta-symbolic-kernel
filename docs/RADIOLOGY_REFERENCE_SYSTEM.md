@@ -12,7 +12,8 @@ system built on the AOS control-layer pattern. In this public repository, that
 description is limited to utility evidence: it shows how AOS can organize model
 outputs, uncertainty, audit evidence, and human escalation in a domain-specific
 workflow. It does not publish the full specialist system, private adapters,
-clinical workflow, thresholds, calibration logic, data, masks, or model weights.
+clinical workflow, restricted technical artifacts, data, masks, or model
+weights.
 
 ## Control Flow
 
@@ -42,8 +43,8 @@ The reference scenario is triage support, not autonomous diagnosis:
 - `BLOCK`: output should not be used without further review
 
 The public repo does not include a radiology model, DICOM/NIfTI data, masks,
-patient records, checkpoints, clinical thresholds, calibration logic, or private
-workflow policy.
+patient records, checkpoints, restricted technical artifacts, or private
+workflow material.
 
 ## Current Metrics Boundary
 
@@ -54,8 +55,8 @@ evidence inventory, not clinical validation or product evidence.
 
 Updated internal results, including any BraTS 2025 runs, should be published
 only after a clean aggregate evidence packet is available. The packet must
-include dataset provenance, split definition, sample count, calibration method,
-baseline definition, reproducibility metadata, and explicit non-claim flags.
+include dataset provenance, split definition, sample count, baseline
+definition, reproducibility metadata, and explicit non-claim flags.
 
 This avoids presenting historical, partial, or superseded metrics as the
 current system state.

@@ -21,7 +21,7 @@ The public repository must not contain:
 - model checkpoints
 - local dataset paths
 - private audit logs
-- private thresholds or calibration values
+- restricted technical artifacts
 
 The public evidence is intentionally limited to aggregate metadata and
 defensive claim-boundary flags.

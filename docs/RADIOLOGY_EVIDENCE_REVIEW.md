@@ -53,30 +53,29 @@ latest reviewed manifest snapshot:
 c4124f59cec5d587a41563b7780a4e6b878a559b669ec293958ab04418899e1b580c1396905f3a731ac5009dab46220ccefce0699c93e65316a9b96133b89133
 ```
 
-This is a public anchor only. It does not expose weights, data, thresholds,
-private policies, proof sources, or the manifest body.
+This is a public anchor only. It does not expose weights, data, restricted
+technical material, or the manifest body.
+
+For future public evidence packets, the recommended anchor set is SHA-256 for
+quick verification, SHA-512 for audit-grade verification, and Ed25519 signature
+metadata for authenticity and provenance.
 
 ## Shadow Benchmarking
 
-Shadow benchmarking is the continuous comparison of model outputs, uncertainty
-signals, control envelopes, audit records, and formal artifacts before any
-claim of deployment readiness. It is useful because AOS is a control layer over
-model use rather than a model-only benchmark.
+Shadow benchmarking means evaluating model outputs and workflow decisions
+against AOS control envelopes before any claim of deployment readiness. It is
+useful because AOS is a control layer over model use rather than a model-only
+benchmark.
 
 In this public repository, shadow benchmarking is represented only by synthetic
-benchmarks, evidence JSON, and the integrity anchor above. Private
-physical-vs-formal audit workflows are not published.
+benchmarks, evidence JSON, and the integrity anchor above. Non-public evaluation
+material remains outside the repository.
 
-## Calibration And Optimization Boundary
+## Performance And Evaluation Boundary
 
-Calibration and optimization are important to the private specialist lifecycle:
-uncertainty quality, thresholds, latency, throughput, memory envelope, and
-deployment settings may be tuned per domain. The public repository only states
-that this capability exists at a high level.
-
-The public repository does not include calibration curves, real clinical
-thresholds, per-case records, private policy logic, CUDA/PTX/C++/assembler
-implementation details, benchmark traces, or data-to-policy workflow material.
+The public repository reports only bounded, aggregate public evidence. It does
+not include non-public implementation material, customer-specific deployment
+details, private performance traces, or restricted evidence packages.
 
 ## Safe Public Summary
 

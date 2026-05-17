@@ -182,7 +182,7 @@ def test_readme_links_public_evidence_docs() -> None:
         "docs/VALUE_METRICS.md",
         "docs/REGULATORY_READINESS.md",
         "docs/CALIBRATION_AND_OPTIMIZATION.md",
-        "docs/TECHNICAL_ADVANTAGE.md",
+        "docs/DEMONSTRATOR_COMPARISON.md",
         "examples/hello-world",
         "examples/api-gate",
         "evidence/radiology_offline_evaluation.json",
@@ -194,6 +194,7 @@ def test_readme_links_public_evidence_docs() -> None:
 def test_required_public_docs_and_examples_exist() -> None:
     for relative_path in (
         "README.md",
+        "VERSION",
         "SCOPE_OF_PROOF.md",
         "docs/AI_PROBLEMS_ADDRESSED.md",
         "docs/PLAIN_LANGUAGE_OVERVIEW.md",
@@ -202,6 +203,7 @@ def test_required_public_docs_and_examples_exist() -> None:
         "docs/architecture.md",
         "docs/INTEGRITY_ANCHORS.md",
         "docs/APPLICATION_PROFILES.md",
+        "docs/DEMONSTRATOR_COMPARISON.md",
         "docs/CLEAN_ROOM_TEST.md",
         "docs/VALUE_METRICS.md",
         "examples/hello-world/README.md",

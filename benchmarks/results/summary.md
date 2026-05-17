@@ -1,8 +1,12 @@
-# Synthetic Technical Advantage Summary
+# Synthetic Demonstrator Comparison Summary
 
 This benchmark compares deterministic interval gating with three simple
 guardrail baselines on synthetic scenarios. It is not a production
 benchmark, external validation, or domain validation claim.
+
+Scope limits: the scenario set has 12 synthetic cases, the baselines
+are intentionally simple, no external guardrail frameworks are
+included, and no statistical significance claim is made.
 
 | Guard | False pass | False block | PASS | WARN | BLOCK | Audit records | Replay |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |

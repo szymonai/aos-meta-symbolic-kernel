@@ -11,7 +11,7 @@ Source: `benchmarks/results/metrics.json`
 
 | Metric | Current value |
 | --- | ---: |
-| Schema version | `synthetic-advantage/v1` |
+| Schema version | `synthetic-comparison/v1` |
 | Synthetic scenarios | 12 |
 | Safe scenarios | 4 |
 | Warning scenarios | 4 |
@@ -60,6 +60,8 @@ Sources: `evidence/demonstrator_manifest.json` and
 | Benchmark production-ready claim | `false` |
 | Benchmark external-validation claim | `false` |
 | Benchmark domain-validation claim | `false` |
+| Benchmark external-framework comparison claim | `false` |
+| Benchmark statistical significance claim | `false` |
 | Python-Lean refinement claim | `false` |
 
 These fields are value metrics because they make the public repository easier to

@@ -21,9 +21,13 @@ def test_benchmark_runner_writes_valid_metrics_json() -> None:
     with METRICS_PATH.open(encoding="utf-8") as file:
         parsed = json.load(file)
 
-    assert parsed["schema_version"] == "synthetic-advantage/v1"
+    assert parsed["schema_version"] == "synthetic-comparison/v1"
     assert parsed["scenario_count"] == 12
     assert metrics["scenario_mix"] == {"safe": 4, "warning": 4, "unsafe": 4}
+
+    claim_boundary = parsed["claim_boundary"]
+    assert claim_boundary["external_framework_comparison_claim"] is False
+    assert claim_boundary["statistical_significance_claim"] is False
 
 
 def test_aos_has_zero_false_passes_for_unsafe_cases() -> None:

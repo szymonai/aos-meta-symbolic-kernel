@@ -2,7 +2,7 @@
 
 This repository is maintained as a professional public demonstrator. The goal is
 to be understandable, reproducible, evidence-led, and publication-safe without
-exposing the private AOSKernel or restricted material.
+mixing the demonstrator with production-system or customer-specific material.
 
 ## First-Read Clarity
 
@@ -13,7 +13,7 @@ The repository should explain the following within the first review pass:
 - how `PASS` / `WARN` / `BLOCK` decisions work;
 - how to run the public demonstrator;
 - what public evidence supports the current claims;
-- what is deliberately not included.
+- what the repository does and does not claim.
 
 README should stay concise at the top. A plain-language explanation belongs in
 `docs/PLAIN_LANGUAGE_OVERVIEW.md`; deeper technical material belongs in focused
@@ -52,13 +52,12 @@ claims without a current, reproducible, public evidence packet.
 
 The repository must not include:
 
-- secrets, credentials, tokens, private logs, or local paths;
-- customer, partner, patient, or private dataset material;
+- secrets, credentials, tokens, internal logs, or local paths;
+- customer, partner, patient, or controlled dataset material;
 - model weights, checkpoints, DICOM/NIfTI, masks, labels, ONNX, TensorRT,
   safetensors, PT/PTH, or similar artifacts;
-- non-public decision parameters, restricted evidence packages, or private
-  implementation material;
-- production deployment settings, commercial delivery material, or private key
+- unreleased decision parameters, evidence packages, or implementation material;
+- production deployment settings, commercial delivery material, or signing key
   material.
 
 ## CI And Verification Hygiene

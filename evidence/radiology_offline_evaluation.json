@@ -52,15 +52,15 @@
     "reproducibility_metadata"
   ],
   "performance_and_evaluation": {
-    "non_public_evaluation_status": "not available in current public evidence",
-    "private_performance_status": "not available in current public evidence",
+        "additional_evaluation_status": "not available in current public evidence",
+    "additional_performance_status": "not available in current public evidence",
     "public_latency_or_throughput_benchmarks": "not available in current public evidence"
   },
   "kernel_positioning": {
     "summary": "one domain-agnostic AOS control kernel can support many specialist profiles",
     "radiology_instance": "Instance 01 reference profile",
     "evidence_review": "evidence/radiology_evidence_review.json",
-    "public_boundary": "not a clinical validation, production readiness, regulatory compliance, SOTA, or SIL equivalence claim"
+    "public_boundary": "not a clinical validation, production readiness, regulatory compliance, SOTA, or safety-certification claim"
   },
   "dataset_provenance": [
     {

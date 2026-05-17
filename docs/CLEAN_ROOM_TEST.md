@@ -1,8 +1,7 @@
 # Clean-Room Test
 
 This test verifies only the limited public demonstrator. It is designed for a
-fresh public checkout with no private source material, no private datasets, and
-no restricted evidence packages.
+fresh public checkout using only the repository contents.
 
 ## Commands
 
@@ -33,13 +32,11 @@ The current public benchmark evidence is:
 | Public AOS deterministic replay | `true` |
 
 The demonstrator manifest is also expected to keep public boundary fields set to
-`false` for full-core publication, private policy logic, clinical claims,
+`false` for full-core publication, internal policy logic, clinical claims,
 external validation, medical-device status, regulatory compliance, and
 production runtime claims.
 
 ## Scope Boundary
 
-This test does not test the private AOSKernel, specialist systems, restricted
-evidence packages, non-public implementation material, datasets, commercial
-delivery materials, production security, deployment settings, or customer
-outcomes.
+This test does not test specialist systems, datasets, commercial delivery
+materials, production security, deployment settings, or customer outcomes.

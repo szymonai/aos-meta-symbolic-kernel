@@ -15,7 +15,7 @@ Its proof surface is useful, but intentionally narrow.
 - model-output signal to `PASS` / `WARN` / `BLOCK` decision flow
 - SHA-256-linked audit trace in the public demonstrator
 - domain-neutral control-layer shape
-- clean-room repeatability without private source material or private data
+- clean-room repeatability using only the public repository contents
 
 ## Not Claimed
 
@@ -23,10 +23,10 @@ Its proof surface is useful, but intentionally narrow.
 - production security or deployment readiness
 - clinical validation or medical-device status
 - regulatory approval or certification
-- AGI or autonomous reasoning capability
-- hardware-origin mathematical certainty claims
-- access to the private AOSKernel or non-public implementation material
+- external validation or independent certification
+- product performance in customer environments
+- production-system completeness
+- materials outside this public demonstrator
 
 The public repository should be read as a technical credibility signal and
-repeatable runtime assurance demonstrator, not as a publication of the private
-system.
+repeatable runtime assurance demonstrator.

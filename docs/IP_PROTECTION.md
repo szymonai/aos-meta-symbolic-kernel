@@ -21,7 +21,7 @@ otherwise, no rights are granted to:
 - incorporate this material into a product, service, dataset, model, benchmark,
   training corpus, or evaluation suite;
 - use AOS names, marks, logos, positioning, or product names as a brand;
-- use non-public AOS technical material, confidential technical documentation,
+- use unreleased AOS technical material, confidential technical documentation,
   reserved implementation detail, or commercially useful process material.
 
 Viewing the repository, cloning it, opening an issue, or submitting a pull
@@ -40,15 +40,15 @@ The public repository may contain only:
 
 The public repository must not contain:
 
-- private AOSKernel code;
-- non-public implementation material;
-- restricted evidence packages or internal technical documentation;
+- production-system code;
+- unreleased implementation material;
+- internal technical documentation;
 - specialist-system source code or artifacts;
 - datasets, patient data, scans, masks, labels, DICOM, NIfTI, checkpoints,
   weights, ONNX, TensorRT engines, safetensors, or model binaries;
-- private manifests, certificate bundles, private performance traces, or
+- certificate bundles, unreleased performance traces, or
   commercial delivery materials;
-- secrets, credentials, local paths, private logs, customer data, or partner
+- secrets, credentials, local paths, internal logs, customer data, or partner
   information.
 
 ## Disclosure Controls
@@ -58,14 +58,14 @@ under controlled access. Before any public disclosure, classify material into on
 of these groups:
 
 - `public-demonstrator`: safe to publish here;
-- `private-source`: private repository or vault only;
-- `restricted`: controlled access only;
+- `controlled-source`: controlled repository or vault only;
+- `controlled`: controlled access only;
 - `review-required`: do not disclose publicly until the publication path is
   cleared;
 - `quarantine-review`: non-authoritative generated or unsupported material.
 
-Restricted material should be protected with access controls, audit history,
-need-to-know permissions, private backups, confidentiality agreements where
+Controlled material should be protected with access controls, audit history,
+need-to-know permissions, controlled backups, confidentiality agreements where
 appropriate, and written publication approval.
 
 ## Review-Required Material
@@ -84,7 +84,7 @@ Public evidence packets should use a clear integrity convention:
 
 Integrity anchors identify approved public evidence packets. They are not a
 license grant, a substitute for the underlying evidence packet, or a disclosure
-of non-public technical material.
+of technical material outside the public demonstrator.
 
 See [Integrity Anchors](INTEGRITY_ANCHORS.md) for the public convention.
 
@@ -113,5 +113,4 @@ For each public release or material PR, keep a record of:
 - publication-safety checks run;
 - evidence and claim-boundary checks;
 - approving person;
-- known withheld private artifacts;
 - whether patent/trademark review was required.

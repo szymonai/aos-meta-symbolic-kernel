@@ -1,8 +1,8 @@
 # Integrity Anchors
 
 This repository uses integrity language only for public evidence provenance. It
-does not publish private keys, certificate bundles, private manifests, production
-signing infrastructure, or restricted evidence packets.
+does not publish signing keys, certificate bundles, production signing
+infrastructure, or customer evidence packets.
 
 ## Public Convention
 
@@ -20,7 +20,7 @@ approved by the signing authority associated with the published public key.
 
 The public repository currently contains SHA-linked demonstrator evidence and
 metadata describing the recommended Ed25519 provenance layer. It does not
-publish a production signing key, private key material, or a production signature
+publish production signing key material or a production signature
 scheme.
 
 ## Safe Publication Rule
@@ -34,6 +34,6 @@ When a future evidence packet is signed, publish only:
 - the Ed25519 signature;
 - the signing date and scope boundary.
 
-Do not publish private key material, internal certificate chains, private
-manifests, customer evidence, restricted logs, deployment settings, or non-public
-implementation details.
+Do not publish signing key material, internal certificate chains, customer
+evidence, controlled logs, deployment settings, or implementation details outside
+the public demonstrator.

@@ -1,9 +1,8 @@
 # Technical Advantage Evidence
 
 This document describes the technical advantage demonstrated by the public AOS
-limited demonstrator. It does not describe the private AOSKernel, production
-system internals, specialist-system material, restricted evidence packages, or
-NDA materials.
+limited demonstrator. It does not describe production-system internals,
+specialist-system material, deployment material, or customer-specific evidence.
 
 ## Technical Thesis
 
@@ -27,7 +26,7 @@ production system. The advantage is the combined control pattern:
 
 The radiology reference scenario is best read as Instance 01: a specialist
 profile demonstrating the utility of the control layer. It is not the only
-target domain and it is not the full private specialist product.
+target domain and it is not a product claim.
 
 ## Demonstrator Evidence Scope
 
@@ -67,8 +66,7 @@ AOS control envelopes while preserving a strict separation between:
 - clinical, regulatory, or production claims
 
 The public demonstrator shows this idea through synthetic benchmarks and
-machine-readable evidence files. Non-public evaluation material remains outside
-the repository.
+machine-readable evidence files.
 
 ## Radiology Reference Scenario
 
@@ -91,7 +89,7 @@ medical-device, regulatory-compliance, or production-readiness claim.
 The useful technical signal is that the same AOS pattern can be instantiated as
 a specialist radiology profile while preserving the separation between model
 output, control decision, audit evidence, and human review. That is utility
-evidence for the architecture, not publication of the private specialist system.
+evidence for the architecture, not publication of a specialist product.
 
 Current radiology performance numbers are intentionally not presented as active
 public results. Newer internal runs, including any BraTS 2025 evidence, require
@@ -106,7 +104,7 @@ clinical-performance claim.
 | Plain `if/else` threshold | `value <= limit` | No | No | No | Can pass unsafe cases when uncertainty crosses the limit |
 | JSON schema validation | Shape and basic types | No | No | No | Valid structure can still contain unsafe values |
 | Prompt-only guardrail | Text cues or policy wording | No deterministic numeric bound | No | No | Can miss unsafe cases when wording is benign or indirect |
-| AOS public demo gate | `value + uncertainty` against the limit and warning band | Yes | Demo HMAC digest | Abstract Lean verdict invariants | Public demo only; not the private production core |
+| AOS public demo gate | `value + uncertainty` against the limit and warning band | Yes | Demo HMAC digest | Abstract Lean verdict invariants | Public demo only |
 
 ## Reading The Results
 

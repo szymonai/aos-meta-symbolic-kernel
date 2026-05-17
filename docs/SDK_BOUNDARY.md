@@ -34,12 +34,9 @@ already a production SDK.
 
 This repository does not publish:
 
-- the private AOSKernel;
 - production API contracts;
-- private decision parameters;
 - customer integration code;
 - deployment settings;
-- private evidence packages;
 - production security design;
 - commercial support or service-level commitments.
 

@@ -1,8 +1,8 @@
 {
   "schema_version": "limited-demonstrator/v1",
-  "status": "limited_public_proof_of_capability",
+  "status": "limited_public_demonstrator",
   "contains_full_aos_core": false,
-  "contains_private_policy_logic": false,
+  "contains_internal_policy_logic": false,
   "contains_real_clinical_thresholds": false,
   "contains_specialist_validation_stack": false,
   "claim_boundary": {

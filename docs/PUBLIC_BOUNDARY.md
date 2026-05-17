@@ -1,11 +1,10 @@
 # Public Boundary
 
-This repository is a limited demonstrator, not the private AOSKernel.
+This repository is a limited public demonstrator.
 
 The public goal is high information density: enough structure, code, tests,
 proof surface, and evidence context for a serious reviewer to understand the
-AOS control thesis, while withholding private IP and avoiding unsupported
-claims.
+AOS control thesis while avoiding unsupported claims.
 
 See also:
 
@@ -24,11 +23,9 @@ See also:
 - bounded evidence summaries and claim-boundary manifests
 - high-level positioning material
 
-## Private
+## Outside This Public Repository
 
 - full proprietary system
-- non-public implementation material
-- restricted evidence packages or evaluation artifacts
 - production security, deployment, or commercial delivery materials
 - customer, partner, patient, model, or dataset artifacts
 

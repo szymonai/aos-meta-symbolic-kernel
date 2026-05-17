@@ -11,8 +11,8 @@ The specialist radiology system may be described as an example specialist
 system built on the AOS control-layer pattern. In this public repository, that
 description is limited to utility evidence: it shows how AOS can organize model
 outputs, uncertainty, audit evidence, and human escalation in a domain-specific
-workflow. It does not publish the full specialist system, private adapters,
-clinical workflow, restricted technical artifacts, data, masks, or model
+workflow. It does not publish the full specialist system, adapters,
+clinical workflow, controlled technical artifacts, data, masks, or model
 weights.
 
 ## Control Flow
@@ -43,14 +43,14 @@ The reference scenario is triage support, not autonomous diagnosis:
 - `BLOCK`: output should not be used without further review
 
 The public repo does not include a radiology model, DICOM/NIfTI data, masks,
-patient records, checkpoints, restricted technical artifacts, or private
+patient records, checkpoints, controlled technical artifacts, or internal
 workflow material.
 
 ## Current Metrics Boundary
 
 This public repository includes a bounded evidence review for selected
-private artifacts. The review separates a small fold validation summary, an
-internal cohort report, and private formal-integrity status. Those items are
+internal evidence summaries. The review separates a small fold validation summary, an
+internal cohort report, and formal-integrity status. Those items are
 evidence inventory, not clinical validation or product evidence.
 
 Updated internal results, including any BraTS 2025 runs, should be published
@@ -66,7 +66,7 @@ See [Radiology evidence review](RADIOLOGY_EVIDENCE_REVIEW.md).
 ## Specialist System Interpretation
 
 A specialist radiology profile would be one possible product family built on a
-private AOSKernel. The public demonstrator only shows the shape of the control
+production system. The public demonstrator only shows the shape of the control
 contract:
 
 - model output is not treated as a final decision
@@ -75,4 +75,4 @@ contract:
 - audit evidence records the control event
 - human review or escalation remains outside AOS
 
-This is a proof-of-utility framing for the architecture, not a clinical proof.
+This is utility evidence for the architecture, not a clinical proof.

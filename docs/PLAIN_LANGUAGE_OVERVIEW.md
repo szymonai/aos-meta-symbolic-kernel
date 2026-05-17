@@ -44,9 +44,8 @@ This repository shows a limited public version of the pattern:
 
 ## What This Public Repository Does Not Show
 
-This repository does not publish the private AOSKernel, production deployment
-materials, customer data, private decision parameters, clinical validation,
-regulatory approval, or commercial performance evidence.
+This repository does not publish production deployment materials, customer data,
+clinical validation, regulatory approval, or commercial performance evidence.
 
 The public repository should be read as a transparent demonstrator of the
-control-layer idea, not as the full private system.
+control-layer idea, not as a full production system.

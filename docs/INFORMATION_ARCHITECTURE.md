@@ -1,14 +1,14 @@
 # Information Architecture
 
 The public repository should be dense, legible, and restrained. Its purpose is
-to communicate the technical thesis clearly without publishing private IP or
-making claims that the demonstrator cannot support.
+to communicate the technical thesis clearly without expanding beyond evidence
+that the demonstrator can support.
 
 ## Editorial Principles
 
 - Prefer high-signal artifacts over broad narration.
 - Put the strongest technical claims next to their evidence and limitations.
-- Keep public/private boundaries explicit and repeated at decision points.
+- Keep public scope boundaries explicit and repeated at decision points.
 - Use compact tables for layer maps, claim boundaries, and evidence status.
 - Use code and tests as primary evidence where possible.
 - Avoid marketing adjectives when a measurable property can be shown instead.
@@ -30,7 +30,7 @@ A simplification is not acceptable when it:
 
 - changes the meaning of the public control pattern;
 - creates an unsupported product claim;
-- makes the private system look like a thin wrapper around the demo;
+- makes the production system look like a thin wrapper around the demo;
 - exposes implementation-specific or disclosure-sensitive detail.
 
 ## Sensitive Language Rule
@@ -46,7 +46,7 @@ Each major public artifact should answer four questions quickly:
 
 1. What does this demonstrate?
 2. What evidence supports it?
-3. What is deliberately withheld?
+3. What is outside the public scope?
 4. What claim is not being made?
 
 ## Suggested Repository Roles
@@ -59,7 +59,7 @@ Each major public artifact should answer four questions quickly:
 | `benchmarks/` | Synthetic comparison, not production benchmark |
 | `lean/` | Abstract proof surface, not runtime refinement proof |
 | `evidence/` | Machine-readable claim and evidence boundaries |
-| `docs/ABSTRACTION_MAP.md` | Layered public map without private internals |
+| `docs/ABSTRACTION_MAP.md` | Layered public map without production internals |
 | `docs/IP_PROTECTION.md` | Publication and rights boundary |
 | `docs/PUBLICATION_CHECKLIST.md` | Pre-publication review process |
 | `docs/EXTERNAL_EVALUATION.md` | Controlled external review pathway |
@@ -71,7 +71,7 @@ another:
 
 - technical clarity;
 - evidence traceability;
-- public/private separation;
+- public-scope separation;
 - claim discipline;
 - reviewer confidence;
 - IP protection.

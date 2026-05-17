@@ -32,8 +32,8 @@ that the public repository is a clinical product.
 The commercial value should be evaluated with controlled workflow evidence:
 decision routing, audit completeness, reproducibility, integration fit, and
 claim discipline. The public repository shows the evaluation shape without
-publishing private evaluation material, implementation details, or customer
-data.
+publishing customer-specific evaluation material, implementation details, or
+customer data.
 
 ## Specialist System Multiplier
 
@@ -43,6 +43,6 @@ profiles. A radiology triage profile is one specialist instance; other
 specialist systems could apply the same core separation of model output, control
 decision, audit evidence, and human review.
 
-The public repo demonstrates this product logic without exposing private
-specialist-system material, restricted evidence packages, or implementation
-details.
+The public repo demonstrates this product logic without exposing
+specialist-system material, customer-specific evidence, or implementation
+details outside the demonstrator.

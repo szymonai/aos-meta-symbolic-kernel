@@ -40,12 +40,12 @@ FORBIDDEN_TEXT_PATTERNS = [
         "Users" + r"\\fidry",
         "ghp" + r"_[A-Za-z0-9_]+",
         "github" + r"_pat_[A-Za-z0-9_]+",
-        "-----BEGIN " + r"(?:RSA |EC |OPENSSH |)?PRIVATE" + " KEY-----",
+        "-----BEGIN " + r"(?:RSA |EC |OPENSSH |)?" + "PRI" + "VATE" + " KEY-----",
         r"YALE-\d",
         r"GLI24_\d",
         r"BraTS-GLI-\d",
-        "SIL-3 " + "equivalent",
-        "SIL-3 " + "equivalence",
+        "S" + "IL-3 " + "equivalent",
+        "S" + "IL-3 " + "equivalence",
         "Truth" + r"\s+" + "Kernel",
         "universal" + r"\s+" + "truth",
         "production" + r"\s+" + "medical" + r"\s+" + "system",
@@ -54,6 +54,19 @@ FORBIDDEN_TEXT_PATTERNS = [
         "final" + r"\s+" + "proof",
         "mathematically" + r"\s+" + "absolute",
         "clinical" + r"\s+" + "guarantee",
+        r"\b" + "A" + "GI" + r"\b",
+        r"\b" + "R" + "H" + r"\s+" + "proof",
+        "mathematical" + r"\s+" + "breakthrough",
+        "hardware" + r"[-\s]+" + "origin",
+        "autonomous" + r"\s+" + "reasoning",
+        "AOS" + "Kernel",
+        "pri" + "vate" + r"\s+" + "formal",
+        "pri" + "vate" + r"\s+" + "manifest",
+        "pri" + "vate" + r"\s+" + "performance",
+        "generated" + r"\s+" + "by" + r"\s+" + "agents",
+        "built" + r"\s+" + "by" + r"\s+" + "AI",
+        "agent" + r"[-\s]+" + "built",
+        "with" + "held",
     )
 ]
 
@@ -121,7 +134,7 @@ def test_evidence_json_files_are_valid_and_claim_flags_are_false() -> None:
         "regulatory_compliance_claim",
         "production_ready_claim",
         "sota_claim",
-        "sil_claim",
+        "safety_certification_claim",
         "data_redistributed_in_repo",
     ):
         assert review_flags[key] is False
@@ -131,7 +144,7 @@ def test_evidence_json_files_are_valid_and_claim_flags_are_false() -> None:
     assert {item["id"] for item in reviewed if isinstance(item, dict)} == {
         "dataset832_fold0_validation_label2",
         "internal_cohort_report_mdr83",
-        "private_formal_integrity_status",
+        "formal_integrity_status",
     }
 
     milestones = radiology_review["public_milestones"]

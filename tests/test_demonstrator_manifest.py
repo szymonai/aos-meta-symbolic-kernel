@@ -13,9 +13,9 @@ def test_demonstrator_manifest_preserves_public_boundary() -> None:
         )
     )
 
-    assert manifest["status"] == "limited_public_proof_of_capability"
+    assert manifest["status"] == "limited_public_demonstrator"
     assert manifest["contains_full_aos_core"] is False
-    assert manifest["contains_private_policy_logic"] is False
+    assert manifest["contains_internal_policy_logic"] is False
     assert manifest["contains_real_clinical_thresholds"] is False
     assert manifest["contains_specialist_validation_stack"] is False
     assert manifest["claim_boundary"]["medical_device_claim"] is False

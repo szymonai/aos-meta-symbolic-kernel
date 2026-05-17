@@ -38,6 +38,7 @@ claims without a current, reproducible, public evidence packet.
 | --- | --- |
 | `README.md` | First-contact positioning, quickstart, public boundary |
 | `docs/PLAIN_LANGUAGE_OVERVIEW.md` | Non-specialist explanation |
+| `docs/SDK_BOUNDARY.md` | Public SDK/integration boundary |
 | `core/` | Minimal executable public demonstrator |
 | `benchmarks/` | Synthetic benchmark runner and public metrics |
 | `lean/` | Abstract public proof surface |

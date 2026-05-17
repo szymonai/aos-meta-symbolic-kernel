@@ -16,6 +16,8 @@ This repository is a **limited public demonstrator** for the AOS control-layer
 pattern. It is not the private AOSKernel, not a production SDK, and not a
 regulated product.
 
+For SDK positioning, see [SDK boundary](docs/SDK_BOUNDARY.md).
+
 ## In Plain Terms
 
 AOS checks AI outputs before they affect a workflow. It does not decide what is
@@ -316,6 +318,7 @@ See:
 
 - [Public boundary](docs/PUBLIC_BOUNDARY.md)
 - [Plain-language overview](docs/PLAIN_LANGUAGE_OVERVIEW.md)
+- [SDK boundary](docs/SDK_BOUNDARY.md)
 - [Repository best practices](docs/REPOSITORY_BEST_PRACTICES.md)
 - [Public architecture](docs/architecture.md)
 - [Scope of Proof](SCOPE_OF_PROOF.md)

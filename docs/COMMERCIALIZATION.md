@@ -22,6 +22,10 @@ Possible product segmentation:
 - AOS Enterprise: evidence store, integrations, governance
 - AOS Critical: formal stack, on-prem/VPC, domain validation
 
+Future SDK packaging is a possible commercial integration surface. The public
+repository remains a demonstrator, not a production SDK. See
+[SDK Boundary](SDK_BOUNDARY.md).
+
 Publicly discuss performance and deployment only through bounded public
 evidence. Do not publish non-public implementation material, restricted evidence
 packages, or private performance claims.

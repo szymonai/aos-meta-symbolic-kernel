@@ -86,6 +86,8 @@ Integrity anchors identify approved public evidence packets. They are not a
 license grant, a substitute for the underlying evidence packet, or a disclosure
 of non-public technical material.
 
+See [Integrity Anchors](INTEGRITY_ANCHORS.md) for the public convention.
+
 ## Trademarks And Naming
 
 AOS-related names, product names, slogans, and positioning statements are not

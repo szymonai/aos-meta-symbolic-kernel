@@ -75,9 +75,19 @@ cd examples/hello-world
 docker compose up
 ```
 
+API-shaped example:
+
+```bash
+python examples/api-gate/aos_api_gate.py evaluate \
+  --input examples/api-gate/sample_input.json
+python examples/api-gate/aos_api_gate.py replay \
+  --evidence examples/api-gate/sample_evidence.json
+```
+
 ## What This Repository Shows
 
 - a simplified `PASS` / `WARN` / `BLOCK` interval gate
+- a small API-shaped gate example with replayable public evidence
 - synthetic benchmark scenarios with reproducible public metrics
 - SHA-256-linked demo audit evidence
 - a small Lean proof surface for abstract verdict logic
@@ -113,6 +123,9 @@ workflows such as:
 - healthcare R&D audit support
 
 These are use-case directions, not production deployment claims.
+
+See [Application profiles](docs/APPLICATION_PROFILES.md) for a bounded view of
+potential specialist adaptations.
 
 ## Universal Control Kernel
 
@@ -324,10 +337,12 @@ See:
 - [AI problems addressed](docs/AI_PROBLEMS_ADDRESSED.md)
 - [Integrity anchors](docs/INTEGRITY_ANCHORS.md)
 - [Universal kernel positioning](docs/UNIVERSAL_KERNEL_POSITIONING.md)
+- [Application profiles](docs/APPLICATION_PROFILES.md)
 - [Commercialization direction](docs/COMMERCIALIZATION.md)
 - [Development transparency](docs/DEVELOPMENT_TRANSPARENCY.md)
 - [Clean-room test](docs/CLEAN_ROOM_TEST.md)
 - [Hello-world example](examples/hello-world)
+- [API gate example](examples/api-gate)
 - [Radiology reference system](docs/RADIOLOGY_REFERENCE_SYSTEM.md)
 - [Offline evaluation results](docs/OFFLINE_EVALUATION_RESULTS.md)
 - [Radiology evidence review](docs/RADIOLOGY_EVIDENCE_REVIEW.md)

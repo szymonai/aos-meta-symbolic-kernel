@@ -49,7 +49,7 @@ validation claim and not a radiology product release.
 
 ## Other Potential Profiles
 
-The same kernel pattern can support:
+The same kernel pattern can support several application profiles, including:
 
 - LLM/RAG answer review and workflow approval
 - enterprise copilot governance
@@ -61,6 +61,9 @@ The same kernel pattern can support:
 The public repository does not publish production-system material,
 specialist-system material, customer-specific evidence, or commercial delivery
 materials.
+
+See [Application Profiles](APPLICATION_PROFILES.md) for a bounded, non-product
+view of potential adaptations.
 
 ## Safety Boundary
 

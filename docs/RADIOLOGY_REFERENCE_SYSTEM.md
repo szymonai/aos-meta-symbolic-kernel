@@ -76,3 +76,6 @@ contract:
 - human review or escalation remains outside AOS
 
 This is utility evidence for the architecture, not a clinical proof.
+
+See [Application Profiles](APPLICATION_PROFILES.md) for the broader context:
+radiology is one reference profile within a domain-neutral assurance pattern.

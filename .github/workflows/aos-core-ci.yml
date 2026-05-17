@@ -33,6 +33,12 @@ jobs:
         run: python -m json.tool evidence/radiology_evidence_review.json > /dev/null
       - name: Run hello-world example
         run: python examples/hello-world/hello_world.py
+      - name: Run API gate example
+        run: |
+          python examples/api-gate/aos_api_gate.py evaluate \
+            --input examples/api-gate/sample_input.json
+          python examples/api-gate/aos_api_gate.py replay \
+            --evidence examples/api-gate/sample_evidence.json
       - name: Validate hello-world Docker Compose config
         run: docker compose -f examples/hello-world/docker-compose.yml config --quiet
       - name: Run hello-world Docker Compose example

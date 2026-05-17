@@ -1,0 +1,26 @@
+{
+  "audit_id": "sha256:e545f9db7dac16f41dd2aef400efb377e47d4d8afee34a6736a408b1254bca7e",
+  "claim_boundary": {
+    "external_validation_claim": false,
+    "production_use_claim": false,
+    "regulated_use_claim": false
+  },
+  "input": {
+    "limit": 9000,
+    "metadata_complete": true,
+    "policy_id": "demo_gate_policy_v1",
+    "policy_version": "1.0.0",
+    "score": 8200,
+    "signal_id": "demo-signal-001",
+    "uncertainty": 1200,
+    "warn_margin": 1000
+  },
+  "input_digest": "sha256:fc96f9b6deb3d6c25efed961dcff5888fb0b20f68e89e3cbab4a5edc47ccb8fc",
+  "policy_id": "demo_gate_policy_v1",
+  "policy_version": "1.0.0",
+  "reason": "Score plus uncertainty exceeds the allowed envelope.",
+  "replayable": true,
+  "schema_version": "aos-demo-evidence/v1",
+  "signal_id": "demo-signal-001",
+  "verdict": "BLOCK"
+}

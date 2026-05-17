@@ -176,6 +176,7 @@ def test_readme_links_public_evidence_docs() -> None:
         "docs/OFFLINE_EVALUATION_RESULTS.md",
         "docs/RADIOLOGY_EVIDENCE_REVIEW.md",
         "docs/UNIVERSAL_KERNEL_POSITIONING.md",
+        "docs/APPLICATION_PROFILES.md",
         "docs/DATASET_PROVENANCE.md",
         "docs/CUSTOMER_VALUE.md",
         "docs/VALUE_METRICS.md",
@@ -183,6 +184,7 @@ def test_readme_links_public_evidence_docs() -> None:
         "docs/CALIBRATION_AND_OPTIMIZATION.md",
         "docs/TECHNICAL_ADVANTAGE.md",
         "examples/hello-world",
+        "examples/api-gate",
         "evidence/radiology_offline_evaluation.json",
         "evidence/radiology_evidence_review.json",
     ):
@@ -199,11 +201,16 @@ def test_required_public_docs_and_examples_exist() -> None:
         "docs/REPOSITORY_BEST_PRACTICES.md",
         "docs/architecture.md",
         "docs/INTEGRITY_ANCHORS.md",
+        "docs/APPLICATION_PROFILES.md",
         "docs/CLEAN_ROOM_TEST.md",
         "docs/VALUE_METRICS.md",
         "examples/hello-world/README.md",
         "examples/hello-world/docker-compose.yml",
         "examples/hello-world/hello_world.py",
+        "examples/api-gate/README.md",
+        "examples/api-gate/aos_api_gate.py",
+        "examples/api-gate/sample_input.json",
+        "examples/api-gate/sample_evidence.json",
     ):
         assert (REPO_ROOT / relative_path).is_file(), relative_path
 

@@ -1,77 +1,77 @@
 {
-  "schema_version": "radiology-offline-evidence/v2",
-  "claim_flags": {
-    "clinical_claim": false,
-    "medical_device_claim": false,
-    "regulatory_compliance_claim": false,
-    "data_redistributed_in_repo": false,
-    "production_ready_claim": false,
-    "sota_claim": false
-  },
-  "interpretation_boundary": {
-    "model_output": "segmentation or risk-related numeric output from a domain model",
-    "aos_decision": "PASS/WARN/BLOCK control decision over output metadata or uncertainty",
-    "human_decision": "radiologist or workflow-owner review outside this repository",
-    "clinical_claim": false
-  },
-  "current_public_evidence_status": {
-    "radiology_metrics_publication_status": "bounded internal evidence review only",
-    "brats_2025_results": "not available in current public evidence",
-    "reason": "Selected internal artifacts were reviewed, but public interpretation remains limited to internal offline evidence inventory. Updated current metrics require a clean aggregate evidence packet with provenance, split definition, sample count, baselines, and reproducibility metadata.",
-    "evidence_review": "evidence/radiology_evidence_review.json",
-    "publication_policy": "Do not publish stale or unproven radiology performance numbers as current results."
-  },
-  "historical_artifacts": [
-    {
-      "id": "older-local-brats-tcga-yale-aggregates",
-      "status": "historical_superseded_not_current",
-      "usage": "evidence inventory only",
-      "metrics_published_as_current": false,
-      "publication_note": "Historical aggregate values are intentionally omitted from the current public evidence layer to avoid stale result claims."
-    }
-  ],
-  "required_fields_for_updated_metrics": [
-    "dataset_name",
-    "dataset_version",
-    "source",
-    "access_date",
-    "terms_or_license",
-    "redistribution_status",
-    "split_definition",
-    "sample_count",
-    "dice",
-    "sensitivity_recall",
-    "specificity",
-    "precision",
-    "fnr",
-    "fpr",
-    "hd95",
-    "uncertainty_summary",
-    "baselines",
-    "run_date",
-    "reproducibility_metadata"
-  ],
-  "performance_and_evaluation": {
+    "schema_version": "radiology-offline-evidence/v2",
+    "claim_flags": {
+        "clinical_claim": false,
+        "medical_device_claim": false,
+        "regulatory_compliance_claim": false,
+        "data_redistributed_in_repo": false,
+        "production_ready_claim": false,
+        "sota_claim": false
+    },
+    "interpretation_boundary": {
+        "model_output": "segmentation or risk-related numeric output from a domain model",
+        "aos_decision": "PASS/WARN/BLOCK control decision over output metadata or uncertainty",
+        "human_decision": "radiologist or workflow-owner review outside this repository",
+        "clinical_claim": false
+    },
+    "current_public_evidence_status": {
+        "radiology_metrics_publication_status": "bounded internal evidence review only",
+        "brats_2025_results": "not available in current public evidence",
+        "reason": "Selected internal artifacts were reviewed, but public interpretation remains limited to internal offline evidence inventory. Updated current metrics require a clean aggregate evidence packet with provenance, split definition, sample count, baselines, and reproducibility metadata.",
+        "evidence_review": "evidence/radiology_evidence_review.json",
+        "publication_policy": "Do not publish stale or unproven radiology performance numbers as current results."
+    },
+    "historical_artifacts": [
+        {
+            "id": "older-local-brats-tcga-yale-aggregates",
+            "status": "historical_superseded_not_current",
+            "usage": "evidence inventory only",
+            "metrics_published_as_current": false,
+            "publication_note": "Historical aggregate values are intentionally omitted from the current public evidence layer to avoid stale result claims."
+        }
+    ],
+    "required_fields_for_updated_metrics": [
+        "dataset_name",
+        "dataset_version",
+        "source",
+        "access_date",
+        "terms_or_license",
+        "redistribution_status",
+        "split_definition",
+        "sample_count",
+        "dice",
+        "sensitivity_recall",
+        "specificity",
+        "precision",
+        "fnr",
+        "fpr",
+        "hd95",
+        "uncertainty_summary",
+        "baselines",
+        "run_date",
+        "reproducibility_metadata"
+    ],
+    "performance_and_evaluation": {
         "additional_evaluation_status": "not available in current public evidence",
-    "additional_performance_status": "not available in current public evidence",
-    "public_latency_or_throughput_benchmarks": "not available in current public evidence"
-  },
-  "kernel_positioning": {
-    "summary": "one domain-agnostic AOS control kernel can support many specialist profiles",
-    "radiology_instance": "Instance 01 reference profile",
-    "evidence_review": "evidence/radiology_evidence_review.json",
-    "public_boundary": "not a clinical validation, production readiness, regulatory compliance, SOTA, or safety-certification claim"
-  },
-  "dataset_provenance": [
-    {
-      "name": "BraTS 2025",
-      "version": "not available in current public evidence",
-      "source": "not available in current public evidence",
-      "access_date": "not available in current public evidence",
-      "usage": "pending refreshed aggregate verification",
-      "terms_license": "not available in current public evidence",
-      "citations": "not available in current public evidence",
-      "redistribution_status": "not redistributed in this repository"
-    }
-  ]
+        "additional_performance_status": "not available in current public evidence",
+        "public_latency_or_throughput_benchmarks": "not available in current public evidence"
+    },
+    "kernel_positioning": {
+        "summary": "one domain-agnostic AOS control kernel can support many specialist profiles",
+        "radiology_instance": "Instance 01 reference profile",
+        "evidence_review": "evidence/radiology_evidence_review.json",
+        "public_boundary": "not a clinical validation, production readiness, regulatory compliance, SOTA, or safety-certification claim"
+    },
+    "dataset_provenance": [
+        {
+            "name": "BraTS 2025",
+            "version": "not available in current public evidence",
+            "source": "not available in current public evidence",
+            "access_date": "not available in current public evidence",
+            "usage": "pending refreshed aggregate verification",
+            "terms_license": "not available in current public evidence",
+            "citations": "not available in current public evidence",
+            "redistribution_status": "not redistributed in this repository"
+        }
+    ]
 }

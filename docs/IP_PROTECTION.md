@@ -40,7 +40,7 @@ The public repository may contain only:
 
 The public repository must not contain:
 
-- full AOS Core code;
+- private AOSKernel code;
 - non-public implementation material;
 - restricted evidence packages or internal technical documentation;
 - specialist-system source code or artifacts;

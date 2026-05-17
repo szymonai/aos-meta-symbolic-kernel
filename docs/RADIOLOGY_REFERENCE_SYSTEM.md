@@ -66,7 +66,7 @@ See [Radiology evidence review](RADIOLOGY_EVIDENCE_REVIEW.md).
 ## Specialist System Interpretation
 
 A specialist radiology profile would be one possible product family built on a
-private AOS Core. The public demonstrator only shows the shape of the control
+private AOSKernel. The public demonstrator only shows the shape of the control
 contract:
 
 - model output is not treated as a final decision

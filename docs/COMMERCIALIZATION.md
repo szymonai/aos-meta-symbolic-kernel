@@ -3,7 +3,7 @@
 AOS is positioned as a deterministic AI control and audit layer.
 
 The private product path is proprietary enterprise software. Specialist systems
-built on the private AOS Core are the main commercialization route.
+built on the private AOSKernel are the main commercialization route.
 
 Lower-risk entry points:
 

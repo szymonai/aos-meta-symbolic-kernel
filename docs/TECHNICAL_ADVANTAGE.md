@@ -1,7 +1,7 @@
 # Technical Advantage Evidence
 
 This document describes the technical advantage demonstrated by the public AOS
-limited demonstrator. It does not describe the private AOS Core, production
+limited demonstrator. It does not describe the private AOSKernel, production
 system internals, specialist-system material, restricted evidence packages, or
 NDA materials.
 

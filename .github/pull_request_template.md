@@ -5,7 +5,7 @@
 ## Publication Boundary
 
 - [ ] This change stays within the limited public demonstrator boundary.
-- [ ] No full AOS Core, non-public implementation material, restricted evidence,
+- [ ] No private AOSKernel, non-public implementation material, restricted evidence,
       specialist-system material, private evaluation results, or commercial delivery
       material is included.
 - [ ] No medical data, DICOM/NIfTI files, masks, labels, checkpoints, weights,

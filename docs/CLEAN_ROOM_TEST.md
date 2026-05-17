@@ -1,15 +1,45 @@
 # Clean-Room Test
 
-This test verifies only the limited public demonstrator.
+This test verifies only the limited public demonstrator. It is designed for a
+fresh public checkout with no private source material, no private datasets, and
+no restricted evidence packages.
+
+## Commands
 
 ```bash
 python -m pip install -r requirements-dev.txt
 python -m ruff check .
 python -m pytest tests -q
-lake build AOSPublicCore
+python benchmarks/run_benchmarks.py
+python -m json.tool benchmarks/results/metrics.json
 python -m json.tool evidence/demonstrator_manifest.json
+python -m json.tool evidence/radiology_offline_evaluation.json
+python -m json.tool evidence/radiology_evidence_review.json
+lake build AOSPublicCore
 ```
 
-It does not test the private AOS Core, specialist systems, restricted evidence
-packages, non-public implementation material, datasets, or commercial delivery
-materials.
+## Expected Public Results
+
+The current public benchmark evidence is:
+
+| Check | Current expected result |
+| --- | --- |
+| Synthetic scenarios | 12 |
+| Scenario mix | 4 safe, 4 warning, 4 unsafe |
+| Public AOS false passes | 0 |
+| Public AOS false blocks | 0 |
+| Public AOS PASS/WARN/BLOCK counts | 4 / 4 / 4 |
+| Public AOS audit digests | 12 |
+| Public AOS deterministic replay | `true` |
+
+The demonstrator manifest is also expected to keep public boundary fields set to
+`false` for full-core publication, private policy logic, clinical claims,
+external validation, medical-device status, regulatory compliance, and
+production runtime claims.
+
+## Scope Boundary
+
+This test does not test the private AOSKernel, specialist systems, restricted
+evidence packages, non-public implementation material, datasets, commercial
+delivery materials, production security, deployment settings, or customer
+outcomes.

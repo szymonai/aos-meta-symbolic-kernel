@@ -16,6 +16,15 @@ This repository is a **limited public demonstrator** for the AOS control-layer
 pattern. It is not the private AOSKernel, not a production SDK, and not a
 regulated product.
 
+## In Plain Terms
+
+AOS checks AI outputs before they affect a workflow. It does not decide what is
+true and it does not replace human review. It decides whether an output should
+`PASS`, require review with `WARN`, or be held with `BLOCK`, then records audit
+evidence for that decision.
+
+See [Plain-language overview](docs/PLAIN_LANGUAGE_OVERVIEW.md).
+
 ## What AOS Does
 
 - evaluates model-output metadata against explicit control rules
@@ -306,6 +315,7 @@ this public repository and is not a medical-device or clinical-validation claim.
 See:
 
 - [Public boundary](docs/PUBLIC_BOUNDARY.md)
+- [Plain-language overview](docs/PLAIN_LANGUAGE_OVERVIEW.md)
 - [Repository best practices](docs/REPOSITORY_BEST_PRACTICES.md)
 - [Public architecture](docs/architecture.md)
 - [Scope of Proof](SCOPE_OF_PROOF.md)

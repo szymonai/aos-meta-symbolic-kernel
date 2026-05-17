@@ -15,7 +15,8 @@ The repository should explain the following within the first review pass:
 - what public evidence supports the current claims;
 - what is deliberately not included.
 
-README should stay concise at the top. Detailed material belongs in focused
+README should stay concise at the top. A plain-language explanation belongs in
+`docs/PLAIN_LANGUAGE_OVERVIEW.md`; deeper technical material belongs in focused
 documents under `docs/`.
 
 ## Evidence-First Documentation
@@ -36,6 +37,7 @@ claims without a current, reproducible, public evidence packet.
 | Area | Role |
 | --- | --- |
 | `README.md` | First-contact positioning, quickstart, public boundary |
+| `docs/PLAIN_LANGUAGE_OVERVIEW.md` | Non-specialist explanation |
 | `core/` | Minimal executable public demonstrator |
 | `benchmarks/` | Synthetic benchmark runner and public metrics |
 | `lean/` | Abstract public proof surface |

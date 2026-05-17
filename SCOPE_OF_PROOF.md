@@ -24,7 +24,6 @@ Its proof surface is useful, but intentionally narrow.
 - clinical validation or medical-device status
 - regulatory approval or certification
 - AGI or autonomous reasoning capability
-- RH proof or mathematical breakthrough claims
 - hardware-origin mathematical certainty claims
 - access to the private AOSKernel or non-public implementation material
 

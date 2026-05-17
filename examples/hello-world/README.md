@@ -15,7 +15,7 @@ audit_id: sha256:...
 Run:
 
 ```bash
-docker-compose up
+docker compose up
 ```
 
 This example is intentionally small. It demonstrates public verdict structure

@@ -14,6 +14,9 @@ python -m json.tool benchmarks/results/metrics.json
 python -m json.tool evidence/demonstrator_manifest.json
 python -m json.tool evidence/radiology_offline_evaluation.json
 python -m json.tool evidence/radiology_evidence_review.json
+python examples/hello-world/hello_world.py
+docker compose -f examples/hello-world/docker-compose.yml config --quiet
+docker compose -f examples/hello-world/docker-compose.yml run --rm hello-world
 lake build AOSPublicCore
 ```
 
@@ -31,8 +34,11 @@ The current public benchmark evidence is:
 | Public AOS audit digests | 12 |
 | Public AOS deterministic replay | `true` |
 
+The hello-world Docker Compose check is a container smoke test for the public
+demonstrator example. It is not a production deployment claim.
+
 The demonstrator manifest is also expected to keep public boundary fields set to
-`false` for full-core publication, internal policy logic, clinical claims,
+`false` for claims outside this limited demonstrator, including clinical claims,
 external validation, medical-device status, regulatory compliance, and
 production runtime claims.
 

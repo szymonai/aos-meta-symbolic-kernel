@@ -72,7 +72,7 @@ Minimal example:
 
 ```bash
 cd examples/hello-world
-docker-compose up
+docker compose up
 ```
 
 ## What This Repository Shows

@@ -306,6 +306,7 @@ this public repository and is not a medical-device or clinical-validation claim.
 See:
 
 - [Public boundary](docs/PUBLIC_BOUNDARY.md)
+- [Repository best practices](docs/REPOSITORY_BEST_PRACTICES.md)
 - [Public architecture](docs/architecture.md)
 - [Scope of Proof](SCOPE_OF_PROOF.md)
 - [AI problems addressed](docs/AI_PROBLEMS_ADDRESSED.md)

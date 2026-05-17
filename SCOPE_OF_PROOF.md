@@ -10,6 +10,18 @@ Its proof surface is useful, but intentionally narrow.
 - audit digest generation for demonstrator decisions
 - reproducible JSON evidence for the current synthetic benchmark set
 
+## Numeric Model Boundary
+
+The public Lean proof surface uses integer arithmetic for abstract interval
+verdict logic. The Python reference implementation accepts finite numeric
+inputs and evaluates floating-point values at runtime.
+
+No proof is published here that converts the Python floating-point execution
+path into the Lean integer model. The Lean result should therefore be read as a
+proof over the abstract verdict structure, not as a proof of Python runtime
+semantics, JSON number parsing, floating-point rounding, or a model-output
+conversion layer.
+
 ## Demonstrated
 
 - model-output signal to `PASS` / `WARN` / `BLOCK` decision flow
@@ -19,6 +31,9 @@ Its proof surface is useful, but intentionally narrow.
 
 ## Not Claimed
 
+- Python-to-Lean refinement
+- Python numeric runtime behavior
+- Int/Float correspondence between code and proof artifacts
 - production SDK completeness
 - production security or deployment readiness
 - clinical validation or medical-device status

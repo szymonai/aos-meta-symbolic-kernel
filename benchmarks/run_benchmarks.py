@@ -109,11 +109,15 @@ def build_summary(metrics: dict[str, Any]) -> str:
 
     return "\n".join(
         [
-            "# Synthetic Technical Advantage Summary",
+            "# Synthetic Demonstrator Comparison Summary",
             "",
             "This benchmark compares deterministic interval gating with three simple",
             "guardrail baselines on synthetic scenarios. It is not a production",
             "benchmark, external validation, or domain validation claim.",
+            "",
+            "Scope limits: the scenario set has 12 synthetic cases, the baselines",
+            "are intentionally simple, no external guardrail frameworks are",
+            "included, and no statistical significance claim is made.",
             "",
             *rows,
             "",
@@ -133,12 +137,14 @@ def build_summary(metrics: dict[str, Any]) -> str:
 def run() -> dict[str, Any]:
     scenarios = load_scenarios()
     metrics = {
-        "schema_version": "synthetic-advantage/v1",
+        "schema_version": "synthetic-comparison/v1",
         "claim_boundary": {
             "production_ready_claim": False,
             "external_validation_claim": False,
             "domain_validation_claim": False,
             "python_lean_refinement_claim": False,
+            "external_framework_comparison_claim": False,
+            "statistical_significance_claim": False,
         },
         "scenario_count": len(scenarios),
         "scenario_mix": {

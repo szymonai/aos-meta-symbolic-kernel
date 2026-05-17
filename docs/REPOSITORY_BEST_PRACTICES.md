@@ -14,10 +14,15 @@ The repository should explain the following within the first review pass:
 - how to run the public demonstrator;
 - what public evidence supports the current claims;
 - what the repository does and does not claim.
+- which CI status and public demonstrator version are current.
 
 README should stay concise at the top. A plain-language explanation belongs in
 `docs/PLAIN_LANGUAGE_OVERVIEW.md`; deeper technical material belongs in focused
 documents under `docs/`.
+
+Domain-specific metrics should be linked from README, not repeated there. This
+keeps first-read positioning clear and prevents bounded evidence from reading as
+a broad product-performance claim.
 
 ## Evidence-First Documentation
 
@@ -37,6 +42,7 @@ claims without a current, reproducible, public evidence packet.
 | Area | Role |
 | --- | --- |
 | `README.md` | First-contact positioning, quickstart, public boundary |
+| `VERSION` | Public demonstrator version marker |
 | `docs/PLAIN_LANGUAGE_OVERVIEW.md` | Non-specialist explanation |
 | `docs/SDK_BOUNDARY.md` | Public SDK/integration boundary |
 | `core/` | Minimal executable public demonstrator |
@@ -69,6 +75,8 @@ CI should protect the public demonstrator by checking:
 - benchmark generation and metrics JSON validity;
 - evidence JSON validity;
 - hello-world example execution;
+- API-gate example replay;
+- Docker Compose smoke test;
 - Lean placeholder scan;
 - Lean build.
 

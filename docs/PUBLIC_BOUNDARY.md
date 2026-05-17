@@ -31,6 +31,16 @@ See also:
 
 Do not treat this public repository as a blueprint for the production system.
 
+## Evaluation Boundaries
+
+The public repository does not establish production calibration, production
+security architecture, Python-to-Lean runtime refinement, load performance,
+domain-adapter quality, enterprise deployment economics, or customer-specific
+operational readiness.
+
+Those areas require separate evaluation artifacts and are outside the limited
+public demonstrator.
+
 ## Claims Not Made
 
 - no external validation

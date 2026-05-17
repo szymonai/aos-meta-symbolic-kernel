@@ -41,6 +41,8 @@ conversion layer.
 - external validation or independent certification
 - product performance in customer environments
 - production-system completeness
+- production calibration, load performance, domain-adapter quality, enterprise
+  deployment economics, or customer-specific operational readiness
 - materials outside this public demonstrator
 
 The public repository should be read as a technical credibility signal and

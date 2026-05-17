@@ -154,6 +154,7 @@ def test_readme_links_public_evidence_docs() -> None:
     for link in (
         "SCOPE_OF_PROOF.md",
         "docs/AI_PROBLEMS_ADDRESSED.md",
+        "docs/PLAIN_LANGUAGE_OVERVIEW.md",
         "docs/REPOSITORY_BEST_PRACTICES.md",
         "docs/architecture.md",
         "docs/INTEGRITY_ANCHORS.md",
@@ -179,6 +180,7 @@ def test_required_public_docs_and_examples_exist() -> None:
         "README.md",
         "SCOPE_OF_PROOF.md",
         "docs/AI_PROBLEMS_ADDRESSED.md",
+        "docs/PLAIN_LANGUAGE_OVERVIEW.md",
         "docs/REPOSITORY_BEST_PRACTICES.md",
         "docs/architecture.md",
         "docs/INTEGRITY_ANCHORS.md",

@@ -46,8 +46,18 @@ FORBIDDEN_TEXT_PATTERNS = [
         r"BraTS-GLI-\d",
         "SIL-3 " + "equivalent",
         "SIL-3 " + "equivalence",
+        "Truth" + r"\s+" + "Kernel",
+        "universal" + r"\s+" + "truth",
+        "production" + r"\s+" + "medical" + r"\s+" + "system",
+        "hardware" + r"\s+" + "as" + r"\s+" + "mathematical" + r"\s+" + "truth",
+        "sac" + "red",
+        "final" + r"\s+" + "proof",
+        "mathematically" + r"\s+" + "absolute",
+        "clinical" + r"\s+" + "guarantee",
     )
 ]
+
+FORBIDDEN_LEAN_TERMS = ("ax" + "iom", "sor" + "ry", "ad" + "mit", "un" + "safe")
 
 
 def iter_repo_files() -> list[Path]:
@@ -142,19 +152,56 @@ def test_readme_links_public_evidence_docs() -> None:
     readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
 
     for link in (
+        "SCOPE_OF_PROOF.md",
+        "docs/AI_PROBLEMS_ADDRESSED.md",
+        "docs/architecture.md",
         "docs/RADIOLOGY_REFERENCE_SYSTEM.md",
         "docs/OFFLINE_EVALUATION_RESULTS.md",
         "docs/RADIOLOGY_EVIDENCE_REVIEW.md",
         "docs/UNIVERSAL_KERNEL_POSITIONING.md",
         "docs/DATASET_PROVENANCE.md",
         "docs/CUSTOMER_VALUE.md",
+        "docs/VALUE_METRICS.md",
         "docs/REGULATORY_READINESS.md",
         "docs/CALIBRATION_AND_OPTIMIZATION.md",
         "docs/TECHNICAL_ADVANTAGE.md",
+        "examples/hello-world",
         "evidence/radiology_offline_evaluation.json",
         "evidence/radiology_evidence_review.json",
     ):
         assert link in readme
+
+
+def test_required_public_docs_and_examples_exist() -> None:
+    for relative_path in (
+        "README.md",
+        "SCOPE_OF_PROOF.md",
+        "docs/AI_PROBLEMS_ADDRESSED.md",
+        "docs/architecture.md",
+        "docs/CLEAN_ROOM_TEST.md",
+        "docs/VALUE_METRICS.md",
+        "examples/hello-world/README.md",
+        "examples/hello-world/docker-compose.yml",
+        "examples/hello-world/hello_world.py",
+    ):
+        assert (REPO_ROOT / relative_path).is_file(), relative_path
+
+
+def test_all_json_files_are_valid() -> None:
+    for path in iter_repo_files():
+        if path.suffix.lower() != ".json":
+            continue
+        with path.open(encoding="utf-8") as file:
+            json.load(file)
+
+
+def test_lean_sources_do_not_use_placeholder_terms() -> None:
+    for path in (REPO_ROOT / "lean").rglob("*.lean"):
+        text = path.read_text(encoding="utf-8")
+        for term in FORBIDDEN_LEAN_TERMS:
+            assert not re.search(rf"\b{term}\b", text), (
+                f"Lean placeholder term {term!r} in {path.relative_to(REPO_ROOT)}"
+            )
 
 
 def test_radiology_public_evidence_does_not_publish_stale_metrics() -> None:

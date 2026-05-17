@@ -13,6 +13,10 @@ replacement for domain models or human reviewers.
 | Policy language is ambiguous | Separate numeric gate behavior from prompt-only wording |
 | Governance teams need boundaries | Distinguish model output, AOS decision, human decision, and claims |
 
+The public value metrics are reported in [Value metrics](VALUE_METRICS.md).
+They are limited to reproducible public artifacts such as benchmark JSON,
+evidence manifests, tests, and clean-room repeatability.
+
 ## Radiology Triage Reference Value
 
 In the radiology reference scenario, AOS is useful as a workflow-control pattern:
@@ -25,11 +29,11 @@ In the radiology reference scenario, AOS is useful as a workflow-control pattern
 This is customer value for governance and workflow assurance. It is not a claim
 that the public repository is a clinical product.
 
-The commercial value is strongest when the specialist profile can be calibrated
-and optimized over time: better uncertainty estimates, clearer escalation
-bands, lower latency, higher throughput, and deployment-specific envelopes. The
-public repo describes that product direction without publishing private
-evaluation material, implementation details, or benchmark traces.
+The commercial value should be evaluated with controlled workflow evidence:
+decision routing, audit completeness, reproducibility, integration fit, and
+claim discipline. The public repository shows the evaluation shape without
+publishing private evaluation material, implementation details, or customer
+data.
 
 ## Specialist System Multiplier
 

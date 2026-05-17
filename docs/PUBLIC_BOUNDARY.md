@@ -1,6 +1,6 @@
 # Public Boundary
 
-This repository is a limited demonstrator, not the proprietary AOS Core.
+This repository is a limited demonstrator, not the private AOSKernel.
 
 The public goal is high information density: enough structure, code, tests,
 proof surface, and evidence context for a serious reviewer to understand the

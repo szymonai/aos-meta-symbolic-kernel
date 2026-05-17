@@ -1,25 +1,114 @@
-# AOS Limited Public Demonstrator
+# AOS Neurosymbolic AI
 
-AOS = deterministic AI control and audit layer.
+AOS is a domain-neutral runtime assurance layer for AI systems. It turns
+uncertain model outputs into deterministic, auditable `PASS` / `WARN` /
+`BLOCK` decisions.
 
-TL;DR:
+AOS does not replace AI models. It controls the effects of their outputs before
+they enter a workflow.
 
 ```text
-AI output -> simple gate -> PASS / WARN / BLOCK -> demo audit record
+AI model output -> explicit policy -> AOS gate
+  -> PASS / WARN / BLOCK -> explanation -> audit evidence
 ```
 
-This repository is a **limited proof-of-capability demonstrator**. It is not the
-full proprietary AOS Core and is not a production SDK.
+This repository is a **limited public demonstrator** for the AOS control-layer
+pattern. It is not the private AOSKernel, not a production SDK, and not a
+regulated product.
 
-AOS is not another AI model. AOS turns uncertain model outputs into auditable
-`PASS` / `WARN` / `BLOCK` decisions.
+## What AOS Does
 
-## Universal AOS Kernel
+- evaluates model-output metadata against explicit control rules
+- converts uncertain outputs into deterministic workflow decisions
+- creates audit evidence for each public demonstrator decision
+- separates model output, control decision, human decision, and external claim
+- acts as a decision firewall between AI output and downstream effects
+
+## AI Problems Addressed
+
+| Current AI problem | AOS public response |
+| --- | --- |
+| Probabilistic outputs enter deterministic workflows | `PASS` / `WARN` / `BLOCK` control decisions |
+| Uncertainty is lost after inference | Explicit uncertainty or quality-signal evaluation |
+| Review triggers are unclear | Deterministic escalation signals |
+| Audit trails are hard to reconstruct | SHA-256-linked public audit evidence |
+| Governance claims get mixed together | Separate model output, AOS verdict, human decision, and external claim |
+
+See [AI problems addressed](docs/AI_PROBLEMS_ADDRESSED.md).
+
+## Anatomy Of A Verdict
+
+| Field | Public demonstrator meaning |
+| --- | --- |
+| `input` | A bounded model-output or workflow signal |
+| `policy` | A public rule used by the demonstrator |
+| `verdict` | `PASS`, `WARN`, or `BLOCK` |
+| `reason` | Human-readable explanation for the public example |
+| `audit_id` | SHA-256-linked evidence identifier |
+
+## Quickstart
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m ruff check .
+python -m pytest tests -q
+python benchmarks/run_benchmarks.py
+python -m json.tool benchmarks/results/metrics.json
+lake build AOSPublicCore
+```
+
+Minimal example:
+
+```bash
+cd examples/hello-world
+docker-compose up
+```
+
+## What This Repository Shows
+
+- a simplified `PASS` / `WARN` / `BLOCK` interval gate
+- synthetic benchmark scenarios with reproducible public metrics
+- SHA-256-linked demo audit evidence
+- a small Lean proof surface for abstract verdict logic
+- clean-room repeatability checks
+- public documentation for scope, value metrics, and publication boundaries
+
+## What This Repository Does Not Contain
+
+- the private AOSKernel
+- non-public decision parameters, customer data, or restricted evidence packages
+- medical datasets, patient files, model weights, checkpoints, or local paths
+- production security, deployment, or commercial delivery material
+- clinical validation, regulatory approval, or unrelated mathematical claims
+
+## Scope Of Proof
+
+The public proof surface is intentionally narrow. It supports deterministic
+verdict logic and bounded audit evidence for the demonstrator only.
+
+See [Scope of Proof](SCOPE_OF_PROOF.md).
+
+## Commercial Use Cases
+
+The same public control pattern can be evaluated in neutral, non-certified
+workflows such as:
+
+- LLM output control
+- agent action gating
+- document AI review
+- fintech risk review
+- cybersecurity automation gates
+- industrial quality review
+- healthcare R&D audit support
+
+These are use-case directions, not production deployment claims.
+
+## Universal Control Kernel
 
 The public positioning is:
 
 ```text
-one domain-agnostic control kernel -> many specialist profiles
+one domain-neutral control kernel -> many specialist profiles
 ```
 
 AOS is domain-neutral by design and can be adapted to different AI workflows,
@@ -36,28 +125,7 @@ Radiology is treated here as **Instance 01**: a reference specialist profile for
 AI-assisted brain tumor triage. Other profiles could target LLM/RAG workflows,
 industrial monitoring, enterprise approvals, cyber-defense, edge systems, or
 other regulated decision workflows. This public repository does not publish
-those specialist products or the private AOS Core.
-
-## What Is Public Here
-
-This repository contains only:
-
-- a simplified `PASS` / `WARN` / `BLOCK` interval gate
-- synthetic demonstration examples
-- a basic audit concept
-- a small Lean proof surface for abstract verdict logic
-- basic tests and CI
-- high-level positioning material
-
-## What Is Not Public
-
-This repository does not contain:
-
-- the full proprietary AOS Core
-- non-public implementation material
-- restricted evidence packages or evaluation artifacts
-- production security, deployment, or commercial delivery materials
-- customer, partner, patient, model, or dataset artifacts
+those specialist products or the private AOSKernel.
 
 ## Problem
 
@@ -164,14 +232,15 @@ This public demonstrator:
 - has no clinical or specialist consultation claim
 - has no medical-device claim
 - has no clinical validation claim
-- does not contain the full AOS Core
+- does not contain the private AOSKernel
 - does not prove that a model is correct
 - does not eliminate LLM or agent hallucinations
 - does not control agents or execute operational control for them
 
 The public Lean file covers only abstract verdict logic. It does not prove the
 Python implementation, HMAC construction, JSON serialization, floating-point
-runtime behavior, production policy logic, domain adapters, or clinical safety.
+runtime behavior, production decision behavior, domain adapters, or clinical
+safety.
 
 Operational control remains with the operator, developer, workflow owner, or
 supervising system.
@@ -179,7 +248,7 @@ supervising system.
 ## Commercial Direction
 
 The commercial system is intended to be developed privately as proprietary
-enterprise software. Specialist systems built on the private AOS Core are the
+enterprise software. Specialist systems built on the private AOSKernel are the
 main commercialization path.
 
 Lower-risk entry points include:
@@ -237,15 +306,20 @@ this public repository and is not a medical-device or clinical-validation claim.
 See:
 
 - [Public boundary](docs/PUBLIC_BOUNDARY.md)
+- [Public architecture](docs/architecture.md)
+- [Scope of Proof](SCOPE_OF_PROOF.md)
+- [AI problems addressed](docs/AI_PROBLEMS_ADDRESSED.md)
 - [Universal kernel positioning](docs/UNIVERSAL_KERNEL_POSITIONING.md)
 - [Commercialization direction](docs/COMMERCIALIZATION.md)
 - [Development transparency](docs/DEVELOPMENT_TRANSPARENCY.md)
 - [Clean-room test](docs/CLEAN_ROOM_TEST.md)
+- [Hello-world example](examples/hello-world)
 - [Radiology reference system](docs/RADIOLOGY_REFERENCE_SYSTEM.md)
 - [Offline evaluation results](docs/OFFLINE_EVALUATION_RESULTS.md)
 - [Radiology evidence review](docs/RADIOLOGY_EVIDENCE_REVIEW.md)
 - [Dataset provenance](docs/DATASET_PROVENANCE.md)
 - [Customer value](docs/CUSTOMER_VALUE.md)
+- [Value metrics](docs/VALUE_METRICS.md)
 - [Regulatory readiness](docs/REGULATORY_READINESS.md)
 - [Performance and evaluation boundary](docs/CALIBRATION_AND_OPTIMIZATION.md)
 

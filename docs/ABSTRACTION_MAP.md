@@ -1,8 +1,8 @@
 # AOS Public Abstraction Map
 
 AOS is built as a layered assurance system. This public repository exposes the
-smallest useful slice of that architecture: enough to show the control pattern,
-not enough to disclose the proprietary core.
+smallest useful slice of that architecture: enough to show the control pattern
+while staying within the approved public demonstrator boundary.
 
 ## Public Layer Stack
 

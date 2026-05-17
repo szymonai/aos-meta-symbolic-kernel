@@ -44,7 +44,7 @@ See [AI problems addressed](docs/AI_PROBLEMS_ADDRESSED.md).
 | `policy` | A public rule used by the demonstrator |
 | `verdict` | `PASS`, `WARN`, or `BLOCK` |
 | `reason` | Human-readable explanation for the public example |
-| `audit_id` | SHA-256-linked evidence identifier |
+| `audit_id` | SHA-256-linked evidence identifier; signed evidence packets may add Ed25519 provenance metadata |
 
 ## Quickstart
 
@@ -309,6 +309,7 @@ See:
 - [Public architecture](docs/architecture.md)
 - [Scope of Proof](SCOPE_OF_PROOF.md)
 - [AI problems addressed](docs/AI_PROBLEMS_ADDRESSED.md)
+- [Integrity anchors](docs/INTEGRITY_ANCHORS.md)
 - [Universal kernel positioning](docs/UNIVERSAL_KERNEL_POSITIONING.md)
 - [Commercialization direction](docs/COMMERCIALIZATION.md)
 - [Development transparency](docs/DEVELOPMENT_TRANSPARENCY.md)

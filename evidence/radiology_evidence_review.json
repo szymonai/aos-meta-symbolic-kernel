@@ -7,11 +7,11 @@
     "regulatory_compliance_claim": false,
     "production_ready_claim": false,
     "sota_claim": false,
-    "sil_claim": false,
+    "safety_certification_claim": false,
     "data_redistributed_in_repo": false
   },
   "review_scope": {
-    "purpose": "bounded review of selected private radiology artifacts",
+    "purpose": "bounded review of selected internal radiology evidence summaries",
     "public_role": "domain-adapter evidence inventory only",
     "aos_role": "explainable/verifiable control layer around model outputs",
     "kernel_positioning": "one domain-agnostic AOS control kernel can support many specialist profiles",
@@ -31,15 +31,15 @@
     "formal_tasks_total": 3292,
     "lake_root_build_exit_code": 0,
     "manifest_payload_sha512": "c4124f59cec5d587a41563b7780a4e6b878a559b669ec293958ab04418899e1b580c1396905f3a731ac5009dab46220ccefce0699c93e65316a9b96133b89133",
-    "publication_boundary": "internal/offline evidence milestones only; not clinical validation, production readiness, regulatory compliance, SOTA, or SIL equivalence"
+    "publication_boundary": "internal/offline evidence milestones only; not clinical validation, production readiness, regulatory compliance, SOTA, or safety certification"
   },
   "shadow_benchmarking": {
     "definition": "bounded evaluation of model outputs and workflow decisions against AOS control envelopes",
     "public_scope": "synthetic benchmarks, evidence JSON, and public SHA-512 integrity anchor",
-    "private_scope_withheld": [
-      "non-public technical material",
-      "restricted evidence packages",
-      "customer-specific materials"
+    "scope_boundary": [
+      "production-system material",
+      "customer-specific materials",
+      "deployment material"
     ]
   },
   "verified_internal_artifacts": [
@@ -68,10 +68,10 @@
         "recall_sensitivity_et": 0.8065,
         "outlier_count_et_dice_below_0_5": 36
       },
-      "publication_boundary": "internal in-silico cohort report only; not clinical validation, certification, compliance, or production-readiness evidence"
+      "publication_boundary": "internal offline cohort report only; not clinical validation, certification, compliance, or production-readiness evidence"
     },
     {
-      "id": "private_formal_integrity_status",
+      "id": "formal_integrity_status",
       "source_artifact": "verification_status.txt",
       "formal_tasks_completed": 3292,
       "formal_tasks_total": 3292,
@@ -82,10 +82,10 @@
       ],
       "manifest_payload_sha512": "c4124f59cec5d587a41563b7780a4e6b878a559b669ec293958ab04418899e1b580c1396905f3a731ac5009dab46220ccefce0699c93e65316a9b96133b89133",
       "audited_core_placeholder_count": 0,
-      "publication_boundary": "private formal-integrity evidence only; not Python-to-Lean refinement, segmentation correctness, clinical safety, or production audit proof"
+      "publication_boundary": "internal formal-integrity status only; not Python-to-Lean refinement, segmentation correctness, clinical safety, or production audit proof"
     }
   ],
-  "not_confirmed_or_withheld": [
+  "not_confirmed_in_public_evidence": [
     {
       "claim": "Detection rate 92.56 percent as cohort-level radiology metric",
       "status": "not confirmed in current public evidence"
@@ -100,20 +100,20 @@
     },
     {
       "claim": "SOTA or broad comparative radiology performance superiority",
-      "status": "withheld; requires external comparison protocol and independent validation"
+      "status": "requires external comparison protocol and independent validation"
     },
     {
-      "claim": "SIL-equivalent safety",
-      "status": "withheld; not established by this public demonstrator"
+      "claim": "Safety certification",
+      "status": "not established by this public demonstrator"
     },
     {
       "claim": "MDR, AI Act, CE, ISO, or medical-device compliance",
-      "status": "withheld; regulatory readiness only"
+      "status": "regulatory readiness only"
     },
     {
       "claim": "Trust index or revenue ledger as market validation",
-      "status": "withheld; internal commercial metadata is not independent market evidence"
+      "status": "internal commercial metadata is not independent market evidence"
     }
   ],
-  "safe_public_summary": "Private internal artifacts include selected promising radiology model-output metrics and a successful formal-integrity build, but this repository does not publish clinical validation, production readiness, regulatory compliance, or SOTA claims."
+  "safe_public_summary": "Selected internal evidence summaries include promising radiology model-output metrics and a successful formal-integrity build, but this repository does not publish clinical validation, production readiness, regulatory compliance, or SOTA claims."
 }

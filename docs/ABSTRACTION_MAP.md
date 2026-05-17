@@ -61,7 +61,7 @@ The public repo does not prove:
 - regulatory compliance;
 - SOTA performance;
 - autonomous operational control;
-- safety of any private specialist profile.
+- safety of any specialist profile.
 
 ## Information-Dense Reading Path
 

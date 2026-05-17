@@ -2,9 +2,9 @@ AOS Limited Public Demonstrator
 
 Copyright (c) 2026 Szymon Hetnar. All rights reserved.
 
-This repository is a limited public demonstrator. It intentionally omits the
-proprietary AOS Core, non-public implementation material, restricted evidence
-packages, production security materials, and commercial delivery materials.
+This repository is a limited public demonstrator. It intentionally excludes
+production-system code, customer material, production security material, and
+commercial delivery material.
 
 No license is granted to copy, modify, distribute, sublicense, host, sell,
 commercialize, incorporate, train on, benchmark against as a product substitute,
@@ -12,9 +12,8 @@ or create derivative works from this software or documentation without prior
 written permission from the copyright holder.
 
 No patent license, trademark license, trade-secret license, database right,
-model-training right, or right to use AOS names, marks, product positioning,
-non-public technical material, restricted evidence, or commercial materials is
-granted by publication of this repository.
+model-training right, or right to use AOS names, marks, product positioning, or
+commercial materials is granted by publication of this repository.
 
 SzymonAI is the GitHub account name only. It is not the legal copyright holder
 unless separately stated.

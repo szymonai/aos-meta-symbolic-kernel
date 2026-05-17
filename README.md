@@ -13,8 +13,8 @@ AI model output -> explicit policy -> AOS gate
 ```
 
 This repository is a **limited public demonstrator** for the AOS control-layer
-pattern. It is not the private AOSKernel, not a production SDK, and not a
-regulated product.
+pattern. It is not a production SDK, regulated product, or full production
+system.
 
 For SDK positioning, see [SDK boundary](docs/SDK_BOUNDARY.md).
 
@@ -86,8 +86,8 @@ docker-compose up
 
 ## What This Repository Does Not Contain
 
-- the private AOSKernel
-- non-public decision parameters, customer data, or restricted evidence packages
+- production-system code
+- customer data, deployment material, or controlled evidence packages
 - medical datasets, patient files, model weights, checkpoints, or local paths
 - production security, deployment, or commercial delivery material
 - clinical validation, regulatory approval, or unrelated mathematical claims
@@ -135,8 +135,8 @@ model output -> uncertainty or quality signal -> deterministic gate
 Radiology is treated here as **Instance 01**: a reference specialist profile for
 AI-assisted brain tumor triage. Other profiles could target LLM/RAG workflows,
 industrial monitoring, enterprise approvals, cyber-defense, edge systems, or
-other regulated decision workflows. This public repository does not publish
-those specialist products or the private AOSKernel.
+other regulated decision workflows. This public repository is limited to the
+shared public demonstrator pattern.
 
 ## Problem
 
@@ -184,9 +184,9 @@ It is not published here as the full specialist system.
 ## Offline Evaluation Evidence
 
 The public repository now includes a bounded evidence review for selected
-private radiology artifacts. It records which values were locally confirmed,
+internal radiology summaries. It records which values were locally confirmed,
 which values belong to a small validation fold, which values belong to an
-internal cohort report, and which claims remain withheld.
+internal cohort report, and which claims remain outside the public scope.
 
 Public evidence milestones:
 
@@ -195,10 +195,10 @@ Public evidence milestones:
 - selected Dataset832 fold artifact: label-2 Dice `0.8843`, label-2 recall
   `0.9085`, label-2 precision `0.8665` on 2 validation cases;
 - formal-integrity status: Lean/Lake `3292/3292` tasks, root build exit code
-  `0`, and public SHA-512 anchor for the private integrity manifest.
+  `0`, and public SHA-512 anchor for an internal integrity snapshot.
 
 The review does not publish a clinical performance claim. It also does not
-claim SOTA, medical-device status, MDR/AI Act compliance, SIL equivalence,
+claim SOTA, medical-device status, MDR/AI Act compliance, safety certification,
 production readiness, or external validation.
 
 BraTS 2025 current results remain marked as `not available in current public
@@ -208,7 +208,7 @@ review is a Dataset832/BraTS2024-labelled fold summary, not a confirmed BraTS
 2025 aggregate package.
 
 No patient data, images, masks, DICOM/NIfTI files, checkpoints, local paths,
-restricted technical artifacts, or per-case records are redistributed.
+controlled technical artifacts, or per-case records are redistributed.
 
 ## Customer Value
 
@@ -219,7 +219,7 @@ behavior and workflow decisions.
 
 The broader commercial signal is scalability: one control kernel can support
 many specialist profiles. The public demonstrator shows the repeatable public
-shape of the control layer while keeping non-public technical material outside
+shape of the control layer while keeping production-system material outside
 the repository.
 
 ## Regulatory Readiness, Not Compliance
@@ -231,7 +231,7 @@ certification, production readiness, or clinical evaluation completion.
 ## Data Redistribution Disclaimer
 
 This public repository redistributes no medical datasets, patient files, scans,
-segmentations, masks, DICOM/NIfTI files, model checkpoints, or private audit
+segmentations, masks, DICOM/NIfTI files, model checkpoints, or internal audit
 records. Dataset provenance fields are included only when supported by current
 local evidence; otherwise they are marked as `not available in current evidence`.
 
@@ -243,10 +243,10 @@ This public demonstrator:
 - has no clinical or specialist consultation claim
 - has no medical-device claim
 - has no clinical validation claim
-- does not contain the private AOSKernel
+- does not contain production-system code
 - does not prove that a model is correct
-- does not eliminate LLM or agent hallucinations
-- does not control agents or execute operational control for them
+- does not guarantee that model outputs are correct
+- does not execute downstream operational control
 
 The public Lean file covers only abstract verdict logic. It does not prove the
 Python implementation, HMAC construction, JSON serialization, floating-point
@@ -258,9 +258,8 @@ supervising system.
 
 ## Commercial Direction
 
-The commercial system is intended to be developed privately as proprietary
-enterprise software. Specialist systems built on the private AOSKernel are the
-main commercialization path.
+Commercial products are intended to be developed as proprietary enterprise
+software. Specialist systems are the main commercialization path.
 
 Lower-risk entry points include:
 
@@ -279,15 +278,15 @@ Possible product segmentation:
 - **AOS Enterprise**: evidence store, integrations, governance
 - **AOS Critical**: formal stack, on-prem/VPC, domain validation
 
-Private/commercial variants may include deployment-specific engineering and
-performance work. No non-public implementation material or private performance
-evidence is published here.
+Commercial variants may include deployment-specific engineering and performance
+work. Implementation material outside the demonstrator and unreleased
+performance evidence are outside this public repository.
 
 ## Performance And Evaluation Boundary
 
 The public demonstrator reports only bounded, reproducible public evidence.
-Customer-specific evaluation, deployment engineering, and private performance
-evidence remain outside this repository unless separately cleared for public
+Customer-specific evaluation, deployment engineering, and unreleased performance
+evidence remain outside this repository unless separately prepared for public
 release.
 
 ## Shadow Benchmarking
@@ -303,9 +302,9 @@ The current public SHA-512 integrity anchor is:
 c4124f59cec5d587a41563b7780a4e6b878a559b669ec293958ab04418899e1b580c1396905f3a731ac5009dab46220ccefce0699c93e65316a9b96133b89133
 ```
 
-This hash is evidence of a private manifest snapshot. It is not the manifest,
-not a model weight hash, not a clinical validation claim, and not a production
-signature scheme.
+This hash is a public integrity anchor for an internal evidence snapshot. It is
+not the evidence packet, not a model weight hash, not a clinical validation
+claim, and not a production signature scheme.
 
 ## Radiology Note
 

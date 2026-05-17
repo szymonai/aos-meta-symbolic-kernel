@@ -5,12 +5,11 @@ deck excerpt, benchmark result, or evidence packet derived from AOS material.
 
 ## Repository Boundary
 
-- [ ] The change belongs in the public demonstrator, not the private AOSKernel.
+- [ ] The change belongs in the public demonstrator.
 - [ ] The change follows [Repository Best Practices](REPOSITORY_BEST_PRACTICES.md).
-- [ ] No private source, specialist-system material, restricted evidence,
-      reserved technical material, or non-public implementation detail are
-      included.
-- [ ] No local paths, credentials, tokens, private logs, customer data, partner
+- [ ] No production-system, specialist-system, customer, partner, deployment,
+      or reserved technical material is included.
+- [ ] No local paths, credentials, tokens, internal logs, customer data, partner
       data, or deployment details are included.
 - [ ] No DICOM, NIfTI, masks, labels, scans, checkpoints, weights, ONNX,
       TensorRT engines, safetensors, PT/PTH files, or other model artifacts are
@@ -36,8 +35,8 @@ deck excerpt, benchmark result, or evidence packet derived from AOS material.
 - [ ] No third-party material is added without written permission and provenance.
 - [ ] No employer-owned, contractor-owned, customer-owned, or partner-owned
       material is added without written clearance.
-- [ ] Review-required technical material has either been withheld or cleared in
-      writing before disclosure.
+- [ ] Review-required technical material has been cleared in writing before
+      disclosure.
 - [ ] Trademark-sensitive names or slogans have been checked before publication.
 - [ ] External contributions, if any, have a written contributor agreement,
       assignment, or inbound license approved by the maintainer.
@@ -65,5 +64,5 @@ Record the following in the PR or release note:
 - date;
 - commit SHA;
 - validation commands run;
-- files intentionally withheld;
+- affected public files;
 - patent/trademark review status, if applicable.

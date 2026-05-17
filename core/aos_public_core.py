@@ -74,7 +74,7 @@ class DemoAuditRecord:
 class DemoIntervalGate:
     """Limited demonstrator of PASS/WARN/BLOCK interval gating.
 
-    This is not the private AOSKernel or a production delivery format.
+    This is not a production delivery format.
     """
 
     def __init__(self, limit: float, warn_margin: float) -> None:

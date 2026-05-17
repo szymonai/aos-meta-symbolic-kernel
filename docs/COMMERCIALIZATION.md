@@ -2,8 +2,8 @@
 
 AOS is positioned as a deterministic AI control and audit layer.
 
-The private product path is proprietary enterprise software. Specialist systems
-built on the private AOSKernel are the main commercialization route.
+The product path is proprietary enterprise software. Specialist systems are the
+main commercialization route.
 
 Lower-risk entry points:
 
@@ -27,5 +27,5 @@ repository remains a demonstrator, not a production SDK. See
 [SDK Boundary](SDK_BOUNDARY.md).
 
 Publicly discuss performance and deployment only through bounded public
-evidence. Do not publish non-public implementation material, restricted evidence
-packages, or private performance claims.
+evidence. Keep unreleased implementation, deployment, and performance material
+outside the public repository.

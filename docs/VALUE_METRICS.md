@@ -1,7 +1,7 @@
 # Value Metrics
 
 This document reports only public, reproducible value metrics from the limited
-demonstrator. It does not report private implementation metrics, customer
+demonstrator. It does not report production-system metrics, customer
 outcomes, production service levels, clinical utility, regulated performance, or
 commercial validation.
 
@@ -46,8 +46,8 @@ Sources: `evidence/demonstrator_manifest.json` and
 
 | Boundary field | Current value |
 | --- | --- |
-| Private AOSKernel included | `false` |
-| Private policy logic included | `false` |
+| Production-system code included | `false` |
+| Internal policy logic included | `false` |
 | Real clinical thresholds included | `false` |
 | Specialist validation materials included | `false` |
 | Data redistributed in repository | `false` |
@@ -64,7 +64,7 @@ Sources: `evidence/demonstrator_manifest.json` and
 
 These fields are value metrics because they make the public repository easier to
 review: the demonstrator exposes a bounded control pattern while explicitly
-separating public evidence from non-public material.
+separating public evidence from production-system material.
 
 ## Clean-Room Repeatability
 
@@ -73,8 +73,7 @@ Source: `docs/CLEAN_ROOM_TEST.md`
 The clean-room test is the public repeatability check. A reviewer should be able
 to clone the repository, install development requirements, run linting and
 tests, rebuild the benchmark metrics, parse the evidence JSON files, and build
-the public Lean target without access to private data or private source
-material.
+the public Lean target using only the repository contents.
 
 ## Not Claimed
 
@@ -88,7 +87,7 @@ The public metrics above do not establish:
 - customer ROI
 - revenue performance
 - best-in-class or state-of-the-art status
-- access to private implementation material
+- access to production-system material
 
 Any future public value claim should identify the exact evidence source, the
 dataset or workflow boundary, the current numeric result, and the claims that

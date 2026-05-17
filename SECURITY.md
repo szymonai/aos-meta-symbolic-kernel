@@ -1,11 +1,12 @@
 # Security Policy
 
-Report security issues privately to the maintainer.
+Report security issues confidentially to the maintainer.
 
 Do not open public issues, pull requests, discussions, comments, screenshots, or
-logs containing secrets, credentials, private datasets, model weights,
-restricted evidence, deployment details, customer information, partner
-information, vulnerability exploit details, or non-public technical material.
+logs containing secrets, credentials, customer or patient datasets, model
+weights, deployment details, customer information, partner information,
+vulnerability exploit details, or technical material outside the public
+demonstrator.
 
 This repository is a limited demonstrator. It does not contain the production
 AOS Core, production security design, commercial delivery materials, or
@@ -27,6 +28,6 @@ Production/commercial systems require separate security engineering, including:
 - secret scanning
 - environment-specific policy review
 - dependency and build provenance review
-- private vulnerability intake and disclosure process
+- confidential vulnerability intake and disclosure process
 
 Do not infer production security properties from this public demonstrator.

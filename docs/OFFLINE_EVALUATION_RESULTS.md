@@ -7,14 +7,14 @@ medical-device claim.
 
 The repository intentionally publishes only aggregate values. It does not
 redistribute patient data, images, masks, DICOM/NIfTI files, checkpoints,
-per-case records, local paths, restricted technical artifacts, or private audit
+per-case records, local paths, controlled technical artifacts, or internal audit
 logs.
 
 ## Current Public Evidence Status
 
 The current public repository includes a bounded radiology evidence review.
 It separates small-fold validation metrics, an internal cohort report, and
-private formal-integrity evidence. None of these are published as clinical
+internal formal-integrity status. None of these are published as clinical
 validation, compliance, production readiness, SOTA, or medical-device evidence.
 
 The safe public milestone is the internal n=484 cohort Dice WT `0.8108`, with
@@ -26,10 +26,10 @@ it is not relabeled as cohort-level Whole Tumor performance.
 | --- | --- | --- |
 | Dataset832/BraTS2024-labelled fold validation summary | selected internal artifact reviewed | Confirms label-2 Dice 0.8843, recall 0.9085, precision 0.8665 on 2 validation cases; this is not a cohort-level result and not BraTS 2025 evidence |
 | Internal cohort report | selected internal artifact reviewed | Confirms n=484 report values: Dice WT 0.8108, Dice ET 0.8033, ET recall 0.8065, and 36 ET outliers; not external validation or compliance evidence |
-| Private formal-integrity status | selected internal artifact reviewed | Confirms 3292/3292 Lean tasks and root build exit code 0; not Python-to-Lean refinement or clinical correctness evidence |
+| Formal-integrity status | selected internal artifact reviewed | Confirms 3292/3292 Lean tasks and root build exit code 0; not Python-to-Lean refinement or clinical correctness evidence |
 | BraTS 2025 current results | not available in current public evidence | A clean aggregate artifact with dataset provenance, split, sample count, metrics, baselines, and reproducibility metadata is not present in this public repo |
 | Older BraTS/TCGA_LGG/Yale aggregate artifacts | historical/superseded, not current result claims | Newer internal runs may exist; publishing stale numbers would misrepresent the current system |
-| Private evaluation evidence | not public | Restricted evidence packages and private performance traces are not public |
+| Additional evaluation evidence | outside current public evidence | Customer-specific packages and unreleased performance traces are not public evidence |
 
 ## Required Evidence Before Publishing Updated Metrics
 

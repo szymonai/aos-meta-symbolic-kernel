@@ -41,9 +41,9 @@ and a clear separation between AI output and operational decision-making.
 
 ## Boundary
 
-This public architecture does not describe the private AOSKernel, non-public
-decision parameters, customer integrations, production security, restricted
-evidence packages, deployment settings, or commercial delivery material.
+This public architecture does not describe production-system internals,
+customer integrations, deployment settings, production security, or commercial
+delivery material.
 
 See [Integrity Anchors](INTEGRITY_ANCHORS.md) for the public SHA-256, SHA-512,
 and Ed25519 convention.

@@ -5,18 +5,17 @@
 ## Publication Boundary
 
 - [ ] This change stays within the limited public demonstrator boundary.
-- [ ] No private AOSKernel, non-public implementation material, restricted evidence,
-      specialist-system material, private evaluation results, or commercial delivery
-      material is included.
+- [ ] No controlled technical, evidence, specialist-system, customer, partner,
+      deployment, or commercial-delivery material is included.
 - [ ] No medical data, DICOM/NIfTI files, masks, labels, checkpoints, weights,
       ONNX/TensorRT/safetensors/PT/PTH artifacts, secrets, local paths, customer
-      data, or private logs are included.
+      data, or internal logs are included.
 
 ## Claims
 
 - [ ] This change does not add clinical-validation, medical-device,
-      regulatory-compliance, production-readiness, SOTA, external-validation, or
-      autonomous-control claims.
+      regulatory-compliance, production-readiness, SOTA, external-validation,
+      or autonomous-control claims.
 
 ## IP And Contribution
 

@@ -12,25 +12,25 @@ inbound license is complete in writing.
 
 Unsolicited pull requests may be closed without review. Opening an issue,
 comment, fork, clone, or pull request does not create an implied license to the
-AOS Core, private architecture, documentation, or commercial product direction.
+AOS Core, documentation, or commercial product direction.
 
 By submitting material, you represent that you have the right to submit it and
 that it does not contain confidential, employer-owned, customer-owned,
 partner-owned, third-party, export-controlled, medical, regulated, or otherwise
-restricted material unless written clearance has already been obtained.
+controlled material unless written clearance has already been obtained.
 
 ## Do Not Submit
 
 Do not submit:
 
 - full AOS Core code
-- non-public implementation material
+- production-system implementation material
 - specialist-system material
 - model weights or datasets
 - DICOM, NIfTI, masks, labels, checkpoints, ONNX, TensorRT engines,
   safetensors, PT/PTH files, or model binaries
-- restricted evidence packages or generated claim bundles
-- deployment secrets, local paths, private logs, customer data, or partner data
+- generated claim bundles
+- deployment secrets, local paths, internal logs, customer data, or partner data
 - material that requires controlled disclosure review
 
 Do not add claims that this public demonstrator is certified, clinically

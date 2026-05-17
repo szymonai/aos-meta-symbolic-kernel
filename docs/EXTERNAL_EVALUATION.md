@@ -13,17 +13,18 @@ behavior, evidence discipline, reproducibility, and claim boundaries.
 - Use category-level baselines and task-specific acceptance criteria rather than
   named competitive comparisons.
 - Publish only evidence that is cleared for public release.
-- Keep non-public technical material outside the public repository.
+- Keep production-system and customer-specific material outside the public
+  repository.
 - Separate model output, AOS decision, human decision, and product or regulatory
   claim.
 
 ## Evaluation Stages
 
-| Stage | Reviewer access | What can be evaluated | What remains withheld | Suitable outcome |
+| Stage | Reviewer access | What can be evaluated | Public boundary | Suitable outcome |
 | --- | --- | --- | --- | --- |
-| Public self-check | Public repository only | Tests, CI, synthetic benchmark, Lean proof surface, evidence manifests | Non-public technical material | Technical credibility and boundary review |
+| Public self-check | Public repository only | Tests, CI, synthetic benchmark, Lean proof surface, evidence manifests | Public demonstrator only | Technical credibility and boundary review |
 | Clean-room technical review | Public repository in a fresh environment | Reproducibility, claim discipline, documentation density, publication safety | Material outside the approved public boundary | Independent public-repo review note |
-| Black-box pilot | Controlled non-public interface | Observable behavior, audit metadata, integration ergonomics, aggregate performance envelope | Non-public implementation material | Aggregate pilot metrics and failure analysis |
+| Black-box pilot | Controlled evaluation interface | Observable behavior, audit metadata, integration ergonomics, aggregate performance envelope | Public release only by agreement | Aggregate pilot metrics and failure analysis |
 | Confidential evaluation | Written agreement | Domain fit, evidence workflow, operational fit, support requirements | Material not expressly included in the evaluation scope | Go/no-go for paid pilot or enterprise evaluation |
 | Commercial pilot | Customer-specific agreement | Governance value, audit trail, support model, security posture, measurable acceptance criteria | Reusable core IP and non-customer materials | Revenue-stage pilot with controlled evidence |
 | Regulated pathway | Separate quality and regulatory program | Risk management, intended use, clinical or safety evidence as applicable | Public demonstrator remains non-product | Formal regulatory strategy, if pursued |
@@ -38,7 +39,7 @@ A serious evaluation packet should include:
 - metrics and acceptance criteria defined before the run;
 - aggregate results and failure cases;
 - environment and dependency summary;
-- list of artifacts intentionally withheld;
+- list of public artifacts included in the packet;
 - public integrity anchors when an evidence packet is released: SHA-256,
   SHA-512, and Ed25519 signature metadata;
 - explicit claim boundary and reviewer limitations;
@@ -57,7 +58,7 @@ A reviewer should be able to verify the public layer through:
 - `lake build AOSPublicCore`
 
 These checks verify the public demonstrator only. They do not validate the full
-private system, production security, specialist workflows, clinical utility,
+production system, production security, specialist workflows, clinical utility,
 regulatory compliance, or commercial deployment readiness.
 
 ## Failure Handling
@@ -69,7 +70,7 @@ case, record:
 - expected behavior;
 - observed behavior;
 - affected public-demonstrator layer;
-- whether the failure affects only the public demonstrator or a private pilot;
+- whether the failure affects only the public demonstrator or a controlled pilot;
 - remediation status.
 
 Do not publish root-cause detail that falls outside the approved public boundary

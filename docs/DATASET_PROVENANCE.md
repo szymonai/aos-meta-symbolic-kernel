@@ -20,8 +20,8 @@ The public repository must not contain:
 - medical images
 - model checkpoints
 - local dataset paths
-- private audit logs
-- restricted technical artifacts
+- internal audit logs
+- controlled technical artifacts
 
 The public evidence is intentionally limited to aggregate metadata and
 defensive claim-boundary flags.

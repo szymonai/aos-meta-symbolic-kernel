@@ -44,7 +44,7 @@ The public repository publishes only a bounded evidence review:
 - formal-integrity milestone: Lean/Lake `3292/3292` tasks, root build exit code
   `0`, and a public SHA-512 anchor.
 
-This is proof-of-utility evidence for the architecture. It is not a clinical
+This is utility evidence for the architecture. It is not a clinical
 validation claim and not a radiology product release.
 
 ## Other Potential Profiles
@@ -58,13 +58,12 @@ The same kernel pattern can support:
 - edge deployment guardrails
 - regulated decision-support workflows
 
-The public repository does not publish non-public implementation material,
-restricted evidence packages, specialist-system material, or commercial delivery
+The public repository does not publish production-system material,
+specialist-system material, customer-specific evidence, or commercial delivery
 materials.
 
 ## Safety Boundary
 
-AOS can be framed with safety-assurance discipline, including SIL-oriented
-thinking, but this repository does not claim SIL certification, SIL equivalence,
-MDR compliance, AI Act compliance, CE marking, production readiness, or external
-validation.
+AOS can be framed with safety-assurance discipline, but this repository does
+not claim safety certification, MDR compliance, AI Act compliance, CE marking,
+production readiness, or external validation.

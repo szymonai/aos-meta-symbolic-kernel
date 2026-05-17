@@ -6,6 +6,7 @@ deck excerpt, benchmark result, or evidence packet derived from AOS material.
 ## Repository Boundary
 
 - [ ] The change belongs in the public demonstrator, not the private AOSKernel.
+- [ ] The change follows [Repository Best Practices](REPOSITORY_BEST_PRACTICES.md).
 - [ ] No private source, specialist-system material, restricted evidence,
       reserved technical material, or non-public implementation detail are
       included.

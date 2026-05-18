@@ -90,7 +90,7 @@ python examples/api-gate/aos_api_gate.py replay \
 | Synthetic benchmark behavior | [Benchmark summary](benchmarks/results/summary.md), [metrics JSON](benchmarks/results/metrics.json) |
 | Metric interpretation | [Value metrics](docs/VALUE_METRICS.md), [Demonstrator comparison](docs/DEMONSTRATOR_COMPARISON.md) |
 | Public evidence boundaries | [Demonstrator manifest](evidence/demonstrator_manifest.json) |
-| Formal verdict scope | [Scope of Proof](SCOPE_OF_PROOF.md), [Lean proof surface](lean/AOSPublicCore.lean) |
+| Formal verdict scope | [Scope of Proof](SCOPE_OF_PROOF.md), [Formal Claims Boundary](docs/FORMAL_CLAIMS_BOUNDARY.md), [Lean proof surface](lean/AOSPublicCore.lean) |
 | API-shaped replay | [API gate example](examples/api-gate) |
 | Radiology reference evidence | [Offline evaluation results](docs/OFFLINE_EVALUATION_RESULTS.md), [radiology evidence JSON](evidence/radiology_offline_evaluation.json), [radiology evidence review JSON](evidence/radiology_evidence_review.json) |
 
@@ -140,6 +140,7 @@ See [Public boundary](docs/PUBLIC_BOUNDARY.md), [SDK boundary](docs/SDK_BOUNDARY
 
 - [Public architecture](docs/architecture.md)
 - [Scope of Proof](SCOPE_OF_PROOF.md)
+- [Formal Claims Boundary](docs/FORMAL_CLAIMS_BOUNDARY.md)
 - [Demonstrator comparison](docs/DEMONSTRATOR_COMPARISON.md)
 - [Customer value](docs/CUSTOMER_VALUE.md)
 - [Value metrics](docs/VALUE_METRICS.md)

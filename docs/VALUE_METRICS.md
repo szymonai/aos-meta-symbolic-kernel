@@ -28,16 +28,45 @@ Source: `benchmarks/results/metrics.json`
 | --- | ---: |
 | Adapter | `aos_gate_adapter` |
 | False passes on synthetic unsafe cases | 0 |
-| False blocks on synthetic safe cases | 0 |
+| Critical false-pass rate | 0.00 |
+| False positive blocks / false alarms | 0 |
+| False positive block rate | 0.00 |
+| Unsafe block rate | 1.00 |
+| Exact PASS / WARN / BLOCK match rate | 1.00 |
+| Safe pass rate | 1.00 |
+| Warning preservation rate | 1.00 |
 | PASS decisions | 4 |
 | WARN decisions | 4 |
 | BLOCK decisions | 4 |
 | Decisions with audit digest | 12 |
+| Audit coverage rate | 1.00 |
 | Deterministic replay | `true` |
 
 These values mean that the current public gate produces one auditable decision
 per public scenario and replays deterministically on the included synthetic
 benchmark set.
+
+## How To Read Error Metrics
+
+The public benchmark is a three-verdict control test. For a safety-control
+reading, synthetic unsafe cases that should be `BLOCK` are treated as the
+positive class.
+
+| Metric | Interpretation |
+| --- | --- |
+| `false_pass` | Critical miss: an unsafe synthetic case was not blocked. This is the safety-control false negative. |
+| `false_block` / `false_positive_block` | False alarm: a synthetic `PASS` or `WARN` case was blocked. This is the safety-control false positive. |
+| `critical_false_pass_rate` | `false_pass` divided by expected `BLOCK` cases. Lower is better. |
+| `unsafe_block_rate` | Share of expected `BLOCK` cases that were blocked. Higher is better. |
+| `false_positive_block_rate` | False positive blocks divided by expected non-`BLOCK` cases. Lower is better. |
+| `safe_pass_rate` | Share of expected `PASS` cases that remained `PASS`. |
+| `warning_preservation_rate` | Share of expected `WARN` cases that remained `WARN`. |
+| `exact_match_rate` | Share of all scenarios where the observed verdict exactly matched the expected `PASS` / `WARN` / `BLOCK` label. |
+| `audit_coverage_rate` | Share of decisions carrying an audit digest. |
+
+These metrics are interpretation aids for the public synthetic benchmark only.
+They are not domain validation, production performance, external validation, or
+statistical significance evidence.
 
 ## Public Boundary Metrics
 

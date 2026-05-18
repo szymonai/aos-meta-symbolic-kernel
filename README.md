@@ -88,6 +88,7 @@ python examples/api-gate/aos_api_gate.py replay \
 | Claim type | Public source |
 | --- | --- |
 | Synthetic benchmark behavior | [Benchmark summary](benchmarks/results/summary.md), [metrics JSON](benchmarks/results/metrics.json) |
+| Metric interpretation | [Value metrics](docs/VALUE_METRICS.md), [Demonstrator comparison](docs/DEMONSTRATOR_COMPARISON.md) |
 | Public evidence boundaries | [Demonstrator manifest](evidence/demonstrator_manifest.json) |
 | Formal verdict scope | [Scope of Proof](SCOPE_OF_PROOF.md), [Lean proof surface](lean/AOSPublicCore.lean) |
 | API-shaped replay | [API gate example](examples/api-gate) |

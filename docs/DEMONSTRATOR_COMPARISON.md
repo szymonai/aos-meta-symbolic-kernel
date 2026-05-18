@@ -30,8 +30,9 @@ demo gate against simple baseline guards:
 - a JSON-shape guard;
 - a deterministic text heuristic that simulates prompt-only guardrails.
 
-The benchmark records false passes, false blocks, verdict counts, audit-record
-presence, and deterministic replay. It is intentionally small and exists to make
+The benchmark records false passes, false positive blocks, exact verdict match,
+unsafe block rate, safe pass rate, warning preservation, audit coverage, verdict
+counts, and deterministic replay. It is intentionally small and exists to make
 the control pattern inspectable.
 
 The current benchmark has limited statistical weight:
@@ -86,6 +87,20 @@ first-read project positioning.
 | AOS public demo gate | `value + uncertainty` against the limit and warning band | Yes | Demo digest | Abstract Lean verdict invariants | Public demo only |
 
 ## Reading The Results
+
+The benchmark is trivalent: expected decisions can be `PASS`, `WARN`, or
+`BLOCK`. For the safety-control interpretation, expected `BLOCK` cases are
+treated as the positive class:
+
+- `false_pass` is a critical miss: an expected `BLOCK` case was not blocked.
+  This corresponds to a safety-control false negative.
+- `false_block` or `false_positive_block` is a false alarm: an expected `PASS`
+  or `WARN` case was blocked.
+- `unsafe_block_rate` is the share of expected `BLOCK` cases that were actually
+  blocked.
+- `exact_match_rate` measures exact agreement with the expected
+  `PASS` / `WARN` / `BLOCK` label.
+- `audit_coverage_rate` measures whether decisions include audit evidence.
 
 See:
 

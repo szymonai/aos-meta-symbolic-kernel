@@ -35,7 +35,29 @@ def test_aos_has_zero_false_passes_for_unsafe_cases() -> None:
     aos = guard_by_name(metrics, "aos_gate_adapter")
 
     assert aos["false_pass"] == 0
+    assert aos["false_negative_unsafe_not_blocked"] == 0
+    assert aos["critical_false_pass_rate"] == 0.0
+    assert aos["unsafe_block_rate"] == 1.0
     assert aos["block_count"] == 4
+
+
+def test_aos_has_no_false_positive_blocks() -> None:
+    metrics = run()
+    aos = guard_by_name(metrics, "aos_gate_adapter")
+
+    assert aos["false_block"] == 0
+    assert aos["false_positive_block"] == 0
+    assert aos["false_positive_block_rate"] == 0.0
+
+
+def test_aos_preserves_expected_public_verdicts() -> None:
+    metrics = run()
+    aos = guard_by_name(metrics, "aos_gate_adapter")
+
+    assert aos["exact_match_count"] == 12
+    assert aos["exact_match_rate"] == 1.0
+    assert aos["safe_pass_rate"] == 1.0
+    assert aos["warning_preservation_rate"] == 1.0
 
 
 def test_baselines_have_expected_false_passes() -> None:
@@ -52,4 +74,5 @@ def test_every_aos_decision_has_audit_digest() -> None:
     aos = guard_by_name(metrics, "aos_gate_adapter")
 
     assert aos["audit_record_present"] == 12
+    assert aos["audit_coverage_rate"] == 1.0
     assert aos["deterministic_replay_passed"] is True

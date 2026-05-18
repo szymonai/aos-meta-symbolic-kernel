@@ -43,7 +43,8 @@ domain adapters, or a full neural-symbolic research stack.
 - provides a reusable assurance pattern for multiple application profiles.
 
 See [Plain-language overview](docs/PLAIN_LANGUAGE_OVERVIEW.md) and
-[AI problems addressed](docs/AI_PROBLEMS_ADDRESSED.md).
+[AI problems addressed](docs/AI_PROBLEMS_ADDRESSED.md). Potential benefits are
+summarized in [Potential benefits](docs/POTENTIAL_BENEFITS.md).
 
 ## Quickstart
 
@@ -92,11 +93,11 @@ python examples/api-gate/aos_api_gate.py replay \
 | Public evidence boundaries | [Demonstrator manifest](evidence/demonstrator_manifest.json) |
 | Formal verdict scope | [Scope of Proof](SCOPE_OF_PROOF.md), [Formal Claims Boundary](docs/FORMAL_CLAIMS_BOUNDARY.md), [Lean proof surface](lean/AOSPublicCore.lean) |
 | API-shaped replay | [API gate example](examples/api-gate) |
-| Radiology reference evidence | [Offline evaluation results](docs/OFFLINE_EVALUATION_RESULTS.md), [radiology evidence JSON](evidence/radiology_offline_evaluation.json), [radiology evidence review JSON](evidence/radiology_evidence_review.json) |
+| Radiology reference boundary | [Radiology reference system](docs/RADIOLOGY_REFERENCE_SYSTEM.md), [offline evaluation boundary](docs/OFFLINE_EVALUATION_RESULTS.md), [radiology boundary JSON](evidence/radiology_evidence_review.json) |
 
-Radiology is included as one reference profile for understanding the assurance
-pattern. Detailed radiology metrics are kept in focused evidence documents, not
-in the README, to avoid presenting them as broad product or clinical claims.
+Radiology is included only as one reference profile for understanding the
+assurance pattern. Current radiology performance metrics are not published as
+public evidence in this repository.
 
 ## Application Profiles
 
@@ -143,6 +144,7 @@ See [Public boundary](docs/PUBLIC_BOUNDARY.md), [SDK boundary](docs/SDK_BOUNDARY
 - [Formal Claims Boundary](docs/FORMAL_CLAIMS_BOUNDARY.md)
 - [Demonstrator comparison](docs/DEMONSTRATOR_COMPARISON.md)
 - [Customer value](docs/CUSTOMER_VALUE.md)
+- [Potential benefits](docs/POTENTIAL_BENEFITS.md)
 - [Value metrics](docs/VALUE_METRICS.md)
 - [Commercialization direction](docs/COMMERCIALIZATION.md)
 - [Integrity anchors](docs/INTEGRITY_ANCHORS.md)

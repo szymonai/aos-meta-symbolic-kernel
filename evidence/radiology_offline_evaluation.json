@@ -15,9 +15,9 @@
         "clinical_claim": false
     },
     "current_public_evidence_status": {
-        "radiology_metrics_publication_status": "bounded internal evidence review only",
+        "radiology_metrics_publication_status": "not published as current public evidence",
         "brats_2025_results": "not available in current public evidence",
-        "reason": "Selected internal artifacts were reviewed, but public interpretation remains limited to internal offline evidence inventory. Updated current metrics require a clean aggregate evidence packet with provenance, split definition, sample count, baselines, and reproducibility metadata.",
+        "reason": "Radiology is kept as a reference profile only. Updated current metrics require a clean aggregate evidence packet with provenance, split definition, sample count, baselines, and reproducibility metadata.",
         "evidence_review": "evidence/radiology_evidence_review.json",
         "publication_policy": "Do not publish stale or unproven radiology performance numbers as current results."
     },
@@ -52,13 +52,13 @@
         "reproducibility_metadata"
     ],
     "performance_and_evaluation": {
-        "additional_evaluation_status": "not available in current public evidence",
+        "additional_evaluation_status": "not published as current public evidence",
         "additional_performance_status": "not available in current public evidence",
         "public_latency_or_throughput_benchmarks": "not available in current public evidence"
     },
     "kernel_positioning": {
         "summary": "one domain-agnostic AOS control kernel can support many specialist profiles",
-        "radiology_instance": "Instance 01 reference profile",
+        "radiology_instance": "reference profile",
         "evidence_review": "evidence/radiology_evidence_review.json",
         "public_boundary": "not a clinical validation, production readiness, regulatory compliance, SOTA, or safety-certification claim"
     },

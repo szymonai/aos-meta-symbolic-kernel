@@ -72,5 +72,5 @@ For a fast technical review, read in this order:
 3. `benchmarks/results/summary.md` for the synthetic comparison.
 4. `lean/AOSPublicCore.lean` for the proof surface.
 5. `evidence/demonstrator_manifest.json` for machine-readable claim limits.
-6. `evidence/radiology_evidence_review.json` for bounded evidence context.
+6. `evidence/radiology_evidence_review.json` for radiology publication boundary.
 7. `docs/IP_PROTECTION.md` before publishing or reusing any material.

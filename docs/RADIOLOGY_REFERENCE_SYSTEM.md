@@ -43,23 +43,22 @@ The reference scenario is triage support, not autonomous diagnosis:
 - `BLOCK`: output should not be used without further review
 
 The public repo does not include a radiology model, DICOM/NIfTI data, masks,
-patient records, checkpoints, controlled technical artifacts, or internal
-workflow material.
+patient records, checkpoints, controlled technical artifacts, or workflow
+material.
 
 ## Current Metrics Boundary
 
-This public repository includes a bounded evidence review for selected
-internal evidence summaries. The review separates a small fold validation summary, an
-internal cohort report, and formal-integrity status. Those items are
-evidence inventory, not clinical validation or product evidence.
+This public repository does not publish current radiology performance metrics.
+Radiology is retained as a reference profile for explaining the control pattern,
+not as a domain-performance result.
 
-Updated internal results, including any BraTS 2025 runs, should be published
-only after a clean aggregate evidence packet is available. The packet must
-include dataset provenance, split definition, sample count, baseline
-definition, reproducibility metadata, and explicit non-claim flags.
+Updated domain results should be published only after a clean aggregate evidence
+packet is available. The packet must include dataset provenance, split
+definition, sample count, baseline definition, reproducibility metadata, and
+explicit non-claim flags.
 
-This avoids presenting historical, partial, or superseded metrics as the
-current system state.
+This avoids presenting historical, partial, or superseded metrics as the current
+system state.
 
 See [Radiology evidence review](RADIOLOGY_EVIDENCE_REVIEW.md).
 

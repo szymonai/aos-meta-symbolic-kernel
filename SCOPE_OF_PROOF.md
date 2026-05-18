@@ -3,6 +3,9 @@
 This repository is a public demonstrator of the AOS runtime assurance pattern.
 Its proof surface is useful, but intentionally narrow.
 
+For claim-level interpretation, see
+[Formal Claims Boundary](docs/FORMAL_CLAIMS_BOUNDARY.md).
+
 ## Proven
 
 - deterministic abstract verdict logic in the public Lean proof surface
@@ -16,11 +19,12 @@ The public Lean proof surface uses integer arithmetic for abstract interval
 verdict logic. The Python reference implementation accepts finite numeric
 inputs and evaluates floating-point values at runtime.
 
-No proof is published here that converts the Python floating-point execution
-path into the Lean integer model. The Lean result should therefore be read as a
-proof over the abstract verdict structure, not as a proof of Python runtime
-semantics, JSON number parsing, floating-point rounding, or a model-output
-conversion layer.
+No full proof is published here that converts the Python floating-point
+execution path into the Lean integer model. The repository includes bounded
+runtime correspondence tests for integer-like values, but the Lean result should
+still be read as a proof over the abstract verdict structure, not as a proof of
+Python runtime semantics, JSON number parsing, floating-point rounding, or a
+model-output conversion layer.
 
 ## Demonstrated
 
@@ -32,8 +36,8 @@ conversion layer.
 ## Not Claimed
 
 - Python-to-Lean refinement
-- Python numeric runtime behavior
-- Int/Float correspondence between code and proof artifacts
+- full Python numeric runtime behavior
+- full Int/Float correspondence between code and proof artifacts
 - production SDK completeness
 - production security or deployment readiness
 - clinical validation or medical-device status

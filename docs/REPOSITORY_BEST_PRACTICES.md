@@ -32,7 +32,8 @@ Public claims should be tied to a visible evidence source:
 - public boundary claims should cite `evidence/demonstrator_manifest.json`;
 - radiology context should remain bounded by the evidence review files;
 - integrity statements should follow `docs/INTEGRITY_ANCHORS.md`;
-- proof statements should stay inside the scope defined in `SCOPE_OF_PROOF.md`.
+- proof statements should stay inside the scope defined in `SCOPE_OF_PROOF.md`
+  and `docs/FORMAL_CLAIMS_BOUNDARY.md`.
 
 Do not publish stale metrics, unsupported performance claims, or broad product
 claims without a current, reproducible, public evidence packet.

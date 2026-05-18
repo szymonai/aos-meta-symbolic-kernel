@@ -28,6 +28,9 @@ deck excerpt, benchmark result, or evidence packet derived from AOS material.
 - [ ] No named competitive scorecard or direct competitive comparison is added.
 - [ ] No claim that AOS proves model correctness, eliminates hallucinations, or
       performs autonomous operational control.
+- [ ] Formal claims match `docs/FORMAL_CLAIMS_BOUNDARY.md`.
+- [ ] Lean task counts are not used as a substitute for theorem quality,
+      runtime refinement, domain validation, or product readiness.
 
 ## IP Review
 

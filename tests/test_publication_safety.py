@@ -41,9 +41,9 @@ FORBIDDEN_TEXT_PATTERNS = [
         "ghp" + r"_[A-Za-z0-9_]+",
         "github" + r"_pat_[A-Za-z0-9_]+",
         "-----BEGIN " + r"(?:RSA |EC |OPENSSH |)?" + "PRI" + "VATE" + " KEY-----",
-        r"YALE-\d",
+        "YA" + r"LE-\d",
         r"GLI24_\d",
-        r"BraTS-GLI-\d",
+        "Bra" + r"TS-GLI-\d",
         "S" + "IL-3 " + "equivalent",
         "S" + "IL-3 " + "equivalence",
         "Truth" + r"\s+" + "Kernel",
@@ -58,13 +58,16 @@ FORBIDDEN_TEXT_PATTERNS = [
         r"\b" + "R" + "H" + r"\s+" + "proof",
         "mathematical" + r"\s+" + "breakthrough",
         "32" + "92",
+        "Bra" + "TS",
+        "TC" + "GA",
+        "Ya" + "le",
         "0" + r"\.8108",
         "0" + r"\.8033",
         "0" + r"\.8065",
         "0" + r"\.8843",
         "0" + r"\.9085",
         "0" + r"\.8665",
-        "c4124" + r"[0-9a-f]{20,}",
+        "c4" + "124" + r"[0-9a-f]{20,}",
         "Dataset" + "832",
         "hardware" + r"[-\s]+" + "origin",
         "autonomous" + r"\s+" + "reasoning",
@@ -129,10 +132,11 @@ def test_evidence_json_files_are_valid_and_claim_flags_are_false() -> None:
     current_status = radiology["current_public_evidence_status"]
     assert isinstance(current_status, dict)
     assert (
-        current_status["brats_2025_results"]
+        current_status["reference_profile_results"]
         == "not available in current public evidence"
     )
     assert "offline_evaluations" not in radiology
+    assert radiology["dataset_provenance_public"] == []
 
     review_flags = radiology_review["claim_flags"]
     assert isinstance(review_flags, dict)

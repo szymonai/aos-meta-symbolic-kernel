@@ -37,7 +37,7 @@ model output metadata
 - medical-device status;
 - regulatory approval or certification;
 - production deployment readiness;
-- current BraTS or radiology benchmark performance;
+- current domain benchmark performance;
 - broad comparative or state-of-the-art performance;
 - production-grade signatures or audit manifests.
 

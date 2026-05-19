@@ -11,6 +11,9 @@ regulatory problems.
 | Guardrails can be hard to audit | Attach a reproducible audit identifier to each public decision |
 | Prompt-only policy can be ambiguous | Use explicit public rules in the demonstrator |
 | Reviews need escalation signals | Route uncertain or unsafe public cases to `WARN` or `BLOCK` |
+| Many AI outputs look similarly plausible | Let policy-compliant outputs proceed while escalating or blocking others |
+| Downstream actions can be expensive | Make review, experimentation, compute, or operational escalation more selective |
+| Edge workflows need local control | Keep the public gate pattern small, deterministic, and replayable |
 | Governance teams need claim boundaries | Separate model output, AOS verdict, human decision, and external claim |
 | AI systems are domain-specific | Keep the public control pattern domain-neutral |
 
@@ -21,4 +24,5 @@ replace human review, certify a workflow, or make clinical, regulatory, or
 production-readiness claims in this public repository.
 
 The public value is narrower and more defensible: deterministic control over
-bounded model-output signals, audit evidence, and a clear decision boundary.
+bounded model-output signals, audit evidence, and a clear decision boundary for
+selective progression, escalation, or blocking.

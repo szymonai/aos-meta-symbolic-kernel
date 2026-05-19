@@ -35,17 +35,10 @@ The radiology reference profile is Instance 01. It demonstrates how a specialist
 system can use model outputs and uncertainty signals as inputs to an auditable
 control layer.
 
-The public repository publishes only a bounded evidence review:
-
-- internal n=484 cohort milestone: Dice WT `0.8108`, Dice ET `0.8033`, ET recall
-  `0.8065`;
-- selected Dataset832 fold artifact: label-2 Dice `0.8843`, label-2 recall
-  `0.9085`, label-2 precision `0.8665` on 2 validation cases;
-- formal-integrity milestone: Lean/Lake `3292/3292` tasks, root build exit code
-  `0`, and a public SHA-512 anchor.
-
-This is utility evidence for the architecture. It is not a clinical
-validation claim and not a radiology product release.
+The public repository does not publish current radiology performance metrics,
+cohort reports, specialist adapters, patient data, model artifacts, or production
+workflow material. This keeps the profile useful for explanation without turning
+it into a clinical, regulatory, or product claim.
 
 ## Other Potential Profiles
 

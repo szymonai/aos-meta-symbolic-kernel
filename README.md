@@ -65,6 +65,25 @@ See [Plain-language overview](docs/PLAIN_LANGUAGE_OVERVIEW.md) and
 [AI problems addressed](docs/AI_PROBLEMS_ADDRESSED.md). Potential benefits are
 summarized in [Potential benefits](docs/POTENTIAL_BENEFITS.md).
 
+## How Decisions Are Evaluated
+
+AOS does not guess whether a model is correct. It evaluates whether a bounded
+model-output signal may move forward under an explicit policy.
+
+The public demonstrator reports control-layer metrics:
+
+- `false_pass`: an unsafe synthetic case was allowed through;
+- `false_block` / false alarm: a safe or reviewable case was blocked;
+- `unsafe_block_rate`: expected `BLOCK` cases that were blocked;
+- `warning_preservation_rate`: expected `WARN` cases that remained `WARN`;
+- `audit_coverage_rate`: decisions carrying an audit digest;
+- `deterministic_replay`: same public input and policy reproduce the same
+  verdict.
+
+The API-shaped examples use replayable evidence with HMAC-SHA256-linked audit
+digests. This makes demonstrator replay mismatches visible. It is not a
+production signing scheme, certification claim, or deployment security claim.
+
 ## Quickstart
 
 ```bash

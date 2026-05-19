@@ -8,8 +8,9 @@ AOS is a domain-neutral runtime assurance layer for AI systems. It evaluates
 bounded model-output signals against explicit policies and returns deterministic,
 auditable `PASS` / `WARN` / `BLOCK` decisions.
 
-AOS does not replace the model, expert, operator, or final decision-maker. It
-sits between an AI output and downstream workflow use.
+AOS is not another AI application. It does not replace the model, expert,
+operator, or final decision-maker. It sits between an AI output and downstream
+workflow use.
 
 ```text
 AI output -> quality / uncertainty / risk signal -> explicit policy
@@ -41,6 +42,24 @@ domain adapters, or a full neural-symbolic research stack.
 - records reproducible evidence for demonstrator decisions;
 - separates model output, AOS verdict, human decision, and external claim;
 - provides a reusable assurance pattern for multiple application profiles.
+
+## Why It Matters
+
+AI systems can produce many plausible outputs, but downstream workflows often
+need a clearer decision boundary: proceed, review, or stop.
+
+AOS is designed to support selective progression:
+
+- policy-compliant outputs can move forward with audit evidence;
+- uncertain outputs can be escalated for review;
+- policy-violating outputs can be blocked before they trigger costly downstream
+  work.
+
+This can support cost discipline in research, operations, and industrial
+workflows by making expensive escalation more selective. In healthcare-adjacent
+and therapy-development workflows, the public framing is narrower: AOS can
+support review and control around AI outputs, but this repository does not make
+clinical, therapeutic, regulatory, or production-readiness claims.
 
 See [Plain-language overview](docs/PLAIN_LANGUAGE_OVERVIEW.md) and
 [AI problems addressed](docs/AI_PROBLEMS_ADDRESSED.md). Potential benefits are

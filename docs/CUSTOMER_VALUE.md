@@ -17,6 +17,9 @@ The public value metrics are reported in [Value metrics](VALUE_METRICS.md).
 They are limited to reproducible public artifacts such as benchmark JSON,
 evidence manifests, tests, and clean-room repeatability.
 
+See [Potential benefits](POTENTIAL_BENEFITS.md) for a broader, bounded summary
+of possible technical, research, governance, and business value.
+
 ## Radiology Triage Reference Value
 
 In the radiology reference scenario, AOS is useful as a workflow-control pattern:

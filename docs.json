@@ -1,0 +1,46 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "AOS Neurosymbolic AI",
+  "theme": "mint",
+  "colors": {
+    "primary": "#0F766E",
+    "light": "#F8FAFC",
+    "dark": "#0F172A"
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Overview",
+        "groups": [
+          {
+            "group": "Start",
+            "pages": [
+              "README",
+              "docs/PLAIN_LANGUAGE_OVERVIEW",
+              "docs/AI_PROBLEMS_ADDRESSED",
+              "docs/POTENTIAL_BENEFITS"
+            ]
+          },
+          {
+            "group": "Architecture",
+            "pages": [
+              "docs/architecture",
+              "docs/ABSTRACTION_MAP",
+              "SCOPE_OF_PROOF",
+              "docs/FORMAL_CLAIMS_BOUNDARY"
+            ]
+          },
+          {
+            "group": "Evidence",
+            "pages": [
+              "docs/VALUE_METRICS",
+              "docs/DEMONSTRATOR_COMPARISON",
+              "docs/PUBLIC_BOUNDARY",
+              "docs/PUBLIC_SURFACES"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

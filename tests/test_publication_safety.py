@@ -171,6 +171,7 @@ def test_readme_links_public_evidence_docs() -> None:
         "docs/PLAIN_LANGUAGE_OVERVIEW.md",
         "docs/SDK_BOUNDARY.md",
         "docs/REPOSITORY_BEST_PRACTICES.md",
+        "docs/PUBLIC_SURFACES.md",
         "docs/FORMAL_CLAIMS_BOUNDARY.md",
         "docs/architecture.md",
         "docs/INTEGRITY_ANCHORS.md",
@@ -202,6 +203,7 @@ def test_required_public_docs_and_examples_exist() -> None:
         "docs/PLAIN_LANGUAGE_OVERVIEW.md",
         "docs/SDK_BOUNDARY.md",
         "docs/REPOSITORY_BEST_PRACTICES.md",
+        "docs/PUBLIC_SURFACES.md",
         "docs/FORMAL_CLAIMS_BOUNDARY.md",
         "docs/architecture.md",
         "docs/INTEGRITY_ANCHORS.md",
@@ -217,6 +219,13 @@ def test_required_public_docs_and_examples_exist() -> None:
         "examples/api-gate/aos_api_gate.py",
         "examples/api-gate/sample_input.json",
         "examples/api-gate/sample_evidence.json",
+        "examples/gradio-sandbox/README.md",
+        "examples/gradio-sandbox/app.py",
+        "examples/gradio-sandbox/requirements.txt",
+        "benchmarks/k6/README.md",
+        "benchmarks/k6/aos_api_smoke.js",
+        "docs.json",
+        "sonar-project.properties",
     ):
         assert (REPO_ROOT / relative_path).is_file(), relative_path
 

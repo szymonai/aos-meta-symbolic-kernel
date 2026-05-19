@@ -140,6 +140,7 @@ See [Public boundary](docs/PUBLIC_BOUNDARY.md), [SDK boundary](docs/SDK_BOUNDARY
 ## Documentation Map
 
 - [Public architecture](docs/architecture.md)
+- [Public surfaces](docs/PUBLIC_SURFACES.md)
 - [Scope of Proof](SCOPE_OF_PROOF.md)
 - [Formal Claims Boundary](docs/FORMAL_CLAIMS_BOUNDARY.md)
 - [Demonstrator comparison](docs/DEMONSTRATOR_COMPARISON.md)

@@ -4,7 +4,6 @@ from typing import Any
 
 from core.aos_public_core import DemoIntervalGate
 
-DEMO_KEY = b"synthetic-benchmark-key"
 WARN_MARGIN = 5.0
 
 
@@ -17,7 +16,6 @@ def evaluate(scenario: dict[str, Any]) -> dict[str, str]:
     record = gate.evaluate(
         value=float(scenario["value"]),
         uncertainty=float(scenario["uncertainty"]),
-        demo_key=DEMO_KEY,
     )
     return {
         "verdict": record.verdict,

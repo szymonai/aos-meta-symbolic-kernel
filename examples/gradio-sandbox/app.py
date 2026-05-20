@@ -13,8 +13,6 @@ if str(ROOT) not in sys.path:
 
 from core.aos_public_core import DemoIntervalGate  # noqa: E402
 
-DEMO_KEY = b"aos-public-gradio-demo-key"
-
 
 def evaluate(
     value: float,
@@ -27,7 +25,6 @@ def evaluate(
         record = gate.evaluate(
             value=value,
             uncertainty=uncertainty,
-            demo_key=DEMO_KEY,
         )
         evidence = {
             "schema_version": "aos-gradio-sandbox/v1",

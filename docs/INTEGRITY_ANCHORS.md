@@ -2,7 +2,7 @@
 
 This repository uses integrity language only for public evidence provenance. It
 does not publish signing keys, certificate bundles, production signing
-infrastructure, or customer evidence packets.
+infrastructure, or deployment evidence packets.
 
 ## Public Convention
 
@@ -34,6 +34,6 @@ When a future evidence packet is signed, publish only:
 - the Ed25519 signature;
 - the signing date and scope boundary.
 
-Do not publish signing key material, internal certificate chains, customer
+Do not publish signing key material, internal certificate chains, deployment
 evidence, controlled logs, deployment settings, or implementation details outside
 the public demonstrator.

@@ -27,10 +27,6 @@ jobs:
         run: python -m pytest tests -q
       - name: Validate demonstrator manifest
         run: python -m json.tool evidence/demonstrator_manifest.json > /dev/null
-      - name: Validate radiology offline evidence
-        run: python -m json.tool evidence/radiology_offline_evaluation.json > /dev/null
-      - name: Validate radiology evidence review
-        run: python -m json.tool evidence/radiology_evidence_review.json > /dev/null
       - name: Run hello-world example
         run: python examples/hello-world/hello_world.py
       - name: Run API gate example
@@ -48,10 +44,10 @@ jobs:
           curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh \
             | sh -s -- -y --default-toolchain "$(cat lean-toolchain)"
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
-      - name: Lean placeholder scan
+      - name: Lean proof gap scan
         run: |
           if grep -R -nE '\b(axiom|admit|sorry|unsafe)\b' lean lakefile.lean; then
-            echo "Lean proof placeholder detected"
+            echo "Lean proof gap term detected"
             exit 1
           fi
       - name: Lean build

@@ -66,17 +66,6 @@ The Lean proof surface covers abstract verdict ordering and interval logic only.
 It uses integer arithmetic and does not prove the floating-point execution path
 in the Python reference implementation.
 
-## Radiology Reference Scenario
-
-Radiology is one reference profile for understanding how the control pattern can
-organize model output, uncertainty, audit evidence, and review escalation. It is
-not a clinical-validity, medical-device, regulatory-compliance, or
-production-readiness claim.
-
-Current radiology performance numbers are intentionally not presented as active
-README claims. Focused evidence documents keep those values separate from the
-first-read project positioning.
-
 ## Synthetic Comparison
 
 | Approach | What It Checks | Handles Uncertainty | Audit Evidence | Formal Invariants | Expected Weakness |
@@ -107,5 +96,4 @@ See:
 - [Benchmark summary](../benchmarks/results/summary.md)
 - [Benchmark metrics JSON](../benchmarks/results/metrics.json)
 - [Value metrics](VALUE_METRICS.md)
-- [Radiology evidence review](RADIOLOGY_EVIDENCE_REVIEW.md)
 - [Lean proof surface](../lean/AOSPublicCore.lean)

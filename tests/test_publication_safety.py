@@ -6,7 +6,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
-MEDICAL_OR_MODEL_EXTENSIONS = {
+CONTROLLED_ARTIFACT_EXTENSIONS = {
     ".dcm",
     ".dicom",
     ".nii",
@@ -46,17 +46,17 @@ FORBIDDEN_TEXT_PATTERNS = [
         "Bra" + r"TS-GLI-\d",
         "S" + "IL-3 " + "equivalent",
         "S" + "IL-3 " + "equivalence",
-        "Truth" + r"\s+" + "Kernel",
-        "universal" + r"\s+" + "truth",
-        "production" + r"\s+" + "medical" + r"\s+" + "system",
-        "hardware" + r"\s+" + "as" + r"\s+" + "mathematical" + r"\s+" + "truth",
+        "Tr" + "uth" + r"\s+" + "Kernel",
+        "universal" + r"\s+" + "tr" + "uth",
+        "production" + r"\s+" + "med" + "ical" + r"\s+" + "system",
+        "hardware" + r"\s+" + "as" + r"\s+" + "mathematical" + r"\s+" + "tr" + "uth",
         "sac" + "red",
         "final" + r"\s+" + "proof",
-        "mathematically" + r"\s+" + "absolute",
-        "clinical" + r"\s+" + "guarantee",
+        "mathematically" + r"\s+" + "abs" + "olute",
+        "clin" + "ical" + r"\s+" + "guar" + "antee",
         r"\b" + "A" + "GI" + r"\b",
         r"\b" + "R" + "H" + r"\s+" + "proof",
-        "mathematical" + r"\s+" + "breakthrough",
+        "mathematical" + r"\s+" + "break" + "through",
         "32" + "92",
         "Bra" + "TS",
         "TC" + "GA",
@@ -103,66 +103,23 @@ def load_json(relative_path: str) -> dict[str, object]:
 
 def test_evidence_json_files_are_valid_and_claim_flags_are_false() -> None:
     manifest = load_json("evidence/demonstrator_manifest.json")
-    radiology = load_json("evidence/radiology_offline_evaluation.json")
-    radiology_review = load_json("evidence/radiology_evidence_review.json")
 
     claim_boundary = manifest["claim_boundary"]
     assert isinstance(claim_boundary, dict)
     for key in (
-        "clinical_claim",
-        "clinical_validation_claim",
-        "medical_device_claim",
-        "regulatory_compliance_claim",
+        "domain_validation_claim",
         "production_runtime_claim",
+        "regulated_use_claim",
+        "safety_approval_claim",
     ):
         assert claim_boundary[key] is False
 
-    claim_flags = radiology["claim_flags"]
-    assert isinstance(claim_flags, dict)
-    for key in (
-        "clinical_claim",
-        "medical_device_claim",
-        "regulatory_compliance_claim",
-        "data_redistributed_in_repo",
-        "production_ready_claim",
-        "sota_claim",
-    ):
-        assert claim_flags[key] is False
-
-    current_status = radiology["current_public_evidence_status"]
-    assert isinstance(current_status, dict)
-    assert (
-        current_status["reference_profile_results"]
-        == "not available in current public evidence"
-    )
-    assert "offline_evaluations" not in radiology
-    assert radiology["dataset_provenance_public"] == []
-
-    review_flags = radiology_review["claim_flags"]
-    assert isinstance(review_flags, dict)
-    for key in (
-        "clinical_claim",
-        "clinical_validation_claim",
-        "medical_device_claim",
-        "regulatory_compliance_claim",
-        "production_ready_claim",
-        "sota_claim",
-        "safety_certification_claim",
-        "data_redistributed_in_repo",
-    ):
-        assert review_flags[key] is False
-
-    current_review_status = radiology_review["current_public_evidence_status"]
-    assert isinstance(current_review_status, dict)
-    assert current_review_status["performance_metrics_public"] is False
-    assert current_review_status["current_domain_benchmark_public"] is False
-    assert current_review_status["restricted_artifacts_public"] is False
-    assert current_review_status["formal_integrity_material_public"] is False
-    assert "public_milestones" not in radiology_review
-    assert "verified_internal_artifacts" not in radiology_review
+    assert manifest["contains_domain_dataset"] is False
+    assert manifest["contains_real_world_evaluation_data"] is False
+    assert manifest["data_redistributed_in_repo"] is False
 
 
-def test_readme_links_public_evidence_docs() -> None:
+def test_readme_links_public_technical_docs() -> None:
     readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
 
     for link in (
@@ -170,26 +127,17 @@ def test_readme_links_public_evidence_docs() -> None:
         "docs/AI_PROBLEMS_ADDRESSED.md",
         "docs/PLAIN_LANGUAGE_OVERVIEW.md",
         "docs/SDK_BOUNDARY.md",
-        "docs/REPOSITORY_BEST_PRACTICES.md",
         "docs/PUBLIC_SURFACES.md",
         "docs/FORMAL_CLAIMS_BOUNDARY.md",
         "docs/architecture.md",
         "docs/INTEGRITY_ANCHORS.md",
-        "docs/RADIOLOGY_REFERENCE_SYSTEM.md",
-        "docs/OFFLINE_EVALUATION_RESULTS.md",
-        "docs/RADIOLOGY_EVIDENCE_REVIEW.md",
-        "docs/UNIVERSAL_KERNEL_POSITIONING.md",
         "docs/APPLICATION_PROFILES.md",
         "docs/DATASET_PROVENANCE.md",
-        "docs/CUSTOMER_VALUE.md",
-        "docs/POTENTIAL_BENEFITS.md",
         "docs/VALUE_METRICS.md",
-        "docs/REGULATORY_READINESS.md",
         "docs/CALIBRATION_AND_OPTIMIZATION.md",
         "docs/DEMONSTRATOR_COMPARISON.md",
         "examples/hello-world",
         "examples/api-gate",
-        "evidence/radiology_evidence_review.json",
     ):
         assert link in readme
 
@@ -202,7 +150,6 @@ def test_required_public_docs_and_examples_exist() -> None:
         "docs/AI_PROBLEMS_ADDRESSED.md",
         "docs/PLAIN_LANGUAGE_OVERVIEW.md",
         "docs/SDK_BOUNDARY.md",
-        "docs/REPOSITORY_BEST_PRACTICES.md",
         "docs/PUBLIC_SURFACES.md",
         "docs/FORMAL_CLAIMS_BOUNDARY.md",
         "docs/architecture.md",
@@ -211,7 +158,6 @@ def test_required_public_docs_and_examples_exist() -> None:
         "docs/DEMONSTRATOR_COMPARISON.md",
         "docs/CLEAN_ROOM_TEST.md",
         "docs/VALUE_METRICS.md",
-        "docs/POTENTIAL_BENEFITS.md",
         "examples/hello-world/README.md",
         "examples/hello-world/docker-compose.yml",
         "examples/hello-world/hello_world.py",
@@ -238,32 +184,20 @@ def test_all_json_files_are_valid() -> None:
             json.load(file)
 
 
-def test_lean_sources_do_not_use_placeholder_terms() -> None:
+def test_lean_sources_do_not_use_gap_terms() -> None:
     for path in (REPO_ROOT / "lean").rglob("*.lean"):
         text = path.read_text(encoding="utf-8")
         for term in FORBIDDEN_LEAN_TERMS:
             assert not re.search(rf"\b{term}\b", text), (
-                f"Lean placeholder term {term!r} in {path.relative_to(REPO_ROOT)}"
+                f"Lean gap term {term!r} in {path.relative_to(REPO_ROOT)}"
             )
 
 
-def test_radiology_public_evidence_does_not_publish_stale_metrics() -> None:
-    radiology = load_json("evidence/radiology_offline_evaluation.json")
-
-    historical = radiology["historical_artifacts"]
-    assert isinstance(historical, list)
-    assert historical
-    for item in historical:
-        assert isinstance(item, dict)
-        assert item["status"] == "historical_superseded_not_current"
-        assert item["metrics_published_as_current"] is False
-
-
-def test_no_medical_data_images_masks_or_checkpoints_are_committed() -> None:
+def test_no_controlled_artifacts_or_model_binaries_are_committed() -> None:
     for path in iter_repo_files():
         suffixes = "".join(path.suffixes).lower()
         assert not any(
-            suffixes.endswith(extension) for extension in MEDICAL_OR_MODEL_EXTENSIONS
+            suffixes.endswith(extension) for extension in CONTROLLED_ARTIFACT_EXTENSIONS
         ), f"forbidden artifact type committed: {path.relative_to(REPO_ROOT)}"
 
 

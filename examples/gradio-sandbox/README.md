@@ -10,7 +10,7 @@ license: other
 This is a synthetic Gradio sandbox for the public AOS demonstrator. It exposes
 bounded public demo logic only.
 
-It does not publish private policies, production adapters, domain data,
+It does not publish policy libraries, production adapters, domain data,
 deployment configuration, credentials, or persistence backends.
 
 ## Local Run

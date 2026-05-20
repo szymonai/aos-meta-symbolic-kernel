@@ -12,8 +12,6 @@ python -m pytest tests -q
 python benchmarks/run_benchmarks.py
 python -m json.tool benchmarks/results/metrics.json
 python -m json.tool evidence/demonstrator_manifest.json
-python -m json.tool evidence/radiology_offline_evaluation.json
-python -m json.tool evidence/radiology_evidence_review.json
 python examples/hello-world/hello_world.py
 python examples/api-gate/aos_api_gate.py evaluate --input examples/api-gate/sample_input.json
 python examples/api-gate/aos_api_gate.py replay --evidence examples/api-gate/sample_evidence.json
@@ -43,11 +41,10 @@ The API-gate replay check verifies that the public sample evidence packet can be
 rebuilt from its included input and compared deterministically.
 
 The demonstrator manifest is also expected to keep public boundary fields set to
-`false` for claims outside this limited demonstrator, including clinical claims,
-external validation, medical-device status, regulatory compliance, and
-production runtime claims.
+`false` for claims outside this limited demonstrator, including external
+validation, regulated use, safety approval, and production runtime claims.
 
 ## Scope Boundary
 
-This test does not test specialist systems, datasets, commercial delivery
-materials, production security, deployment settings, or customer outcomes.
+This test does not test specialist systems, datasets, delivery materials,
+production security, deployment settings, or deployment outcomes.

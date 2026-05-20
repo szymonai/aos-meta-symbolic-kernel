@@ -18,8 +18,7 @@ AI output -> quality / uncertainty / risk signal -> explicit policy
 ```
 
 This repository is a limited public demonstrator of that control pattern. It is
-not a production SDK, regulated product, clinical system, or full commercial
-implementation.
+not a production SDK, regulated-use product, or production implementation.
 
 ## Why Neurosymbolic?
 
@@ -56,14 +55,12 @@ AOS is designed to support selective progression:
   work.
 
 This can support cost discipline in research, operations, and industrial
-workflows by making expensive escalation more selective. In healthcare-adjacent
-and therapy-development workflows, the public framing is narrower: AOS can
-support review and control around AI outputs, but this repository does not make
-clinical, therapeutic, regulatory, or production-readiness claims.
+workflows by making expensive review, compute, experimentation, or escalation
+more selective. The public repository demonstrates the control pattern only; it
+does not make domain-validation, regulatory, or production-readiness claims.
 
 See [Plain-language overview](docs/PLAIN_LANGUAGE_OVERVIEW.md) and
-[AI problems addressed](docs/AI_PROBLEMS_ADDRESSED.md). Potential benefits are
-summarized in [Potential benefits](docs/POTENTIAL_BENEFITS.md).
+[AI problems addressed](docs/AI_PROBLEMS_ADDRESSED.md).
 
 ## How Decisions Are Evaluated
 
@@ -80,9 +77,9 @@ The public demonstrator reports control-layer metrics:
 - `deterministic_replay`: same public input and policy reproduce the same
   verdict.
 
-The API-shaped examples use replayable evidence with HMAC-SHA256-linked audit
-digests. This makes demonstrator replay mismatches visible. It is not a
-production signing scheme, certification claim, or deployment security claim.
+The API-shaped examples include local SHA-256 audit digests for replay checks
+in the demo. They are not a distributed trust model, production signature
+scheme, key-management design, or security recommendation.
 
 ## Quickstart
 
@@ -117,7 +114,7 @@ python examples/api-gate/aos_api_gate.py replay \
 | --- | --- |
 | Gate logic | Simplified interval gate returning `PASS` / `WARN` / `BLOCK` |
 | API shape | Neutral `/v1/evaluate` and `/v1/replay` demonstrator |
-| Evidence | SHA-256-linked public audit identifiers and JSON evidence |
+| Evidence | JSON evidence and local demonstrator audit digests |
 | Benchmarks | Synthetic scenarios with reproducible metrics |
 | Formal surface | Lean proof surface for abstract verdict logic |
 | Boundaries | Machine-readable claim flags and publication checks |
@@ -131,15 +128,9 @@ python examples/api-gate/aos_api_gate.py replay \
 | Public evidence boundaries | [Demonstrator manifest](evidence/demonstrator_manifest.json) |
 | Formal verdict scope | [Scope of Proof](SCOPE_OF_PROOF.md), [Formal Claims Boundary](docs/FORMAL_CLAIMS_BOUNDARY.md), [Lean proof surface](lean/AOSPublicCore.lean) |
 | API-shaped replay | [API gate example](examples/api-gate) |
-| Radiology reference boundary | [Radiology reference system](docs/RADIOLOGY_REFERENCE_SYSTEM.md), [offline evaluation boundary](docs/OFFLINE_EVALUATION_RESULTS.md), [radiology boundary JSON](evidence/radiology_evidence_review.json) |
-
-Radiology is included only as one reference profile for understanding the
-assurance pattern. Current radiology performance metrics are not published as
-public evidence in this repository.
-
 ## Application Profiles
 
-The same public control pattern can be evaluated in neutral, non-certified
+The same public control pattern can be evaluated in neutral, non-production
 workflows such as:
 
 - LLM output and agent action gating;
@@ -147,33 +138,29 @@ workflows such as:
 - cybersecurity automation review;
 - industrial and physical-system quality review;
 - robotics and edge-signal review;
-- healthcare R&D audit support;
 - financial workflow review.
 
 These are potential adaptation profiles, not released products or deployment
-claims. See [Application profiles](docs/APPLICATION_PROFILES.md) and
-[Universal kernel positioning](docs/UNIVERSAL_KERNEL_POSITIONING.md).
+claims. See [Application profiles](docs/APPLICATION_PROFILES.md).
 
 ## Public Boundary
 
 This repository does not contain:
 
-- production-system code or customer deployment material;
-- model weights, checkpoints, medical datasets, patient files, DICOM/NIfTI
-  files, masks, or local paths;
-- production security design, production signing infrastructure, or commercial
-  delivery material;
-- clinical validation, regulatory approval, safety certification, or unrelated
+- production-system code or deployment material;
+- model weights, checkpoints, domain datasets, regulated records, or local paths;
+- production security design, production signing infrastructure, or delivery
+  material;
+- domain validation, regulatory approval, safety approval, or unrelated
   mathematical claims.
 
 The Lean file covers abstract verdict logic only. It does not prove model
 correctness, production audit security, Python-to-Lean refinement, Python
 numeric runtime behavior, Int/Float correspondence, domain adapter behavior, or
-clinical safety.
+regulated-use safety.
 
 See [Public boundary](docs/PUBLIC_BOUNDARY.md), [SDK boundary](docs/SDK_BOUNDARY.md),
-[Regulatory readiness](docs/REGULATORY_READINESS.md), and
-[Repository best practices](docs/REPOSITORY_BEST_PRACTICES.md).
+and [Formal Claims Boundary](docs/FORMAL_CLAIMS_BOUNDARY.md).
 
 ## Documentation Map
 
@@ -182,15 +169,9 @@ See [Public boundary](docs/PUBLIC_BOUNDARY.md), [SDK boundary](docs/SDK_BOUNDARY
 - [Scope of Proof](SCOPE_OF_PROOF.md)
 - [Formal Claims Boundary](docs/FORMAL_CLAIMS_BOUNDARY.md)
 - [Demonstrator comparison](docs/DEMONSTRATOR_COMPARISON.md)
-- [Customer value](docs/CUSTOMER_VALUE.md)
-- [Potential benefits](docs/POTENTIAL_BENEFITS.md)
 - [Value metrics](docs/VALUE_METRICS.md)
-- [Commercialization direction](docs/COMMERCIALIZATION.md)
 - [Integrity anchors](docs/INTEGRITY_ANCHORS.md)
 - [Dataset provenance](docs/DATASET_PROVENANCE.md)
-- [Radiology reference system](docs/RADIOLOGY_REFERENCE_SYSTEM.md)
-- [Radiology evidence review](docs/RADIOLOGY_EVIDENCE_REVIEW.md)
-- [Development transparency](docs/DEVELOPMENT_TRANSPARENCY.md)
 - [Clean-room test](docs/CLEAN_ROOM_TEST.md)
 - [Performance and evaluation boundary](docs/CALIBRATION_AND_OPTIMIZATION.md)
 - [Hello-world example](examples/hello-world)

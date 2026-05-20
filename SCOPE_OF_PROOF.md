@@ -40,13 +40,13 @@ model-output conversion layer.
 - full Int/Float correspondence between code and proof artifacts
 - production SDK completeness
 - production security or deployment readiness
-- clinical validation or medical-device status
-- regulatory approval or certification
-- external validation or independent certification
-- product performance in customer environments
+- domain validation or regulated-use approval
+- regulatory approval or safety approval
+- external validation or independent assessment
+- product performance in deployment environments
 - production-system completeness
-- production calibration, load performance, domain-adapter quality, enterprise
-  deployment economics, or customer-specific operational readiness
+- production calibration, load performance, domain-adapter quality, deployment
+  economics, or operational readiness
 - materials outside this public demonstrator
 
 The public repository should be read as a technical credibility signal and

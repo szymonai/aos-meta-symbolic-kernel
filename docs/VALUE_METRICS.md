@@ -1,9 +1,9 @@
 # Value Metrics
 
 This document reports only public, reproducible value metrics from the limited
-demonstrator. It does not report production-system metrics, customer
-outcomes, production service levels, clinical utility, regulated performance, or
-commercial validation.
+demonstrator. It does not report production-system metrics, deployment
+outcomes, production service levels, domain utility, regulated performance, or
+market validation.
 
 ## Current Public Dataset
 
@@ -77,14 +77,14 @@ Sources: `evidence/demonstrator_manifest.json` and
 | --- | --- |
 | Production-system code included | `false` |
 | Internal policy logic included | `false` |
-| Real clinical thresholds included | `false` |
+| Real-world domain thresholds included | `false` |
 | Specialist validation materials included | `false` |
 | Data redistributed in repository | `false` |
-| Clinical claim | `false` |
-| Clinical validation claim | `false` |
+| Domain-validation claim | `false` |
 | External validation completed | `false` |
-| Medical-device claim | `false` |
+| Regulated-use claim | `false` |
 | Regulatory compliance claim | `false` |
+| Safety-approval claim | `false` |
 | Production runtime claim | `false` |
 | Benchmark production-ready claim | `false` |
 | Benchmark external-validation claim | `false` |
@@ -111,13 +111,13 @@ the public Lean target using only the repository contents.
 The public metrics above do not establish:
 
 - production readiness
-- clinical safety or clinical utility
-- medical-device status
+- domain safety or domain utility
+- regulated-use approval
 - regulatory compliance
 - external validation
-- customer ROI
+- deployment ROI
 - revenue performance
-- best-in-class or state-of-the-art status
+- external performance ranking
 - access to production-system material
 
 Any future public value claim should identify the exact evidence source, the

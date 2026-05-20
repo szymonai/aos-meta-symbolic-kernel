@@ -20,7 +20,7 @@ regulatory problems.
 ## What This Does Not Mean
 
 AOS does not claim that a model is correct. It does not eliminate hallucinations,
-replace human review, certify a workflow, or make clinical, regulatory, or
+replace human review, approve a workflow, or make domain, regulatory, or
 production-readiness claims in this public repository.
 
 The public value is narrower and more defensible: deterministic control over

@@ -13,18 +13,15 @@ For claim-level interpretation, see
 - audit digest generation for demonstrator decisions
 - reproducible JSON evidence for the current synthetic benchmark set
 
-## Numeric Model Boundary
+## Numeric Precision Boundary
 
-The public Lean proof surface uses integer arithmetic for abstract interval
-verdict logic. The Python reference implementation accepts finite numeric
-inputs and evaluates floating-point values at runtime.
+The public Lean proof surface covers abstract integer verdict logic. Production
+runtime paths should use canonical fixed-point signals or an explicitly bounded
+floating-point error model before verdict evaluation.
 
-No full proof is published here that converts the Python floating-point
-execution path into the Lean integer model. The repository includes bounded
-runtime correspondence tests for integer-like values, but the Lean result should
-still be read as a proof over the abstract verdict structure, not as a proof of
-Python runtime semantics, JSON number parsing, floating-point rounding, or a
-model-output conversion layer.
+IEEE-754 behavior, JSON numeric parsing, rounding modes, and platform runtime
+semantics are outside the current public proof surface. Near-boundary cases
+should route to `WARN` when numeric error could change the verdict.
 
 ## Demonstrated
 

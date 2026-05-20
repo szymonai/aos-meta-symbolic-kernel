@@ -17,8 +17,8 @@ AI output
 
 An application profile is appropriate when the workflow can expose bounded
 signals, explicit policies, a deterministic verdict, and evidence that can be
-replayed. The final business, operational, scientific, or clinical decision
-remains outside the public demonstrator.
+replayed. The final operational, scientific, or business decision remains
+outside the public demonstrator.
 
 ## Agent And Tool-Call Gate
 
@@ -35,7 +35,7 @@ Example public signals:
 - identity or sealed-state status
 
 Not claimed: model correctness, hallucination elimination, autonomous-agent
-safety, production security, or complete agent-system certification.
+safety, production security, or complete agent-system approval.
 
 ## Document And Workflow Review
 
@@ -50,7 +50,7 @@ Example public signals:
 - missing-field status
 - policy match
 
-Not claimed: legal correctness, compliance certification, final approval, or
+Not claimed: legal correctness, compliance approval, final approval, or
 replacement of expert review.
 
 ## Cybersecurity Automation Gate
@@ -66,7 +66,7 @@ Example public signals:
 - blast-radius estimate
 - policy match
 
-Not claimed: complete threat detection, autonomous defense certification,
+Not claimed: complete threat detection, autonomous defense approval,
 incident-response correctness, or production security readiness.
 
 ## Industrial And Physical-System Review
@@ -82,8 +82,8 @@ Example public signals:
 - temperature or pressure bound
 - sensor uncertainty
 
-Not claimed: replacement of numerical solvers, certified simulation tools,
-engineering sign-off, or safety certification.
+Not claimed: replacement of numerical solvers, regulated simulation tools,
+engineering sign-off, or safety approval.
 
 ## Robotics And Edge Review
 
@@ -98,8 +98,8 @@ Example public signals:
 - collision margin
 - navigation-zone status
 
-Not claimed: autonomous safety certification, real-time control certification,
-or certified robotics deployment.
+Not claimed: autonomous safety approval, real-time control approval, or
+regulated robotics deployment.
 
 ## Scientific Research Pipeline Gate
 
@@ -117,26 +117,6 @@ Example public signals:
 Not claimed: scientific discovery, biological activity, therapeutic validity,
 wet-lab validation, or experimental success.
 
-## Healthcare R&D And Radiology Reference
-
-Potential use: healthcare research workflows and radiology reference scenarios
-where model-output metadata can be routed to review or workflow hold.
-
-Example public signals:
-
-- output quality metadata
-- uncertainty signal
-- policy threshold
-- review status
-- audit evidence
-
-Not claimed: clinical validation, diagnosis, treatment recommendation,
-medical-device status, regulatory approval, or clinical deployment readiness.
-
-The radiology reference profile in this repository should be understood as one
-concrete instance of the general control pattern, not as the full specialist
-system.
-
 ## Financial Workflow Review
 
 Potential use: review queues where AI-generated risk signals are checked before
@@ -150,11 +130,11 @@ Example public signals:
 - identity status
 - review trigger
 
-Not claimed: final financial decision-making, compliance certification,
+Not claimed: final financial decision-making, compliance approval,
 regulated approval, or automated approval authority.
 
 ## Reading These Profiles
 
 These profiles explain where the AOS pattern can be evaluated. They do not
-publish production integrations, customer-specific policies, controlled
-evidence, deployment settings, or specialist-system implementation material.
+publish production integrations, deployment settings, controlled evidence, or
+specialist-system implementation material.

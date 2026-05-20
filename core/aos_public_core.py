@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import hashlib
-import hmac
 import json
 import math
 from dataclasses import dataclass
@@ -60,15 +59,15 @@ class DemoAuditRecord:
     verdict: Verdict
     audit_digest: str
 
-    def verify_demo_digest(self, demo_key: bytes) -> bool:
+    def verify_demo_digest(self) -> bool:
         payload = _canonical_demo_payload(
             self.value,
             self.uncertainty,
             self.limit,
             self.verdict,
         )
-        expected = hmac.new(demo_key, payload, hashlib.sha256).hexdigest()
-        return hmac.compare_digest(self.audit_digest, expected)
+        expected = hashlib.sha256(payload).hexdigest()
+        return self.audit_digest == expected
 
 
 class DemoIntervalGate:
@@ -87,11 +86,7 @@ class DemoIntervalGate:
         self,
         value: float,
         uncertainty: float,
-        demo_key: bytes,
     ) -> DemoAuditRecord:
-        if not isinstance(demo_key, bytes) or not demo_key:
-            raise ValueError("demo_key must be non-empty bytes")
-
         value = _require_finite("value", value)
         uncertainty = _require_finite("uncertainty", uncertainty)
         if uncertainty < 0:
@@ -100,7 +95,7 @@ class DemoIntervalGate:
         upper_bound = _require_finite("upper_bound", value + uncertainty)
         verdict = derive_verdict(upper_bound, self.limit, self.warn_margin)
         payload = _canonical_demo_payload(value, uncertainty, self.limit, verdict)
-        digest = hmac.new(demo_key, payload, hashlib.sha256).hexdigest()
+        digest = hashlib.sha256(payload).hexdigest()
 
         return DemoAuditRecord(
             value=value,

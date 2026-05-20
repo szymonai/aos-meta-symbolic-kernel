@@ -16,7 +16,7 @@ synthetic metrics, and review the public proof surface.
 
 ## What A Future SDK Could Provide
 
-A future commercial SDK could expose a stable integration surface for controlled
+A future SDK could expose a stable integration surface for controlled
 deployments, such as:
 
 - verdict evaluation;
@@ -35,13 +35,13 @@ already a production SDK.
 This repository does not publish:
 
 - production API contracts;
-- customer integration code;
+- deployment integration code;
 - deployment settings;
 - production security design;
-- commercial support or service-level commitments.
+- support or service-level commitments.
 
 ## Public Rule
 
 Use this repository to evaluate the public control-layer idea. Treat SDK,
-enterprise deployment, customer integration, and production support as separate
-commercial surfaces that require controlled disclosure and separate agreements.
+enterprise deployment, deployment integration, and production support as
+separate surfaces that require controlled disclosure and separate agreements.

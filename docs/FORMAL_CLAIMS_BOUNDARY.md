@@ -30,7 +30,7 @@ This supports a limited statement:
 - JSON/IO/security/key-management correctness;
 - policy calibration or threshold validity;
 - deployment, concurrency, availability, or production security;
-- domain, clinical, regulatory, financial, or safety certification;
+- domain, regulatory, financial, or safety approval;
 - end-to-end product correctness.
 
 ## Safe Public Wording

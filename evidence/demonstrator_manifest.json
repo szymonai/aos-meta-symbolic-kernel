@@ -3,15 +3,15 @@
   "status": "limited_public_demonstrator",
   "contains_full_aos_core": false,
   "contains_internal_policy_logic": false,
-  "contains_real_clinical_thresholds": false,
+  "contains_domain_dataset": false,
+  "contains_real_world_evaluation_data": false,
   "contains_specialist_validation_stack": false,
   "claim_boundary": {
-    "clinical_claim": false,
-    "clinical_validation_claim": false,
+    "domain_validation_claim": false,
     "external_validation_completed": false,
-    "medical_device_claim": false,
-    "regulatory_compliance_claim": false,
-    "production_runtime_claim": false
+    "production_runtime_claim": false,
+    "regulated_use_claim": false,
+    "safety_approval_claim": false
   },
   "data_redistributed_in_repo": false
 }

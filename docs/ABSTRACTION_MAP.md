@@ -57,9 +57,9 @@ The public repo does not prove:
 - model correctness;
 - Python-to-Lean refinement;
 - production audit security;
-- clinical validity;
+- domain validity;
 - regulatory compliance;
-- SOTA performance;
+- external performance ranking;
 - autonomous operational control;
 - safety of any specialist profile.
 
@@ -72,5 +72,3 @@ For a fast technical review, read in this order:
 3. `benchmarks/results/summary.md` for the synthetic comparison.
 4. `lean/AOSPublicCore.lean` for the proof surface.
 5. `evidence/demonstrator_manifest.json` for machine-readable claim limits.
-6. `evidence/radiology_evidence_review.json` for radiology publication boundary.
-7. `docs/IP_PROTECTION.md` before publishing or reusing any material.

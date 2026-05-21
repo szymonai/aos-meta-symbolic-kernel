@@ -1,9 +1,12 @@
 # Plain-Language Overview
 
-AOS is a control layer for AI systems.
+AOS is a meta-symbolic verification layer for AI systems.
 
-It does not replace the AI model. It checks the model's output before that
-output affects a workflow.
+It does not replace the AI model. It checks bounded signals from the model's
+output before that output affects a workflow.
+
+In this context, `meta-symbolic` means that AOS sits above model internals and
+uses explicit symbolic rules to supervise whether an AI output may proceed.
 
 ## The Basic Idea
 
@@ -48,4 +51,4 @@ This repository does not publish production deployment materials, controlled
 data, domain validation, regulatory approval, or market performance evidence.
 
 The public repository should be read as a transparent demonstrator of the
-control-layer idea, not as a full production system.
+meta-symbolic verification pattern, not as a full production system.

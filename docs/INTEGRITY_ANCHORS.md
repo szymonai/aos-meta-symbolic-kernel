@@ -23,6 +23,18 @@ metadata describing the recommended Ed25519 provenance layer. It does not
 publish production signing key material or a production signature
 scheme.
 
+## Current Demonstrator Digest Boundary
+
+The current public gate emits SHA-256 identifiers over canonical demonstrator
+payloads. These identifiers support local replay checks: the same public input,
+policy, and verdict should reproduce the same digest.
+
+A SHA-256 demonstrator digest is not a signature, HMAC, append-only audit
+ledger, key-management design, non-repudiation proof, or production security
+control. Production auditability requires a separately designed evidence layer,
+such as HMAC-backed records, signed packets, KMS-backed key handling, immutable
+log storage, retention policy, and tamper-response procedures.
+
 ## Safe Publication Rule
 
 When a future evidence packet is signed, publish only:

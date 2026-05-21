@@ -1,13 +1,14 @@
-# AOS Meta-Symbolic AI
+# AOS Meta-Symbolic Verification Kernel
 
 [![AOS Limited Demonstrator CI](https://github.com/szymonai/aos-neurosymbolic-ai/actions/workflows/aos-core-ci.yml/badge.svg)](https://github.com/szymonai/aos-neurosymbolic-ai/actions/workflows/aos-core-ci.yml)
 
 Public demonstrator version: `0.1.0`
 
-AOS is a meta-symbolic verification layer for AI systems. It supervises
-bounded AI-output signals with deterministic integrity rules and explicit
-policies, returning auditable `PASS` / `WARN` / `BLOCK` decisions independently
-of application domain.
+AOS is a meta-symbolic verification kernel for AI systems: a compact control
+core with a formal integrity proof surface for selected properties of its
+abstract verdict model. It supervises bounded AI-output signals with
+deterministic integrity rules and explicit policies, returning auditable
+`PASS` / `WARN` / `BLOCK` decisions independently of application domain.
 
 AOS is not another AI application or a neural-symbolic model architecture. It
 does not replace the model, expert, operator, or final decision-maker. It sits
@@ -21,22 +22,22 @@ AI output -> quality / uncertainty / risk signal -> explicit policy
 This repository is a limited public demonstrator of that control pattern. It is
 not a production SDK, regulated-use product, or production implementation.
 
-## Why Meta-Symbolic?
+## Why Meta-Symbolic Kernel?
 
-`Meta-symbolic` is the preferred public description because it captures the
-three relevant properties of AOS without implying that this repository publishes
-a full neural-symbolic research stack:
+`Meta-symbolic verification kernel` is the preferred public description because
+it captures the three relevant properties of AOS without implying that this
+repository publishes a full neural-symbolic research stack:
 
 - `meta`: AOS operates above model internals, supervising AI outputs before they
   affect downstream workflow state;
 - `symbolic`: AOS uses explicit policies, deterministic verdict logic,
   reproducible evidence, and a small Lean proof surface;
-- `verification`: AOS checks whether a bounded output signal may move forward
-  under the declared policy boundary.
+- `kernel`: AOS is the compact control core that turns bounded signals and
+  policy rules into deterministic workflow verdicts.
 
-The public Lean surface verifies selected properties of the abstract verdict
-model. It does not prove model correctness, production runtime correctness,
-Python-to-Lean refinement, or regulated-use safety.
+The public Lean surface verifies selected integrity properties of the abstract
+verdict model. It does not prove model correctness, production runtime
+correctness, Python-to-Lean refinement, or regulated-use safety.
 
 This repository does not publish model internals, training pipelines, production
 domain adapters, or a full neural-symbolic research stack.

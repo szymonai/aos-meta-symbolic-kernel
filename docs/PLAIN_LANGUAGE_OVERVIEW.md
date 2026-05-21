@@ -1,12 +1,14 @@
 # Plain-Language Overview
 
-AOS is a meta-symbolic verification layer for AI systems.
+AOS is a meta-symbolic verification kernel for AI systems.
 
 It does not replace the AI model. It checks bounded signals from the model's
 output before that output affects a workflow.
 
 In this context, `meta-symbolic` means that AOS sits above model internals and
 uses explicit symbolic rules to supervise whether an AI output may proceed.
+`Kernel` means the compact control core of the public demonstrator, not a full
+production runtime or operating-system kernel.
 
 ## The Basic Idea
 
@@ -28,7 +30,7 @@ In plain terms:
 AOS helps separate three things that are often mixed together:
 
 - what the model produced;
-- what the control layer decided;
+- what the control kernel decided;
 - what a human or organization does next.
 
 That separation is useful for auditability, review triggers, governance, and
@@ -51,4 +53,4 @@ This repository does not publish production deployment materials, controlled
 data, domain validation, regulatory approval, or market performance evidence.
 
 The public repository should be read as a transparent demonstrator of the
-meta-symbolic verification pattern, not as a full production system.
+meta-symbolic verification-kernel pattern, not as a full production system.

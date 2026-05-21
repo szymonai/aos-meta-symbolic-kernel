@@ -1,6 +1,6 @@
 # Plain-Language Overview
 
-AOS is a meta-symbolic verification kernel for AI systems.
+AOS is a meta-symbolic kernel for AI systems.
 
 It does not replace the AI model. It checks bounded signals from the model's
 output before that output affects a workflow.
@@ -33,8 +33,8 @@ AOS helps separate three things that are often mixed together:
 - what the control kernel decided;
 - what a human or organization does next.
 
-That separation is useful for auditability, review triggers, governance, and
-workflow safety.
+That separation is useful for verification, auditability, review triggers,
+governance, and workflow safety.
 
 ## What This Public Repository Shows
 
@@ -53,4 +53,4 @@ This repository does not publish production deployment materials, controlled
 data, domain validation, regulatory approval, or market performance evidence.
 
 The public repository should be read as a transparent demonstrator of the
-meta-symbolic verification-kernel pattern, not as a full production system.
+meta-symbolic kernel pattern, not as a full production system.

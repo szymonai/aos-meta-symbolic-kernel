@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "name": "AOS Neurosymbolic AI",
+  "name": "AOS Meta-Symbolic Kernel",
   "theme": "mint",
   "colors": {
     "primary": "#0F766E",

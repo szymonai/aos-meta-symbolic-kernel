@@ -1,7 +1,7 @@
 # Public Architecture
 
-AOS is presented here as a domain-neutral meta-symbolic verification kernel. The
-public architecture is deliberately small:
+AOS is presented here as a domain-neutral meta-symbolic kernel. The public
+architecture is deliberately small:
 
 ```text
 AI model
@@ -17,7 +17,8 @@ AI model
 `Meta-symbolic` means that the kernel operates above model internals while using
 explicit symbolic policies, deterministic verdict logic, and replayable evidence
 to supervise model-output effects. `Kernel` means the compact control core that
-turns bounded signals and policy rules into workflow verdicts.
+turns bounded signals and policy rules into workflow verdicts. Verification is
+one function of that kernel, alongside gating, routing, and evidence generation.
 
 ## Components
 

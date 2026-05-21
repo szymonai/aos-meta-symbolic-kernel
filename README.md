@@ -1,13 +1,13 @@
-# AOS Meta-Symbolic Verification Kernel
+# AOS Meta-Symbolic Kernel
 
 [![AOS Limited Demonstrator CI](https://github.com/szymonai/aos-neurosymbolic-ai/actions/workflows/aos-core-ci.yml/badge.svg)](https://github.com/szymonai/aos-neurosymbolic-ai/actions/workflows/aos-core-ci.yml)
 
 Public demonstrator version: `0.1.0`
 
-AOS is a meta-symbolic verification kernel for AI systems: a compact control
-core with a formal integrity proof surface for selected properties of its
-abstract verdict model. It supervises bounded AI-output signals with
-deterministic integrity rules and explicit policies, returning auditable
+AOS is a meta-symbolic kernel for AI systems: a compact control core that
+verifies, gates, routes, and records bounded AI-output signals under explicit
+policies. Its public demonstrator includes a formal integrity proof surface for
+selected properties of the abstract verdict model, returning auditable
 `PASS` / `WARN` / `BLOCK` decisions independently of application domain.
 
 AOS is not another AI application or a neural-symbolic model architecture. It
@@ -24,9 +24,9 @@ not a production SDK, regulated-use product, or production implementation.
 
 ## Why Meta-Symbolic Kernel?
 
-`Meta-symbolic verification kernel` is the preferred public description because
-it captures the three relevant properties of AOS without implying that this
-repository publishes a full neural-symbolic research stack:
+`Meta-symbolic kernel` is the preferred public description because it captures
+the relevant properties of AOS without implying that this repository publishes a
+full neural-symbolic research stack:
 
 - `meta`: AOS operates above model internals, supervising AI outputs before they
   affect downstream workflow state;
@@ -34,6 +34,9 @@ repository publishes a full neural-symbolic research stack:
   reproducible evidence, and a small Lean proof surface;
 - `kernel`: AOS is the compact control core that turns bounded signals and
   policy rules into deterministic workflow verdicts.
+
+Verification is one function of the kernel, alongside gating, routing, audit
+evidence generation, and policy-boundary enforcement.
 
 The public Lean surface verifies selected integrity properties of the abstract
 verdict model. It does not prove model correctness, production runtime

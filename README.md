@@ -1,16 +1,17 @@
-# AOS Neurosymbolic AI
+# AOS Meta-Symbolic AI
 
 [![AOS Limited Demonstrator CI](https://github.com/szymonai/aos-neurosymbolic-ai/actions/workflows/aos-core-ci.yml/badge.svg)](https://github.com/szymonai/aos-neurosymbolic-ai/actions/workflows/aos-core-ci.yml)
 
 Public demonstrator version: `0.1.0`
 
-AOS is a domain-neutral runtime assurance layer for AI systems. It evaluates
-bounded model-output signals against explicit policies and returns deterministic,
-auditable `PASS` / `WARN` / `BLOCK` decisions.
+AOS is a meta-symbolic verification layer for AI systems. It supervises
+bounded AI-output signals with deterministic integrity rules and explicit
+policies, returning auditable `PASS` / `WARN` / `BLOCK` decisions independently
+of application domain.
 
-AOS is not another AI application. It does not replace the model, expert,
-operator, or final decision-maker. It sits between an AI output and downstream
-workflow use.
+AOS is not another AI application or a neural-symbolic model architecture. It
+does not replace the model, expert, operator, or final decision-maker. It sits
+between an AI output and downstream workflow use.
 
 ```text
 AI output -> quality / uncertainty / risk signal -> explicit policy
@@ -20,15 +21,22 @@ AI output -> quality / uncertainty / risk signal -> explicit policy
 This repository is a limited public demonstrator of that control pattern. It is
 not a production SDK, regulated-use product, or production implementation.
 
-## Why Neurosymbolic?
+## Why Meta-Symbolic?
 
-The repository name reflects the intended boundary between neural model outputs
-and symbolic control logic. In this public demonstrator:
+`Meta-symbolic` is the preferred public description because it captures the
+three relevant properties of AOS without implying that this repository publishes
+a full neural-symbolic research stack:
 
-- the neural side is represented by bounded output metadata such as uncertainty,
-  confidence, quality, or risk signals;
-- the symbolic side is represented by explicit policies, deterministic verdict
-  logic, replayable evidence, and a small Lean proof surface.
+- `meta`: AOS operates above model internals, supervising AI outputs before they
+  affect downstream workflow state;
+- `symbolic`: AOS uses explicit policies, deterministic verdict logic,
+  reproducible evidence, and a small Lean proof surface;
+- `verification`: AOS checks whether a bounded output signal may move forward
+  under the declared policy boundary.
+
+The public Lean surface verifies selected properties of the abstract verdict
+model. It does not prove model correctness, production runtime correctness,
+Python-to-Lean refinement, or regulated-use safety.
 
 This repository does not publish model internals, training pipelines, production
 domain adapters, or a full neural-symbolic research stack.
@@ -128,6 +136,7 @@ python examples/api-gate/aos_api_gate.py replay \
 | Public evidence boundaries | [Demonstrator manifest](evidence/demonstrator_manifest.json) |
 | Formal verdict scope | [Scope of Proof](SCOPE_OF_PROOF.md), [Formal Claims Boundary](docs/FORMAL_CLAIMS_BOUNDARY.md), [Lean proof surface](lean/AOSPublicCore.lean) |
 | API-shaped replay | [API gate example](examples/api-gate) |
+
 ## Application Profiles
 
 The same public control pattern can be evaluated in neutral, non-production

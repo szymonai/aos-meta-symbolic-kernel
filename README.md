@@ -1,6 +1,6 @@
 # AOS Meta-Symbolic Kernel
 
-[![AOS Limited Demonstrator CI](https://github.com/szymonai/aos-neurosymbolic-ai/actions/workflows/aos-core-ci.yml/badge.svg)](https://github.com/szymonai/aos-neurosymbolic-ai/actions/workflows/aos-core-ci.yml)
+[![AOS Limited Demonstrator CI](https://github.com/szymonai/aos-meta-symbolic-kernel/actions/workflows/aos-core-ci.yml/badge.svg)](https://github.com/szymonai/aos-meta-symbolic-kernel/actions/workflows/aos-core-ci.yml)
 
 Public demonstrator version: `0.1.0`
 

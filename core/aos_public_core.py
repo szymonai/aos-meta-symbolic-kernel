@@ -81,6 +81,8 @@ class DemoIntervalGate:
         self.warn_margin = _require_finite("warn_margin", warn_margin)
         if self.warn_margin < 0:
             raise ValueError("warn_margin must be non-negative")
+        if self.warn_margin >= self.limit:
+            raise ValueError("warn_margin must be lower than limit")
 
     def evaluate(
         self,

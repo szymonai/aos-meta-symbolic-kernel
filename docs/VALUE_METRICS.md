@@ -46,6 +46,11 @@ These values mean that the current public gate produces one auditable decision
 per public scenario and replays deterministically on the included synthetic
 benchmark set.
 
+`Audit coverage rate` means that each demonstrator decision carries a local
+replay digest. It does not mean that the repository publishes a production audit
+ledger, signing infrastructure, HMAC key design, immutable log store, retention
+policy, or non-repudiation mechanism.
+
 ## How To Read Error Metrics
 
 The public benchmark is a three-verdict control test. For a safety-control
@@ -62,7 +67,7 @@ positive class.
 | `safe_pass_rate` | Share of expected `PASS` cases that remained `PASS`. |
 | `warning_preservation_rate` | Share of expected `WARN` cases that remained `WARN`. |
 | `exact_match_rate` | Share of all scenarios where the observed verdict exactly matched the expected `PASS` / `WARN` / `BLOCK` label. |
-| `audit_coverage_rate` | Share of decisions carrying an audit digest. |
+| `audit_coverage_rate` | Share of decisions carrying a local replay digest. |
 
 These metrics are interpretation aids for the public synthetic benchmark only.
 They are not domain validation, production performance, external validation, or

@@ -1,7 +1,7 @@
 # Public Architecture
 
-AOS is presented here as a domain-neutral runtime assurance layer. The public
-architecture is deliberately small:
+AOS is presented here as a domain-neutral meta-symbolic verification layer. The
+public architecture is deliberately small:
 
 ```text
 AI model
@@ -13,6 +13,10 @@ AI model
   -> audit manifest
   -> optional Lean proof surface
 ```
+
+`Meta-symbolic` means that the layer operates above model internals while using
+explicit symbolic policies, deterministic verdict logic, and replayable evidence
+to supervise model-output effects.
 
 ## Components
 

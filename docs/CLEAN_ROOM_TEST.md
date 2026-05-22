@@ -9,7 +9,7 @@ fresh public checkout using only the repository contents.
 python -m pip install -r requirements-dev.txt
 python -m ruff check .
 python -m pytest tests -q
-python benchmarks/run_benchmarks.py
+python benchmarks/run_benchmarks.py --check
 python -m json.tool benchmarks/results/metrics.json
 python -m json.tool evidence/demonstrator_manifest.json
 python examples/hello-world/hello_world.py

@@ -31,5 +31,5 @@
 
 - [ ] `python -m ruff check .`
 - [ ] `python -m pytest tests -q`
-- [ ] `python benchmarks/run_benchmarks.py`
+- [ ] `python benchmarks/run_benchmarks.py --check`
 - [ ] `lake build AOSPublicCore`

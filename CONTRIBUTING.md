@@ -43,7 +43,7 @@ Run before submitting changes:
 ```bash
 python -m ruff check .
 python -m pytest tests -q
-python benchmarks/run_benchmarks.py
+python benchmarks/run_benchmarks.py --check
 python -m json.tool evidence/demonstrator_manifest.json
 lake build AOSPublicCore
 ```

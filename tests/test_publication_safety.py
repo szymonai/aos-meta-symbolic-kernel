@@ -176,6 +176,17 @@ def test_required_public_docs_and_examples_exist() -> None:
         assert (REPO_ROOT / relative_path).is_file(), relative_path
 
 
+def test_public_validation_docs_use_benchmark_check_mode() -> None:
+    for relative_path in (
+        "README.md",
+        "docs/CLEAN_ROOM_TEST.md",
+        "CONTRIBUTING.md",
+        ".github/pull_request_template.md",
+    ):
+        text = (REPO_ROOT / relative_path).read_text(encoding="utf-8")
+        assert "python benchmarks/run_benchmarks.py --check" in text
+
+
 def test_all_json_files_are_valid() -> None:
     for path in iter_repo_files():
         if path.suffix.lower() != ".json":

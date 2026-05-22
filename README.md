@@ -99,7 +99,7 @@ scheme, key-management design, or security recommendation.
 python -m pip install -r requirements-dev.txt
 python -m ruff check .
 python -m pytest tests -q
-python benchmarks/run_benchmarks.py
+python benchmarks/run_benchmarks.py --check
 python -m json.tool benchmarks/results/metrics.json
 lake build AOSPublicCore
 ```

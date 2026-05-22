@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import argparse
+import hashlib
 import importlib
 import json
 import sys
@@ -16,11 +18,41 @@ RESULTS_DIR = ROOT / "results"
 METRICS_PATH = RESULTS_DIR / "metrics.json"
 SUMMARY_PATH = RESULTS_DIR / "summary.md"
 
+AOS_WARN_MARGIN = 5.0
+BENCHMARK_SCHEMA_VERSION = "synthetic-comparison/v1"
+BENCHMARK_KIND = "synthetic_sanity_benchmark"
+
 BASELINES = {
     "simple_threshold_guard": "benchmarks.baselines.simple_threshold_guard",
     "json_schema_guard": "benchmarks.baselines.json_schema_guard",
     "prompt_guardrail_sim": "benchmarks.baselines.prompt_guardrail_sim",
     "aos_gate_adapter": "benchmarks.baselines.aos_gate_adapter",
+}
+
+CLAIM_BOUNDARY = {
+    "production_ready_claim": False,
+    "external_validation_claim": False,
+    "domain_validation_claim": False,
+    "python_lean_refinement_claim": False,
+    "external_framework_comparison_claim": False,
+    "statistical_significance_claim": False,
+}
+
+USEFULNESS_VERIFICATION = {
+    "useful_for": [
+        "checking deterministic policy conformance",
+        "checking replay stability",
+        "checking public audit digest coverage",
+        "explaining evidence boundaries to public reviewers",
+    ],
+    "not_useful_for": [
+        "production readiness",
+        "domain validation",
+        "external framework ranking",
+        "statistical significance",
+        "regulated-use safety",
+    ],
+    "requires_clean_room_reproduction": True,
 }
 
 
@@ -44,6 +76,28 @@ def safe_rate(numerator: int, denominator: int) -> float:
     if denominator == 0:
         return 0.0
     return round(numerator / denominator, 6)
+
+
+def canonical_json_sha256(value: Any) -> str:
+    payload = json.dumps(
+        value,
+        allow_nan=False,
+        separators=(",", ":"),
+        sort_keys=True,
+    ).encode("utf-8")
+    return hashlib.sha256(payload).hexdigest()
+
+
+def metrics_to_json(metrics: dict[str, Any]) -> str:
+    return (
+        json.dumps(
+            metrics,
+            allow_nan=False,
+            separators=(",", ":"),
+            sort_keys=True,
+        )
+        + "\n"
+    )
 
 
 def evaluate_guard(
@@ -130,6 +184,8 @@ def evaluate_guard(
 
 
 def build_summary(metrics: dict[str, Any]) -> str:
+    metadata = metrics["benchmark_metadata"]
+    usefulness = metrics["usefulness_verification"]
     rows = [
         (
             "| Guard | False pass | False block | Exact match | Unsafe block rate | "
@@ -167,6 +223,20 @@ def build_summary(metrics: dict[str, Any]) -> str:
             "are intentionally simple, no external guardrail frameworks are",
             "included, and no statistical significance claim is made.",
             "",
+            "Usefulness:",
+            "",
+            f"- benchmark kind: `{metadata['benchmark_kind']}`",
+            f"- primary use: `{metadata['primary_use']}`",
+            f"- scenario canonical SHA-256: `{metadata['scenario_canonical_sha256']}`",
+            "",
+            "Useful for:",
+            "",
+            *(f"- `{item}`" for item in usefulness["useful_for"]),
+            "",
+            "Not useful for:",
+            "",
+            *(f"- `{item}`" for item in usefulness["not_useful_for"]),
+            "",
             *rows,
             "",
             "Verdict distribution:",
@@ -194,18 +264,26 @@ def build_summary(metrics: dict[str, Any]) -> str:
     )
 
 
-def run() -> dict[str, Any]:
-    scenarios = load_scenarios()
-    metrics = {
-        "schema_version": "synthetic-comparison/v1",
-        "claim_boundary": {
-            "production_ready_claim": False,
-            "external_validation_claim": False,
-            "domain_validation_claim": False,
-            "python_lean_refinement_claim": False,
-            "external_framework_comparison_claim": False,
-            "statistical_significance_claim": False,
+def build_metrics(scenarios: list[dict[str, Any]]) -> dict[str, Any]:
+    return {
+        "schema_version": BENCHMARK_SCHEMA_VERSION,
+        "benchmark_metadata": {
+            "benchmark_kind": BENCHMARK_KIND,
+            "primary_use": "policy_conformance_and_replay_check",
+            "scenario_source": "benchmarks/scenarios.json",
+            "scenario_canonical_sha256": canonical_json_sha256(scenarios),
+            "policy_under_test": (
+                "upper_bound = value + uncertainty; "
+                "PASS/WARN/BLOCK with warning band"
+            ),
+            "aos_warn_margin": AOS_WARN_MARGIN,
+            "result_artifacts": [
+                "benchmarks/results/metrics.json",
+                "benchmarks/results/summary.md",
+            ],
         },
+        "claim_boundary": CLAIM_BOUNDARY,
+        "usefulness_verification": USEFULNESS_VERIFICATION,
         "scenario_count": len(scenarios),
         "scenario_mix": {
             "safe": sum(scenario["risk_label"] == "safe" for scenario in scenarios),
@@ -220,20 +298,55 @@ def run() -> dict[str, Any]:
         ],
     }
 
+
+def run(*, write: bool = True) -> dict[str, Any]:
+    scenarios = load_scenarios()
+    metrics = build_metrics(scenarios)
+
+    if not write:
+        return metrics
+
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
-    METRICS_PATH.write_text(
-        json.dumps(
-            metrics,
-            allow_nan=False,
-            separators=(",", ":"),
-            sort_keys=True,
-        )
-        + "\n",
-        encoding="utf-8",
-    )
+    METRICS_PATH.write_text(metrics_to_json(metrics), encoding="utf-8")
     SUMMARY_PATH.write_text(build_summary(metrics) + "\n", encoding="utf-8")
     return metrics
 
 
-if __name__ == "__main__":
+def check_committed_results() -> None:
+    metrics = run(write=False)
+    expected = {
+        METRICS_PATH: metrics_to_json(metrics),
+        SUMMARY_PATH: build_summary(metrics) + "\n",
+    }
+    mismatches = [
+        path
+        for path, expected_content in expected.items()
+        if path.read_text(encoding="utf-8") != expected_content
+    ]
+    if mismatches:
+        files = ", ".join(str(path.relative_to(REPO_ROOT)) for path in mismatches)
+        raise SystemExit(
+            "Benchmark result drift detected in "
+            f"{files}. Run `python benchmarks/run_benchmarks.py` "
+            "and commit the updated artifacts."
+        )
+
+
+def main(argv: list[str] | None = None) -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="verify committed benchmark artifacts match generated output",
+    )
+    args = parser.parse_args(argv)
+
+    if args.check:
+        check_committed_results()
+        return
+
     run()
+
+
+if __name__ == "__main__":
+    main()

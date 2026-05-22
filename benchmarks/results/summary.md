@@ -8,6 +8,27 @@ Scope limits: the scenario set has 12 synthetic cases, the baselines
 are intentionally simple, no external guardrail frameworks are
 included, and no statistical significance claim is made.
 
+Usefulness:
+
+- benchmark kind: `synthetic_sanity_benchmark`
+- primary use: `policy_conformance_and_replay_check`
+- scenario canonical SHA-256: `66385b97c0496cc0c110e737b56eb4c62218faf7ef01ba2cefb07d263b5f02f4`
+
+Useful for:
+
+- `checking deterministic policy conformance`
+- `checking replay stability`
+- `checking public audit digest coverage`
+- `explaining evidence boundaries to public reviewers`
+
+Not useful for:
+
+- `production readiness`
+- `domain validation`
+- `external framework ranking`
+- `statistical significance`
+- `regulated-use safety`
+
 | Guard | False pass | False block | Exact match | Unsafe block rate | False positive block rate | Audit coverage | Replay |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
 | simple_threshold_guard | 2 | 0 | 50.00% | 50.00% | 0.00% | 0.00% | True |

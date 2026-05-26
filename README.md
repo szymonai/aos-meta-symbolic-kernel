@@ -22,6 +22,11 @@ AI output -> quality / uncertainty / risk signal -> explicit policy
 This repository is a limited public demonstrator of that control pattern. It is
 not a production SDK, regulated-use product, or production implementation.
 
+Current public evidence status: insufficient for a high-quality public
+effectiveness proof. The included benchmarks are reproducible smoke,
+hard-case, and protocol checks; they are not yet a strong empirical proof that
+AOS improves real LLM or agent behavior under realistic conditions.
+
 ## Why Meta-Symbolic Kernel?
 
 `Meta-symbolic kernel` is the preferred public description because it captures
@@ -100,6 +105,9 @@ python -m pip install -r requirements-dev.txt
 python -m ruff check .
 python -m pytest tests -q
 python benchmarks/run_benchmarks.py --check
+python benchmarks/run_llm_assurance_benchmark.py --check
+python benchmarks/run_llm_hard_case_benchmark.py --check
+python benchmarks/run_e3_controlled_study.py --help
 python -m json.tool benchmarks/results/metrics.json
 lake build AOSPublicCore
 ```
@@ -136,10 +144,22 @@ python examples/api-gate/aos_api_gate.py replay \
 | Claim type | Public source |
 | --- | --- |
 | Synthetic benchmark behavior | [Benchmark summary](benchmarks/results/summary.md), [metrics JSON](benchmarks/results/metrics.json) |
+| LLM and agent assurance profile | [LLM assurance benchmark](benchmarks/results/llm_assurance_summary.md), [LLM assurance metrics](benchmarks/results/llm_assurance_metrics.json), [hard-case summary](benchmarks/results/llm_hard_case_summary.md), [controlled-study runner](benchmarks/run_e3_controlled_study.py), [evaluation standard](docs/LLM_ASSURANCE_EVALUATION.md) |
 | Metric interpretation | [Value metrics](docs/VALUE_METRICS.md), [Demonstrator comparison](docs/DEMONSTRATOR_COMPARISON.md) |
 | Public evidence boundaries | [Demonstrator manifest](evidence/demonstrator_manifest.json) |
 | Formal verdict scope | [Scope of Proof](SCOPE_OF_PROOF.md), [Formal Claims Boundary](docs/FORMAL_CLAIMS_BOUNDARY.md), [Lean proof surface](lean/AOSPublicCore.lean) |
 | API-shaped replay | [API gate example](examples/api-gate) |
+
+Current evidence status is summarized in [Evidence status](docs/EVIDENCE_STATUS.md).
+
+The controlled-study runner separates protocol evidence from effectiveness
+evidence. Frozen outputs and replayable metrics can satisfy the protocol gate;
+an effectiveness claim additionally requires independent signal extraction,
+normalization audit, matched baselines, and reported failures/trade-offs.
+
+At the current public stage, the smoke and hard-case benchmark results should
+be read as implementation and measurement checks. They are not sufficient
+public effectiveness evidence.
 
 ## Application Profiles
 
@@ -183,6 +203,9 @@ and [Formal Claims Boundary](docs/FORMAL_CLAIMS_BOUNDARY.md).
 - [Formal Claims Boundary](docs/FORMAL_CLAIMS_BOUNDARY.md)
 - [Demonstrator comparison](docs/DEMONSTRATOR_COMPARISON.md)
 - [Value metrics](docs/VALUE_METRICS.md)
+- [Evidence status](docs/EVIDENCE_STATUS.md)
+- [LLM assurance evaluation](docs/LLM_ASSURANCE_EVALUATION.md)
+- [Controlled-study dataset profile](docs/E3_PUBLIC_DATASETS.md)
 - [Integrity anchors](docs/INTEGRITY_ANCHORS.md)
 - [Dataset provenance](docs/DATASET_PROVENANCE.md)
 - [Clean-room test](docs/CLEAN_ROOM_TEST.md)

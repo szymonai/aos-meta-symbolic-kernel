@@ -1,0 +1,82 @@
+{
+  "study_id": "aos-e3-controlled-study-example",
+  "evaluation_profile": "hallucination_text",
+  "frozen_model_outputs": true,
+  "effectiveness_design": {
+    "normalized_signals_source": "dataset_label_mapping",
+    "labels_used_as_aos_signals": true,
+    "normalization_layer_evaluated": false,
+    "held_out_manual_audit_present": false,
+    "baseline_inputs_matched": true,
+    "failure_cases_reported": false,
+    "tradeoff_metrics_reported": true
+  },
+  "dataset_sources": [
+    {
+      "name": "RAGTruth",
+      "url": "https://github.com/ParticleMedia/RAGTruth",
+      "license": "MIT",
+      "use": "RAG hallucination and grounding cases",
+      "e3_status": "near_direct_frozen_outputs"
+    },
+    {
+      "name": "HaluEval",
+      "url": "https://github.com/RUCAIBox/HaluEval",
+      "license": "MIT",
+      "use": "hallucination and factuality cases",
+      "e3_status": "near_direct_frozen_outputs"
+    },
+    {
+      "name": "AgentDojo",
+      "url": "https://github.com/ethz-spylab/agentdojo",
+      "license": "MIT",
+      "use": "agent and prompt-injection cases",
+      "e3_status": "requires_controlled_benchmark_run"
+    },
+    {
+      "name": "FEVER",
+      "url": "https://fever.ai/dataset/fever.html",
+      "license": "Wikipedia-derived license terms / CC BY-SA 3.0 fallback",
+      "use": "factual support/refutation/insufficient-evidence cases",
+      "e3_status": "requires_controlled_output_generation"
+    }
+  ],
+  "output_generation": {
+    "model_id": "example-frozen-model-id",
+    "prompt_template_sha256": "replace-with-64-char-sha256",
+    "temperature": 0,
+    "top_p": 1
+  },
+  "comparators": [
+    {
+      "name": "llm_only",
+      "version": "local"
+    },
+    {
+      "name": "citation_presence_guard",
+      "version": "local"
+    },
+    {
+      "name": "prompt_guardrail_sim",
+      "version": "local"
+    },
+    {
+      "name": "aos_evidence_gate",
+      "version": "local"
+    }
+  ],
+  "predefined_metrics": [
+    "unsupported_pass_rate",
+    "policy_violation_pass_rate",
+    "unsafe_action_pass_rate",
+    "block_recall",
+    "warn_yield",
+    "false_block_rate",
+    "safe_pass_rate",
+    "audit_coverage_rate",
+    "replay_success_rate"
+  ],
+  "labeling_protocol": "Labels are assigned before guard evaluation.",
+  "case_level_results": true,
+  "claim_boundary": "Protocol template over frozen model outputs. This example does not make an effectiveness, production-readiness, or external-replication claim."
+}

@@ -16,6 +16,8 @@ regulatory problems.
 | Edge workflows need local control | Keep the public gate pattern small, deterministic, and replayable |
 | Governance teams need claim boundaries | Separate model output, AOS verdict, human decision, and external claim |
 | AI systems are domain-specific | Keep the public control pattern domain-neutral |
+| LLM outputs may include unsupported claims | Define measurable `unsupported_pass_rate` rather than claiming hallucination elimination |
+| Agent plans can contain invalid or unsafe actions | Treat LLM plans as candidates that require symbolic policy checks before execution |
 
 ## What This Does Not Mean
 
@@ -26,3 +28,6 @@ production-readiness claims in this public repository.
 The public value is narrower and more defensible: deterministic control over
 bounded model-output signals, audit evidence, and a clear decision boundary for
 selective progression, escalation, or blocking.
+
+Future LLM-oriented claims require a separate reproducible evaluation profile.
+See [LLM assurance evaluation](LLM_ASSURANCE_EVALUATION.md).

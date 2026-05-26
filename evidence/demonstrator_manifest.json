@@ -1,6 +1,7 @@
 {
   "schema_version": "limited-demonstrator/v1",
   "status": "limited_public_demonstrator",
+  "public_effectiveness_evidence_status": "insufficient_for_high_quality_public_proof",
   "contains_full_aos_core": false,
   "contains_internal_policy_logic": false,
   "contains_domain_dataset": false,
@@ -9,6 +10,8 @@
   "claim_boundary": {
     "domain_validation_claim": false,
     "external_validation_completed": false,
+    "high_quality_public_effectiveness_proof_claim": false,
+    "public_effectiveness_proof_sufficient": false,
     "production_runtime_claim": false,
     "regulated_use_claim": false,
     "safety_approval_claim": false

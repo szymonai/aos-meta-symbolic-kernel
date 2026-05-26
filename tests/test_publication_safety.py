@@ -101,6 +101,10 @@ def load_json(relative_path: str) -> dict[str, object]:
     return payload
 
 
+def strip_public_hashes(text: str) -> str:
+    return re.sub(r"\b[0-9a-f]{64}\b", "<sha256>", text)
+
+
 def test_evidence_json_files_are_valid_and_claim_flags_are_false() -> None:
     manifest = load_json("evidence/demonstrator_manifest.json")
 
@@ -108,6 +112,8 @@ def test_evidence_json_files_are_valid_and_claim_flags_are_false() -> None:
     assert isinstance(claim_boundary, dict)
     for key in (
         "domain_validation_claim",
+        "high_quality_public_effectiveness_proof_claim",
+        "public_effectiveness_proof_sufficient",
         "production_runtime_claim",
         "regulated_use_claim",
         "safety_approval_claim",
@@ -134,6 +140,7 @@ def test_readme_links_public_technical_docs() -> None:
         "docs/APPLICATION_PROFILES.md",
         "docs/DATASET_PROVENANCE.md",
         "docs/VALUE_METRICS.md",
+        "docs/EVIDENCE_STATUS.md",
         "docs/CALIBRATION_AND_OPTIMIZATION.md",
         "docs/DEMONSTRATOR_COMPARISON.md",
         "examples/hello-world",
@@ -158,6 +165,9 @@ def test_required_public_docs_and_examples_exist() -> None:
         "docs/DEMONSTRATOR_COMPARISON.md",
         "docs/CLEAN_ROOM_TEST.md",
         "docs/VALUE_METRICS.md",
+        "docs/EVIDENCE_STATUS.md",
+        "docs/LLM_ASSURANCE_EVALUATION.md",
+        "docs/E3_PUBLIC_DATASETS.md",
         "examples/hello-world/README.md",
         "examples/hello-world/docker-compose.yml",
         "examples/hello-world/hello_world.py",
@@ -174,6 +184,39 @@ def test_required_public_docs_and_examples_exist() -> None:
         "sonar-project.properties",
     ):
         assert (REPO_ROOT / relative_path).is_file(), relative_path
+
+
+def test_docs_navigation_points_to_existing_files() -> None:
+    docs_config = load_json("docs.json")
+    navigation = docs_config["navigation"]
+    assert isinstance(navigation, dict)
+
+    tabs = navigation["tabs"]
+    assert isinstance(tabs, list)
+    pages: list[str] = []
+    for tab in tabs:
+        assert isinstance(tab, dict)
+        groups = tab["groups"]
+        assert isinstance(groups, list)
+        for group in groups:
+            assert isinstance(group, dict)
+            group_pages = group["pages"]
+            assert isinstance(group_pages, list)
+            pages.extend(str(page) for page in group_pages)
+
+    for page in pages:
+        if page == "README":
+            assert (REPO_ROOT / "README.md").is_file()
+        else:
+            assert (REPO_ROOT / f"{page}.md").is_file()
+
+
+def test_public_docs_avoid_internal_evidence_labels() -> None:
+    labels = (r"\bE1\b", r"\bE2\b", r"\bE3\b", r"\bE4\b")
+    for path in [REPO_ROOT / "README.md", *(REPO_ROOT / "docs").glob("*.md")]:
+        text = path.read_text(encoding="utf-8")
+        for label in labels:
+            assert not re.search(label, text), path.relative_to(REPO_ROOT)
 
 
 def test_public_validation_docs_use_benchmark_check_mode() -> None:
@@ -204,6 +247,39 @@ def test_lean_sources_do_not_use_gap_terms() -> None:
             )
 
 
+def test_lean_surface_links_json_input_shape_to_verdict_model() -> None:
+    text = (REPO_ROOT / "lean" / "AOSPublicCore.lean").read_text(encoding="utf-8")
+
+    for symbol in (
+        "JsonGateInput",
+        "jsonGateVerdict",
+        "jsonCompleteInputUsesIntervalVerdict",
+        "jsonIncompleteInputBlocks",
+        "jsonCompleteBlockCorrect",
+        "jsonCompleteWarnCorrect",
+        "jsonCompletePassCorrect",
+        "AuditDecision",
+        "auditDecisionReady",
+        "exactBlockDecisionNotSilent",
+        "StudyCriteria",
+        "EffectivenessCriteria",
+        "e3Ready",
+        "studyDesignReady",
+        "studyAuditReady",
+        "studyEvidenceLevel",
+        "publicEvidenceLevel",
+        "effectivenessReady",
+        "e3AssessmentDoesNotOverclaim",
+        "publicEffectivenessEvidenceRequiresProtocol",
+        "publicEffectivenessEvidenceRequiresEffectivenessReady",
+        "labelMappingBlocksEffectivenessReady",
+        "e3ReadyRequiresAudit",
+        "e3ReadyRequiresDesign",
+        "missingMinimumCasesBlocksE3",
+    ):
+        assert symbol in text
+
+
 def test_no_controlled_artifacts_or_model_binaries_are_committed() -> None:
     for path in iter_repo_files():
         suffixes = "".join(path.suffixes).lower()
@@ -216,7 +292,7 @@ def test_no_local_paths_secrets_or_per_case_ids_in_text_files() -> None:
     for path in iter_repo_files():
         if path.suffix.lower() not in TEXT_EXTENSIONS:
             continue
-        text = path.read_text(encoding="utf-8")
+        text = strip_public_hashes(path.read_text(encoding="utf-8"))
         for pattern in FORBIDDEN_TEXT_PATTERNS:
             assert not pattern.search(text), (
                 f"forbidden pattern {pattern.pattern!r} in "

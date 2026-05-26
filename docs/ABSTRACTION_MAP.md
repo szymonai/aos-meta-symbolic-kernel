@@ -40,14 +40,15 @@ otherwise                           -> PASS
 This simplification is intentional. It preserves the public assurance idea while
 staying within the approved disclosure boundary.
 
-## What The Public Repo Proves
+## What The Public Repo Demonstrates
 
-The public repo can show that:
+The public repo can demonstrate that:
 
 - the demonstrator gate is deterministic;
 - synthetic unsafe interval-crossing cases are blocked by the AOS adapter;
 - demo audit digests are reproducible and tamper-sensitive;
-- the Lean file proves abstract verdict invariants for the simplified model;
+- the Lean file verifies selected abstract verdict invariants for the
+  simplified model;
 - public evidence files preserve explicit claim boundaries.
 
 ## What The Public Repo Does Not Prove
@@ -67,7 +68,7 @@ The public repo does not prove:
 
 For a fast technical review, read in this order:
 
-1. `README.md` for project thesis and public boundary.
+1. `README.md` for project claim and public boundary.
 2. `core/aos_public_core.py` for the executable control primitive.
 3. `benchmarks/results/summary.md` for the synthetic comparison.
 4. `lean/AOSPublicCore.lean` for the proof surface.

@@ -17,7 +17,7 @@ AI output
 
 An application profile is appropriate when the workflow can expose bounded
 signals, explicit policies, a deterministic verdict, and evidence that can be
-replayed. The final operational, scientific, or business decision remains
+replayed. The final operational, research, or business decision remains
 outside the public demonstrator.
 
 ## Agent And Tool-Call Gate

@@ -17,6 +17,13 @@ build/
 .env.*
 public_release_exports/
 
+# Local E3 public-dataset runs are generated evidence candidates, not committed
+# demonstrator evidence.
+benchmarks/results/frozen_outputs.jsonl
+benchmarks/results/*_e3_manifest.json
+benchmarks/results/*_e3_metrics.json
+benchmarks/results/*_e3_summary.md
+
 # Medical or model artifacts must not be committed to the public demonstrator.
 data/
 datasets/

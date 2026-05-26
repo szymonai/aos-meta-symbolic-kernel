@@ -32,6 +32,9 @@
           {
             "group": "Evidence",
             "pages": [
+              "docs/EVIDENCE_STATUS",
+              "docs/LLM_ASSURANCE_EVALUATION",
+              "docs/E3_PUBLIC_DATASETS",
               "docs/VALUE_METRICS",
               "docs/DEMONSTRATOR_COMPARISON",
               "docs/PUBLIC_BOUNDARY",

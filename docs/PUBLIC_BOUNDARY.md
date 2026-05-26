@@ -4,7 +4,7 @@ This repository is a limited public demonstrator.
 
 The public goal is high information density: enough structure, code, tests,
 proof surface, and evidence context for a serious reviewer to understand the
-AOS control thesis while avoiding unsupported claims.
+AOS control claim while avoiding unsupported claims.
 
 See also:
 
@@ -33,8 +33,8 @@ Do not treat this public repository as a blueprint for the production system.
 
 The public repository does not establish production calibration, production
 security architecture, Python-to-Lean runtime refinement, load performance,
-domain-adapter quality, enterprise deployment economics, or deployment-specific
-operational readiness.
+domain-adapter quality, high-quality public effectiveness evidence, enterprise
+deployment economics, or deployment-specific operational readiness.
 
 Those areas require separate evaluation artifacts and are outside the limited
 public demonstrator.
@@ -50,6 +50,7 @@ public demonstrator.
 - no production-readiness claim
 - no regulatory-compliance claim
 - no external-ranking claim
+- no high-quality public effectiveness proof claim
 
 Control remains with the operator, developer, workflow owner, or supervising
 system.

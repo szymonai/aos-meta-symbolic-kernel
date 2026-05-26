@@ -8,6 +8,8 @@ boundary statement, not a full-system verification claim.
 The public Lean layer verifies selected properties of an abstract
 `PASS` / `WARN` / `BLOCK` verdict model. The public Python runtime is tested
 against the same decision behavior on a bounded demonstrator subset.
+It also contains a small abstract contract for audit-ready decisions,
+controlled-study protocol gating, and the stronger effectiveness-evidence gate.
 
 This supports a limited statement:
 
@@ -20,6 +22,9 @@ This supports a limited statement:
 - abstract verdict behavior;
 - deterministic `PASS` / `WARN` / `BLOCK` structure;
 - selected interval-boundary properties;
+- audit-ready decision predicates over abstract records;
+- controlled-study readiness predicates over abstract study criteria;
+- public evidence-level separation between protocol and effectiveness evidence;
 - synthetic benchmark behavior;
 - bounded runtime correspondence tests.
 
@@ -28,7 +33,9 @@ This supports a limited statement:
 - full Python-to-Lean refinement;
 - arbitrary floating-point behavior;
 - JSON/IO/security/key-management correctness;
+- correctness of model-output hashes beyond the public runner checks;
 - policy calibration or threshold validity;
+- semantic truth of model outputs or retrieved evidence;
 - deployment, concurrency, availability, or production security;
 - domain, regulatory, financial, or safety approval;
 - end-to-end product correctness.

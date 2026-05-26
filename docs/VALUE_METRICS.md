@@ -71,7 +71,8 @@ positive class.
 
 These metrics are interpretation aids for the public synthetic benchmark only.
 They are not domain validation, production performance, external validation, or
-statistical significance evidence.
+statistical significance evidence. They are also not sufficient for a
+high-quality public effectiveness proof.
 
 ## Public Boundary Metrics
 
@@ -87,6 +88,8 @@ Sources: `evidence/demonstrator_manifest.json` and
 | Data redistributed in repository | `false` |
 | Domain-validation claim | `false` |
 | External validation completed | `false` |
+| High-quality public effectiveness proof claim | `false` |
+| Public effectiveness proof sufficient | `false` |
 | Regulated-use claim | `false` |
 | Regulatory compliance claim | `false` |
 | Safety-approval claim | `false` |
@@ -120,6 +123,7 @@ The public metrics above do not establish:
 - regulated-use approval
 - regulatory compliance
 - external validation
+- high-quality public effectiveness proof
 - deployment ROI
 - revenue performance
 - external performance ranking

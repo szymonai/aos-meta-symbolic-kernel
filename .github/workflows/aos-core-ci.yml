@@ -21,6 +21,10 @@ jobs:
         run: python -m ruff check .
       - name: Check synthetic benchmark artifacts
         run: python benchmarks/run_benchmarks.py --check
+      - name: Check LLM assurance benchmark artifacts
+        run: python benchmarks/run_llm_assurance_benchmark.py --check
+      - name: Check hard-case benchmark artifacts
+        run: python benchmarks/run_llm_hard_case_benchmark.py --check
       - name: Validate benchmark metrics
         run: python -m json.tool benchmarks/results/metrics.json > /dev/null
       - name: Python tests

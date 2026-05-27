@@ -28,30 +28,17 @@ operational control replay over public frozen time-series traces. It is not a
 production deployment proof, external validation, or a general effectiveness
 claim for all AOS applications.
 
-## Why Meta-Symbolic Kernel?
+## Engineering Proof Surface
 
-`Meta-symbolic kernel` is the preferred public description because it captures
-the relevant properties of AOS without implying that this repository publishes a
-full neural-symbolic research stack:
+The repository has three executable surfaces:
 
-- `meta`: AOS operates above model internals, supervising AI outputs before they
-  affect downstream workflow state;
-- `symbolic`: AOS uses explicit policies, deterministic verdict logic,
-  reproducible evidence, and a small Lean proof surface;
-- `kernel`: AOS is the compact control core that turns bounded signals and
-  policy rules into deterministic workflow verdicts.
+| Surface | Artifact | Check |
+| --- | --- | --- |
+| Minimal runtime | [core/aos_public_core.py](core/aos_public_core.py), [minimal runtime example](examples/minimal-runtime) | `python examples/minimal-runtime/minimal_runtime.py` |
+| Benchmarks | [benchmarks](benchmarks), [results](benchmarks/results) | `python benchmarks/run_operational_control_replay.py --check` |
+| Concrete applications | [application profile cases](examples/application-profiles) | `python examples/application-profiles/run_profiles.py --check` |
 
-Verification is one function of the kernel, alongside gating, routing, audit
-evidence generation, and policy-boundary enforcement.
-
-The public Lean surface verifies selected integrity properties of the abstract
-verdict model. This is sufficient for the narrow claim that the published
-verdict contract has selected formal invariants. It is not sufficient for model
-correctness, production runtime correctness, Python-to-Lean refinement,
-effectiveness, or regulated-use safety.
-
-This repository does not publish model internals, training pipelines, production
-domain adapters, or a full neural-symbolic research stack.
+See [Engineering proof surface](docs/ENGINEERING_PROOF.md).
 
 ## What AOS Does
 
@@ -62,25 +49,24 @@ domain adapters, or a full neural-symbolic research stack.
 - separates model output, AOS verdict, human decision, and external claim;
 - provides a reusable assurance pattern for multiple application profiles.
 
-## Why It Matters
+## Minimal Runtime Contract
 
-AI systems can produce many plausible outputs, but downstream workflows often
-need a clearer decision boundary: proceed, review, or stop.
+For a complete input:
 
-AOS is designed to support selective progression:
+```text
+upper_bound = score + uncertainty
+safe_limit = limit - warn_margin
+```
 
-- policy-compliant outputs can move forward with audit evidence;
-- uncertain outputs can be escalated for review;
-- policy-violating outputs can be blocked before they trigger costly downstream
-  work.
+| Condition | Verdict |
+| --- | --- |
+| `metadata_complete == false` | `BLOCK` |
+| `upper_bound <= safe_limit` | `PASS` |
+| `safe_limit < upper_bound <= limit` | `WARN` |
+| `upper_bound > limit` | `BLOCK` |
 
-This can support cost discipline in research, operations, and industrial
-workflows by making expensive review, compute, experimentation, or escalation
-more selective. The public repository demonstrates the control pattern only; it
-does not make domain-validation, regulatory, or production-readiness claims.
-
-See [Plain-language overview](docs/PLAIN_LANGUAGE_OVERVIEW.md) and
-[AI problems addressed](docs/AI_PROBLEMS_ADDRESSED.md).
+The runtime emits a deterministic evidence packet with a SHA-256 audit id and a
+replay path.
 
 ## How Decisions Are Evaluated
 
@@ -108,6 +94,8 @@ python -m pip install -r requirements-dev.txt
 python -m ruff check .
 python -m pytest tests -q
 python tools/verify_public_integrity.py
+python examples/minimal-runtime/minimal_runtime.py
+python examples/application-profiles/run_profiles.py --check
 python benchmarks/run_benchmarks.py --check
 python benchmarks/run_llm_assurance_benchmark.py --check
 python benchmarks/run_llm_hard_case_benchmark.py --check
@@ -141,6 +129,7 @@ python examples/api-gate/aos_api_gate.py replay \
 | API shape | Neutral `/v1/evaluate` and `/v1/replay` demonstrator |
 | Evidence | JSON evidence and local demonstrator audit digests |
 | Benchmarks | Synthetic scenarios with reproducible metrics |
+| Concrete cases | Minimal runtime and application-profile runners |
 | Formal surface | Lean proof surface for selected abstract verdict invariants |
 | Runtime substrates | Python/Lean public substrate boundary and optional native/GPU backend roles |
 | Boundaries | Machine-readable claim flags and publication checks |
@@ -152,6 +141,7 @@ python examples/api-gate/aos_api_gate.py replay \
 | Synthetic benchmark behavior | [Benchmark summary](benchmarks/results/summary.md), [metrics JSON](benchmarks/results/metrics.json) |
 | LLM and agent assurance profile | [LLM assurance benchmark](benchmarks/results/llm_assurance_summary.md), [LLM assurance metrics](benchmarks/results/llm_assurance_metrics.json), [hard-case summary](benchmarks/results/llm_hard_case_summary.md), [controlled-study runner](benchmarks/run_controlled_study.py), [evaluation standard](docs/LLM_ASSURANCE_EVALUATION.md) |
 | Operational control replay | [Operational replay summary](benchmarks/results/operational_control_replay_summary.md), [operational replay metrics](benchmarks/results/operational_control_replay_metrics.json), [replay profile](docs/OPERATIONAL_CONTROL_REPLAY.md) |
+| Engineering proof surface | [Engineering proof surface](docs/ENGINEERING_PROOF.md), [minimal runtime](examples/minimal-runtime), [application profile cases](examples/application-profiles) |
 | Public assessment | [Usefulness, scalability, and evidence assessment](docs/PUBLIC_ASSESSMENT.md) |
 | Technical diligence boundary | [Technical diligence](docs/TECHNICAL_DILIGENCE.md) |
 | Metric interpretation | [Value metrics](docs/VALUE_METRICS.md), [Demonstrator comparison](docs/DEMONSTRATOR_COMPARISON.md) |
@@ -214,7 +204,10 @@ and [Formal Claims Boundary](docs/FORMAL_CLAIMS_BOUNDARY.md).
 ## Documentation Map
 
 - [Public architecture](docs/architecture.md)
+- [Engineering proof surface](docs/ENGINEERING_PROOF.md)
 - [Control spec](docs/CONTROL_SPEC.md)
+- [Plain-language overview](docs/PLAIN_LANGUAGE_OVERVIEW.md)
+- [AI problems addressed](docs/AI_PROBLEMS_ADDRESSED.md)
 - [Public surfaces](docs/PUBLIC_SURFACES.md)
 - [Runtime substrates](docs/RUNTIME_SUBSTRATES.md)
 - [Scope of Proof](SCOPE_OF_PROOF.md)
@@ -231,6 +224,8 @@ and [Formal Claims Boundary](docs/FORMAL_CLAIMS_BOUNDARY.md).
 - [Dataset provenance](docs/DATASET_PROVENANCE.md)
 - [Clean-room test](docs/CLEAN_ROOM_TEST.md)
 - [Performance and evaluation boundary](docs/CALIBRATION_AND_OPTIMIZATION.md)
+- [Minimal runtime example](examples/minimal-runtime)
+- [Application profile cases](examples/application-profiles)
 - [Hello-world example](examples/hello-world)
 
 ## License

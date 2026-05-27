@@ -1,0 +1,103 @@
+{
+  "schema_version": "aos-application-profile-cases/v1",
+  "cases": [
+    {
+      "application": "agent_tool_call_gate",
+      "case_id": "agent-delete-production-db",
+      "description": "High-risk tool action before execution.",
+      "expected_verdict": "BLOCK",
+      "input": {
+        "limit": 7000,
+        "metadata_complete": true,
+        "score": 9200,
+        "signal_id": "agent-delete-production-db",
+        "uncertainty": 300,
+        "warn_margin": 1000
+      }
+    },
+    {
+      "application": "rag_answer_review",
+      "case_id": "rag-weak-source-coverage",
+      "description": "Answer has weak support but remains inside the hard limit.",
+      "expected_verdict": "WARN",
+      "input": {
+        "limit": 7000,
+        "metadata_complete": true,
+        "score": 6100,
+        "signal_id": "rag-weak-source-coverage",
+        "uncertainty": 500,
+        "warn_margin": 1500
+      }
+    },
+    {
+      "application": "document_extraction",
+      "case_id": "document-complete-low-risk",
+      "description": "Complete extraction with low risk score.",
+      "expected_verdict": "PASS",
+      "input": {
+        "limit": 7000,
+        "metadata_complete": true,
+        "score": 1800,
+        "signal_id": "document-complete-low-risk",
+        "uncertainty": 200,
+        "warn_margin": 1500
+      }
+    },
+    {
+      "application": "industrial_sensor_review",
+      "case_id": "sensor-drift-with-uncertainty",
+      "description": "Sensor drift plus uncertainty crosses the hard envelope.",
+      "expected_verdict": "BLOCK",
+      "input": {
+        "limit": 7000,
+        "metadata_complete": true,
+        "score": 6400,
+        "signal_id": "sensor-drift-with-uncertainty",
+        "uncertainty": 900,
+        "warn_margin": 1000
+      }
+    },
+    {
+      "application": "financial_workflow_review",
+      "case_id": "finance-elevated-risk-band",
+      "description": "Elevated workflow risk routes to review.",
+      "expected_verdict": "WARN",
+      "input": {
+        "limit": 8000,
+        "metadata_complete": true,
+        "score": 6900,
+        "signal_id": "finance-elevated-risk-band",
+        "uncertainty": 400,
+        "warn_margin": 1200
+      }
+    },
+    {
+      "application": "quantum_job_gate",
+      "case_id": "quantum-backend-calibration-review",
+      "description": "Quantum job metadata routes to review when backend risk enters the warning band.",
+      "expected_verdict": "WARN",
+      "input": {
+        "limit": 7500,
+        "metadata_complete": true,
+        "score": 6500,
+        "signal_id": "quantum-backend-calibration-review",
+        "uncertainty": 400,
+        "warn_margin": 1200
+      }
+    },
+    {
+      "application": "metadata_gate",
+      "case_id": "missing-required-metadata",
+      "description": "Incomplete metadata blocks before numeric band evaluation.",
+      "expected_verdict": "BLOCK",
+      "input": {
+        "limit": 9000,
+        "metadata_complete": false,
+        "score": 1000,
+        "signal_id": "missing-required-metadata",
+        "uncertainty": 0,
+        "warn_margin": 1000
+      }
+    }
+  ]
+}

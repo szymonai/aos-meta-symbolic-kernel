@@ -166,6 +166,7 @@ def test_readme_links_public_technical_docs() -> None:
         "docs/RUNTIME_SUBSTRATES.md",
         "docs/SDK_BOUNDARY.md",
         "docs/PUBLIC_SURFACES.md",
+        "docs/ENGINEERING_PROOF.md",
         "docs/FORMAL_CLAIMS_BOUNDARY.md",
         "docs/OPERATIONAL_CONTROL_REPLAY.md",
         "docs/PUBLIC_ASSESSMENT.md",
@@ -179,6 +180,8 @@ def test_readme_links_public_technical_docs() -> None:
         "docs/CALIBRATION_AND_OPTIMIZATION.md",
         "docs/DEMONSTRATOR_COMPARISON.md",
         "examples/hello-world",
+        "examples/minimal-runtime",
+        "examples/application-profiles",
         "examples/api-gate",
     ):
         assert link in readme
@@ -195,6 +198,7 @@ def test_required_public_docs_and_examples_exist() -> None:
         "docs/RUNTIME_SUBSTRATES.md",
         "docs/SDK_BOUNDARY.md",
         "docs/PUBLIC_SURFACES.md",
+        "docs/ENGINEERING_PROOF.md",
         "docs/FORMAL_CLAIMS_BOUNDARY.md",
         "docs/architecture.md",
         "docs/INTEGRITY_ANCHORS.md",
@@ -210,6 +214,11 @@ def test_required_public_docs_and_examples_exist() -> None:
         "examples/hello-world/README.md",
         "examples/hello-world/docker-compose.yml",
         "examples/hello-world/hello_world.py",
+        "examples/minimal-runtime/README.md",
+        "examples/minimal-runtime/minimal_runtime.py",
+        "examples/application-profiles/README.md",
+        "examples/application-profiles/profile_cases.json",
+        "examples/application-profiles/run_profiles.py",
         "examples/api-gate/README.md",
         "examples/api-gate/aos_api_gate.py",
         "examples/api-gate/sample_input.json",
@@ -411,6 +420,24 @@ def test_public_assessment_binds_usefulness_scale_and_evidence() -> None:
 
     assert "AOS is production ready" in text
     assert "AOS is clinically ready" in text
+
+
+def test_engineering_proof_surface_is_executable_and_concrete() -> None:
+    text = (REPO_ROOT / "docs" / "ENGINEERING_PROOF.md").read_text(
+        encoding="utf-8"
+    )
+
+    for phrase in (
+        "python examples/minimal-runtime/minimal_runtime.py",
+        "python examples/application-profiles/run_profiles.py --check",
+        "python benchmarks/run_operational_control_replay.py --check",
+        "362,774 records",
+        "Minimal Runtime",
+        "Concrete Application Cases",
+        "Quantum job gate",
+        "Hard Failure Conditions",
+    ):
+        assert phrase in text
 
 
 def test_technical_diligence_boundary_is_bounded() -> None:

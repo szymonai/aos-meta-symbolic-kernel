@@ -4,7 +4,7 @@
   "manifest_date": "2026-05-26",
   "integrity_command": "python tools/verify_public_integrity.py",
   "interpretation": "Selected artifact hash consistency only. This is not effectiveness evidence, production evidence, external validation, or a proof of AI behavior.",
-  "artifact_count": 46,
+  "artifact_count": 53,
   "claim_boundary": {
     "aos_effectiveness_claim": false,
     "external_validation_claim": false,
@@ -18,12 +18,12 @@
     {
       "path": "README.md",
       "role": "public_entrypoint",
-      "sha256": "0426143d33955932633b1bc0ce9e8c86d23fe049484aff914b4aa9d640e4b141"
+      "sha256": "c57cc3a395230ef4951284922649b9ff7ecf5f2e28ee282b6b009971adb01535"
     },
     {
       "path": "CONTRIBUTING.md",
       "role": "contribution_validation_contract",
-      "sha256": "4b15f84db34f7c5d04b5f26ba140931b6bd6a1d7549b36a9ccd9f58336ace08e"
+      "sha256": "8c425c5e26745c0353aa3dfa41b004d4199cfe202f9c761c561dcb7e573ad6d4"
     },
     {
       "path": ".gitignore",
@@ -101,6 +101,11 @@
       "sha256": "2d8e6c01c97fb47d7f3781fbc4d91522c2906031f7d8aa064f820c5badeb5e4c"
     },
     {
+      "path": "docs/ENGINEERING_PROOF.md",
+      "role": "engineering_proof_surface",
+      "sha256": "0daa20c9bde3489f98c6dc648b13f921b6b548c256b50ce7ca380ba18eff8461"
+    },
+    {
       "path": "docs/OPERATIONAL_CONTROL_REPLAY.md",
       "role": "operational_control_replay_boundary",
       "sha256": "da51529d47c15596b4ed47b86672efc0e655c10dfa711f5ad6bcf024094594c2"
@@ -108,12 +113,37 @@
     {
       "path": "docs.json",
       "role": "docs_navigation",
-      "sha256": "49d30489262e9fb7030de1af2d36559b1c6f9c53e4be75afff9e2599cf3351db"
+      "sha256": "9067d852744ea6b9614dec2b5ced1d58c34b95aede176f6fbf17255c34364759"
     },
     {
       "path": "evidence/demonstrator_manifest.json",
       "role": "claim_flags",
       "sha256": "0e7e891b0957c304db79e6471307dce2ced0a09b9565925b21a81b25ddb3d76c"
+    },
+    {
+      "path": "examples/minimal-runtime/README.md",
+      "role": "minimal_runtime_example_docs",
+      "sha256": "d6d697f6ec0989c44fd50ae471038fe3b5bdb3495ab15e1f6e470c7027bc80a1"
+    },
+    {
+      "path": "examples/minimal-runtime/minimal_runtime.py",
+      "role": "minimal_runtime_example",
+      "sha256": "fc8b0de40a7108ff6562f44a5afabb1b92bfae9d943157ae1244acf76d0bd4ec"
+    },
+    {
+      "path": "examples/application-profiles/README.md",
+      "role": "application_profile_case_docs",
+      "sha256": "ba38e540bd6e4592c9e7e9085b743bb7180b0f5f2053d53d9fecbd11e863b362"
+    },
+    {
+      "path": "examples/application-profiles/profile_cases.json",
+      "role": "application_profile_cases",
+      "sha256": "6749a95635ed785e926fb9af8a8fe6cc85d54a4ddf6ae70ce0e46a2830573aff"
+    },
+    {
+      "path": "examples/application-profiles/run_profiles.py",
+      "role": "application_profile_case_runner",
+      "sha256": "cf0b8cfe11dceaecd9eadefb763245b64c6bd712a5f34584bb892228d5a6774b"
     },
     {
       "path": "core/aos_public_core.py",
@@ -218,7 +248,7 @@
     {
       "path": "tests/test_publication_safety.py",
       "role": "publication_safety_tests",
-      "sha256": "cd37648eeff879f00172699a8e886309b72a59019c1ebeee0a4073d29983e926"
+      "sha256": "cb2cf0345f406e46508056182d3365ee82f91c4c73890f67da71b2bf41ab5191"
     },
     {
       "path": "tests/test_public_integrity.py",
@@ -226,9 +256,14 @@
       "sha256": "f84bc66bf8aafd2478b9a99b1af32ae60b9e255925d43ae1cf5c79253b32df16"
     },
     {
+      "path": "tests/test_engineering_examples.py",
+      "role": "engineering_example_tests",
+      "sha256": "e2e564ebe454fff75d0a61ac72f3415ac97538a7aea99ff67938f974ec64b7cf"
+    },
+    {
       "path": "tools/verify_public_integrity.py",
       "role": "public_integrity_checker",
-      "sha256": "af824abc18f559373f79670aa30bb827044ab3f8235084dba85cad8011af8e09"
+      "sha256": "2c1b959a8cfaf3f4085ae4ad48cc0b18a086e4c17497298e5df7e7b603c219ce"
     },
     {
       "path": ".github/CODEOWNERS",
@@ -238,12 +273,12 @@
     {
       "path": ".github/pull_request_template.md",
       "role": "public_review_checklist",
-      "sha256": "e6cc63fc2c0853639b719de487ee7bbe2cd7e4731b674244305fd1f463ba2b4b"
+      "sha256": "2f45d22a367a0cf8f5968e144170a3c0ba249d8d36524b7dc5f30f154b5d69e2"
     },
     {
       "path": ".github/workflows/aos-core-ci.yml",
       "role": "public_ci_gate",
-      "sha256": "8718a799108f98b9d778c0669829972b9772f7e0049dca3ea90404e187905150"
+      "sha256": "0e54b59be60a32e7b09b6efaafd29f6df90e60b9b09e1064f751f597fb8f692d"
     }
   ]
 }

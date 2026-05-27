@@ -33,6 +33,10 @@ jobs:
         run: python -m pytest tests -q
       - name: Verify public repository integrity
         run: python tools/verify_public_integrity.py
+      - name: Run minimal runtime example
+        run: python examples/minimal-runtime/minimal_runtime.py
+      - name: Run application profile cases
+        run: python examples/application-profiles/run_profiles.py --check
       - name: Validate demonstrator manifest
         run: python -m json.tool evidence/demonstrator_manifest.json > /dev/null
       - name: Run hello-world example

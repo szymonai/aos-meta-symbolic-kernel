@@ -17,15 +17,16 @@
             "pages": [
               "README",
               "docs/PLAIN_LANGUAGE_OVERVIEW",
-              "docs/AI_PROBLEMS_ADDRESSED",
-              "docs/FLAGSHIP_CASE_STUDY"
+              "docs/AI_PROBLEMS_ADDRESSED"
             ]
           },
           {
             "group": "Architecture",
             "pages": [
               "docs/architecture",
+              "docs/CONTROL_SPEC",
               "docs/ABSTRACTION_MAP",
+              "docs/RUNTIME_SUBSTRATES",
               "SCOPE_OF_PROOF",
               "docs/FORMAL_CLAIMS_BOUNDARY"
             ]
@@ -34,8 +35,11 @@
             "group": "Evidence",
             "pages": [
               "docs/EVIDENCE_STATUS",
+              "docs/PUBLIC_ASSESSMENT",
+              "docs/TECHNICAL_DILIGENCE",
               "docs/LLM_ASSURANCE_EVALUATION",
-              "docs/E3_PUBLIC_DATASETS",
+              "docs/OPERATIONAL_CONTROL_REPLAY",
+              "docs/CONTROLLED_STUDY_DATASETS",
               "docs/VALUE_METRICS",
               "docs/DEMONSTRATOR_COMPARISON",
               "docs/PUBLIC_BOUNDARY",

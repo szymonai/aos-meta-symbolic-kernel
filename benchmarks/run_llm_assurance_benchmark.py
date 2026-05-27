@@ -120,10 +120,13 @@ def aos_evidence_gate_verdict(scenario: dict[str, Any]) -> tuple[str, str | None
     required = int(scenario["required_citation_count"])
     provided = int(scenario["provided_citation_count"])
     coverage = float(scenario["source_coverage"])
+    warn_coverage_threshold = float(
+        scenario.get("warn_source_coverage_threshold", 0.75)
+    )
 
     if unsupported > 0 or policy > 0 or unsafe > 0:
         verdict = "BLOCK"
-    elif provided < required or coverage < 0.75:
+    elif provided < required or coverage < warn_coverage_threshold:
         verdict = "WARN"
     else:
         verdict = "PASS"
@@ -138,6 +141,8 @@ def aos_evidence_gate_verdict(scenario: dict[str, Any]) -> tuple[str, str | None
         "unsupported_claim_count": unsupported,
         "verdict": verdict,
     }
+    if "warn_source_coverage_threshold" in scenario:
+        audit_payload["warn_source_coverage_threshold"] = warn_coverage_threshold
     return verdict, canonical_json_sha256(audit_payload)
 
 
@@ -321,7 +326,7 @@ def build_metrics(scenarios: list[dict[str, Any]]) -> dict[str, Any]:
         "schema_version": SCHEMA_VERSION,
         "benchmark_metadata": {
             "benchmark_kind": BENCHMARK_KIND,
-            "evidence_level": "E1_FIXED_OUTPUT_OFFLINE_SMOKE",
+            "evidence_level": "FIXED_OUTPUT_SMOKE",
             "public_evidence_status": (
                 "INSUFFICIENT_FOR_HIGH_QUALITY_PUBLIC_EFFECTIVENESS_PROOF"
             ),
@@ -339,9 +344,9 @@ def build_metrics(scenarios: list[dict[str, Any]]) -> dict[str, Any]:
             "statistical_interpretation": (
                 "descriptive only; no statistical significance claim"
             ),
-            "minimum_e3_upgrade": {
+            "minimum_controlled_study_upgrade": {
                 "target_evidence_level": (
-                    "E3_EFFECTIVENESS_READY_CONTROLLED_STUDY"
+                    "CONTROLLED_STUDY_EFFECTIVENESS_READY"
                 ),
                 "minimum_scenarios": 500,
                 "required_difficulty_classes": [

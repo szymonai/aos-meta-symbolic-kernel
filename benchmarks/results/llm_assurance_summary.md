@@ -8,7 +8,7 @@ public effectiveness proof.
 
 - schema: `llm-assurance-offline/v1`
 - scenarios: `20`
-- evidence level: `E1_FIXED_OUTPUT_OFFLINE_SMOKE`
+- evidence level: `FIXED_OUTPUT_SMOKE`
 - public evidence status: `INSUFFICIENT_FOR_HIGH_QUALITY_PUBLIC_EFFECTIVENESS_PROOF`
 - claim strength: `smoke_test_only`
 - technical claim: `On this fixed smoke benchmark, a deterministic evidence gate reduces silent pass-through of unsupported, policy-violating, and unsafe agent outputs versus simple local baselines while preserving replayable audit evidence.`

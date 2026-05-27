@@ -28,6 +28,32 @@ This supports a limited statement:
 - synthetic benchmark behavior;
 - bounded runtime correspondence tests.
 
+## Sufficiency Boundary
+
+| Claim | Current Lean surface |
+| --- | --- |
+| Abstract verdict-integrity claim | Sufficient for selected invariants |
+| Runtime equivalence claim | Not sufficient |
+| Signal-extraction correctness claim | Not sufficient |
+| Real-world effectiveness claim | Not sufficient |
+| Production or regulated-use claim | Not sufficient |
+
+The Lean target is a formal control-model artifact. It is valuable because it
+removes ambiguity from the published verdict contract. It should not be used as
+the main evidence that AOS improves model behavior.
+
+## Build Quality Gate
+
+The public verification path is:
+
+```bash
+lake build AOSPublicCore
+python tools/verify_public_integrity.py
+```
+
+The integrity checker rejects Lean gap terms in committed Lean sources. A clean
+Lean build plus that check supports the formal-boundary claim only.
+
 ## What Is Not Covered
 
 - full Python-to-Lean refinement;

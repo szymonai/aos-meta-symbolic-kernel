@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -23,7 +24,9 @@ CONTROLLED_ARTIFACT_EXTENSIONS = {
 
 TEXT_EXTENSIONS = {
     ".json",
+    ".lean",
     ".md",
+    ".properties",
     ".py",
     ".toml",
     ".txt",
@@ -57,7 +60,7 @@ FORBIDDEN_TEXT_PATTERNS = [
         r"\b" + "A" + "GI" + r"\b",
         r"\b" + "R" + "H" + r"\s+" + "proof",
         "mathematical" + r"\s+" + "break" + "through",
-        "32" + "92",
+        "Dataset" + r"[-_\s]*" + "32" + "92",
         "Bra" + "TS",
         "TC" + "GA",
         "Ya" + "le",
@@ -79,6 +82,22 @@ FORBIDDEN_TEXT_PATTERNS = [
         "built" + r"\s+" + "by" + r"\s+" + "AI",
         "agent" + r"[-\s]+" + "built",
         "with" + "held",
+        "FLAG" + "SHIP_CASE_STUDY",
+        "proof" + "_manifest",
+        "run_" + "e3_" + "controlled_study",
+        "E3" + "_PUBLIC_DATASETS",
+        "E1" + "_FIXED_OUTPUT",
+        "E2" + "_FIXED_OUTPUT",
+        "E3" + "_EFFECTIVENESS",
+        "E3" + "_PROTOCOL",
+        "eliminates" + r"\s+" + "risk",
+        "ensures" + r"\s+" + "safety",
+        "guaranteeing" + r"\s+" + "that" + r"\s+" + "the" + r"\s+" + "model",
+        "85" + r"\s*%" + r"\s+" + "reduction",
+        "100" + r"\s*%" + r"\s+" + "manual" + r"\s+" + "review",
+        "critical" + r"\s+" + "failure" + r"\s+" + "rate",
+        "business" + r"\s+" + "impact",
+        "regulatory" + r"\s+" + "readiness",
     )
 ]
 
@@ -86,11 +105,22 @@ FORBIDDEN_LEAN_TERMS = ("ax" + "iom", "sor" + "ry", "ad" + "mit", "un" + "safe")
 
 
 def iter_repo_files() -> list[Path]:
-    ignored_parts = {".git", ".lake", ".ruff_cache", "__pycache__"}
+    ignored_parts = {
+        ".git",
+        ".lake",
+        ".pytest_cache",
+        ".ruff_cache",
+        "__pycache__",
+        "datasets",
+        "pytest-cache-files-operational-fixture",
+    }
+    ignored_top_level_dirs = {"data"}
     return [
         path
         for path in REPO_ROOT.rglob("*")
-        if path.is_file() and not any(part in ignored_parts for part in path.parts)
+        if path.is_file()
+        and not any(part in ignored_parts for part in path.relative_to(REPO_ROOT).parts)
+        and path.relative_to(REPO_ROOT).parts[0] not in ignored_top_level_dirs
     ]
 
 
@@ -130,11 +160,16 @@ def test_readme_links_public_technical_docs() -> None:
 
     for link in (
         "SCOPE_OF_PROOF.md",
+        "docs/CONTROL_SPEC.md",
         "docs/AI_PROBLEMS_ADDRESSED.md",
         "docs/PLAIN_LANGUAGE_OVERVIEW.md",
+        "docs/RUNTIME_SUBSTRATES.md",
         "docs/SDK_BOUNDARY.md",
         "docs/PUBLIC_SURFACES.md",
         "docs/FORMAL_CLAIMS_BOUNDARY.md",
+        "docs/OPERATIONAL_CONTROL_REPLAY.md",
+        "docs/PUBLIC_ASSESSMENT.md",
+        "docs/TECHNICAL_DILIGENCE.md",
         "docs/architecture.md",
         "docs/INTEGRITY_ANCHORS.md",
         "docs/APPLICATION_PROFILES.md",
@@ -154,8 +189,10 @@ def test_required_public_docs_and_examples_exist() -> None:
         "README.md",
         "VERSION",
         "SCOPE_OF_PROOF.md",
+        "docs/CONTROL_SPEC.md",
         "docs/AI_PROBLEMS_ADDRESSED.md",
         "docs/PLAIN_LANGUAGE_OVERVIEW.md",
+        "docs/RUNTIME_SUBSTRATES.md",
         "docs/SDK_BOUNDARY.md",
         "docs/PUBLIC_SURFACES.md",
         "docs/FORMAL_CLAIMS_BOUNDARY.md",
@@ -166,8 +203,10 @@ def test_required_public_docs_and_examples_exist() -> None:
         "docs/CLEAN_ROOM_TEST.md",
         "docs/VALUE_METRICS.md",
         "docs/EVIDENCE_STATUS.md",
+        "docs/PUBLIC_ASSESSMENT.md",
+        "docs/TECHNICAL_DILIGENCE.md",
         "docs/LLM_ASSURANCE_EVALUATION.md",
-        "docs/E3_PUBLIC_DATASETS.md",
+        "docs/CONTROLLED_STUDY_DATASETS.md",
         "examples/hello-world/README.md",
         "examples/hello-world/docker-compose.yml",
         "examples/hello-world/hello_world.py",
@@ -180,6 +219,14 @@ def test_required_public_docs_and_examples_exist() -> None:
         "examples/gradio-sandbox/requirements.txt",
         "benchmarks/k6/README.md",
         "benchmarks/k6/aos_api_smoke.js",
+        "benchmarks/run_ragtruth_public_benchmark.py",
+        "benchmarks/run_operational_control_replay.py",
+        "benchmarks/results/operational_control_replay_metrics.json",
+        "benchmarks/results/operational_control_replay_summary.md",
+        "evidence/integrity_manifest.json",
+        "tests/fixtures/operational_control_replay/NAB/data/realKnownCause/fixture.csv",
+        "tests/fixtures/operational_control_replay/NAB/labels/combined_windows.json",
+        "tools/verify_public_integrity.py",
         "docs.json",
         "sonar-project.properties",
     ):
@@ -228,6 +275,8 @@ def test_public_validation_docs_use_benchmark_check_mode() -> None:
     ):
         text = (REPO_ROOT / relative_path).read_text(encoding="utf-8")
         assert "python benchmarks/run_benchmarks.py --check" in text
+        assert "python benchmarks/run_operational_control_replay.py --check" in text
+        assert "python tools/verify_public_integrity.py" in text
 
 
 def test_all_json_files_are_valid() -> None:
@@ -263,21 +312,134 @@ def test_lean_surface_links_json_input_shape_to_verdict_model() -> None:
         "exactBlockDecisionNotSilent",
         "StudyCriteria",
         "EffectivenessCriteria",
-        "e3Ready",
+        "controlledStudyReady",
         "studyDesignReady",
         "studyAuditReady",
         "studyEvidenceLevel",
         "publicEvidenceLevel",
         "effectivenessReady",
-        "e3AssessmentDoesNotOverclaim",
+        "controlledStudyAssessmentDoesNotOverclaim",
         "publicEffectivenessEvidenceRequiresProtocol",
         "publicEffectivenessEvidenceRequiresEffectivenessReady",
         "labelMappingBlocksEffectivenessReady",
-        "e3ReadyRequiresAudit",
-        "e3ReadyRequiresDesign",
-        "missingMinimumCasesBlocksE3",
+        "controlledStudyReadyRequiresAudit",
+        "controlledStudyReadyRequiresDesign",
+        "missingMinimumCasesBlocksControlledStudy",
     ):
         assert symbol in text
+
+
+def test_formal_claim_boundary_states_lean_sufficiency_limits() -> None:
+    text = (REPO_ROOT / "docs" / "FORMAL_CLAIMS_BOUNDARY.md").read_text(
+        encoding="utf-8"
+    )
+
+    required_phrases = (
+        "Abstract verdict-integrity claim",
+        "Sufficient for selected invariants",
+        "Runtime equivalence claim",
+        "Real-world effectiveness claim",
+        "Not sufficient",
+        "lake build AOSPublicCore",
+        "python tools/verify_public_integrity.py",
+    )
+    for phrase in required_phrases:
+        assert phrase in text
+
+
+def test_public_architecture_includes_signal_extraction_boundary() -> None:
+    architecture = (REPO_ROOT / "docs" / "architecture.md").read_text(
+        encoding="utf-8"
+    )
+    abstraction_map = (REPO_ROOT / "docs" / "ABSTRACTION_MAP.md").read_text(
+        encoding="utf-8"
+    )
+
+    for text in (architecture, abstraction_map):
+        assert "signal extraction / normalization" in text
+        assert "bounded" in text
+
+    assert "Operational control replay" in architecture
+    assert "operational replay measures control behavior after" in abstraction_map
+    assert "does not prove the correctness of signal extraction" in architecture
+
+
+def test_runtime_substrate_boundary_does_not_overclaim() -> None:
+    text = (REPO_ROOT / "docs" / "RUNTIME_SUBSTRATES.md").read_text(
+        encoding="utf-8"
+    )
+    architecture = (REPO_ROOT / "docs" / "architecture.md").read_text(
+        encoding="utf-8"
+    )
+    abstraction_map = (REPO_ROOT / "docs" / "ABSTRACTION_MAP.md").read_text(
+        encoding="utf-8"
+    )
+
+    for term in ("C++", "Rust", "CUDA", "PTX", "Assembly", "WASM", "eBPF"):
+        assert term in text
+
+    for phrase in (
+        "implementation options only",
+        "do not change the public AOS semantics",
+        "does not claim production latency",
+        "native-runtime equivalence",
+    ):
+        assert phrase in text
+
+    assert "Substrate Independence" in architecture
+    assert "Runtime substrate boundary" in abstraction_map
+
+
+def test_public_assessment_binds_usefulness_scale_and_evidence() -> None:
+    text = (REPO_ROOT / "docs" / "PUBLIC_ASSESSMENT.md").read_text(
+        encoding="utf-8"
+    )
+
+    for phrase in (
+        "Usefulness",
+        "Scalability",
+        "Evidence",
+        "362,774",
+        "96.55%",
+        "3.45%",
+        "12.76%",
+        "bounded production-relevant replay claim",
+        "insufficient for production effectiveness",
+        "cannot yet support",
+    ):
+        assert phrase in text
+
+    assert "AOS is production ready" in text
+    assert "AOS is clinically ready" in text
+
+
+def test_technical_diligence_boundary_is_bounded() -> None:
+    text = (REPO_ROOT / "docs" / "TECHNICAL_DILIGENCE.md").read_text(
+        encoding="utf-8"
+    )
+
+    for phrase in (
+        "investment decision",
+        "production-relevant offline replay evidence",
+        "Investor-Grade Diligence Needs A Separate Data Room",
+        "customer validation",
+        "public technical evidence: credible but bounded",
+        "commercial proof: not established in this repository",
+    ):
+        assert phrase in text
+
+
+def test_committed_test_fixtures_are_not_git_ignored() -> None:
+    for relative_path in (
+        "tests/fixtures/operational_control_replay/NAB/data/realKnownCause/fixture.csv",
+        "tests/fixtures/operational_control_replay/NAB/labels/combined_windows.json",
+    ):
+        result = subprocess.run(
+            ["git", "check-ignore", "-q", relative_path],
+            cwd=REPO_ROOT,
+            check=False,
+        )
+        assert result.returncode == 1, f"fixture is git-ignored: {relative_path}"
 
 
 def test_no_controlled_artifacts_or_model_binaries_are_committed() -> None:

@@ -1,14 +1,17 @@
 from __future__ import annotations
 
 import math
-from dataclasses import FrozenInstanceError, replace
+from dataclasses import FrozenInstanceError, asdict, replace
 
 import pytest
 
 from core.aos_public_core import (
     REFERENCE_IMPLEMENTATION_ONLY,
     DemoIntervalGate,
+    build_signal_evidence,
     derive_verdict,
+    parse_signal,
+    verify_signal_evidence,
 )
 
 
@@ -67,3 +70,40 @@ def test_abstract_verdict_function() -> None:
     assert derive_verdict(90.0, 100.0, 5.0) == "PASS"
     assert derive_verdict(96.0, 100.0, 5.0) == "WARN"
     assert derive_verdict(101.0, 100.0, 5.0) == "BLOCK"
+
+
+def test_canonical_signal_evidence_replays() -> None:
+    signal = parse_signal(
+        {
+            "limit": 9000,
+            "metadata_complete": True,
+            "score": 8200,
+            "signal_id": "demo-signal-001",
+            "uncertainty": 1200,
+            "warn_margin": 1000,
+        }
+    )
+    evidence = build_signal_evidence(signal)
+    result = verify_signal_evidence(asdict(evidence))
+
+    assert evidence.verdict == "BLOCK"
+    assert evidence.audit_id.startswith("sha256:")
+    assert result["valid"] is True
+    assert result["mismatches"] == []
+
+
+def test_incomplete_signal_blocks_before_numeric_band() -> None:
+    signal = parse_signal(
+        {
+            "limit": 9000,
+            "metadata_complete": False,
+            "score": 100,
+            "signal_id": "incomplete-signal",
+            "uncertainty": 0,
+            "warn_margin": 1000,
+        }
+    )
+    evidence = build_signal_evidence(signal)
+
+    assert evidence.verdict == "BLOCK"
+    assert evidence.reason == "Required metadata is incomplete."

@@ -1,5 +1,5 @@
 {
-  "study_id": "aos-e3-controlled-study-example",
+  "study_id": "aos-controlled-study-example",
   "evaluation_profile": "hallucination_text",
   "frozen_model_outputs": true,
   "effectiveness_design": {
@@ -17,28 +17,28 @@
       "url": "https://github.com/ParticleMedia/RAGTruth",
       "license": "MIT",
       "use": "RAG hallucination and grounding cases",
-      "e3_status": "near_direct_frozen_outputs"
+      "controlled_study_status": "near_direct_frozen_outputs"
     },
     {
       "name": "HaluEval",
       "url": "https://github.com/RUCAIBox/HaluEval",
       "license": "MIT",
       "use": "hallucination and factuality cases",
-      "e3_status": "near_direct_frozen_outputs"
+      "controlled_study_status": "near_direct_frozen_outputs"
     },
     {
       "name": "AgentDojo",
       "url": "https://github.com/ethz-spylab/agentdojo",
       "license": "MIT",
       "use": "agent and prompt-injection cases",
-      "e3_status": "requires_controlled_benchmark_run"
+      "controlled_study_status": "requires_controlled_benchmark_run"
     },
     {
       "name": "FEVER",
       "url": "https://fever.ai/dataset/fever.html",
       "license": "Wikipedia-derived license terms / CC BY-SA 3.0 fallback",
       "use": "factual support/refutation/insufficient-evidence cases",
-      "e3_status": "requires_controlled_output_generation"
+      "controlled_study_status": "requires_controlled_output_generation"
     }
   ],
   "output_generation": {

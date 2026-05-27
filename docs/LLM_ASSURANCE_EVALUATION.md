@@ -263,7 +263,7 @@ claim becomes reasonable. It requires frozen model outputs, not synthetic-only
 cases.
 
 The clean public-data order and controlled-study profiles are defined in
-[controlled-study public dataset profile](E3_PUBLIC_DATASETS.md): RAGTruth,
+[controlled-study public dataset profile](CONTROLLED_STUDY_DATASETS.md): RAGTruth,
 HaluEval, AgentDojo, then FEVER.
 
 Runnable protocol:
@@ -280,11 +280,11 @@ python benchmarks/freeze_ragtruth_outputs.py \
   --response path/to/ragtruth/response.jsonl \
   --source-info path/to/ragtruth/source_info.jsonl \
   --output path/to/frozen_outputs.jsonl \
-  --manifest-output path/to/ragtruth_e3_manifest.json
+  --manifest-output path/to/ragtruth_controlled_study_manifest.json
 
-python benchmarks/run_e3_controlled_study.py \
+python benchmarks/run_controlled_study.py \
   --input path/to/frozen_outputs.jsonl \
-  --manifest benchmarks/e3_study_manifest.example.json
+  --manifest benchmarks/controlled_study_manifest.example.json
 ```
 
 Each input record must include:

@@ -13,6 +13,24 @@ For claim-level interpretation, see
 - audit digest generation for demonstrator decisions
 - reproducible JSON evidence for the current synthetic benchmark set
 
+## Formal Sufficiency
+
+The current Lean surface is sufficient for one narrow claim:
+
+```text
+selected properties of the abstract public verdict model are formally checked
+in the pinned Lean environment
+```
+
+It is not sufficient for a system-level effectiveness or production claim.
+Those claims would require additional artifacts outside the current proof
+surface: runtime refinement, parser and IO correctness, signal-extraction
+validation, representative data, baseline comparisons, and operational tests.
+
+The public integrity check also rejects Lean gap terms in committed Lean
+sources. This prevents placeholder proofs from being published as verified
+artifacts.
+
 ## Numeric Precision Boundary
 
 The public Lean proof surface covers abstract integer verdict logic. Production

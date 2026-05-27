@@ -35,6 +35,25 @@ control. Production auditability requires a separately designed evidence layer,
 such as HMAC-backed records, signed packets, KMS-backed key handling, immutable
 log storage, retention policy, and tamper-response procedures.
 
+## Public Repository Integrity Manifest
+
+`evidence/integrity_manifest.json` records SHA-256 hashes for selected public
+specification, runtime, benchmark, proof, test, and CI artifacts. The manifest
+is checked by:
+
+```bash
+python tools/verify_public_integrity.py
+```
+
+The manifest is an internal-consistency anchor for this public repository. It
+also enforces a required set of public-critical artifacts, validates manifest
+path shape and SHA-256 format, checks public claim-boundary flags, rejects Lean
+proof-gap terms, and verifies the minimum structure of the operational replay
+evidence packet. It does not prove AOS effectiveness, production readiness,
+independent validation, or model behavior. It is not a release signature,
+software bill of materials, supply-chain attestation, or production evidence
+ledger.
+
 ## Safe Publication Rule
 
 When a future evidence packet is signed, publish only:

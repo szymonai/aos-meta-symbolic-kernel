@@ -1,212 +1,26 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import sys
-from dataclasses import asdict, dataclass
+from dataclasses import asdict
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from typing import Any, Literal, TypeAlias
+from pathlib import Path
+from typing import Any
 from urllib.parse import urlparse
 
-SCORE_SCALE = 10_000
 MAX_BODY_BYTES = 64 * 1024
-DEFAULT_POLICY_ID = "demo_gate_policy_v1"
-DEFAULT_POLICY_VERSION = "1.0.0"
 
-Verdict: TypeAlias = Literal["PASS", "WARN", "BLOCK"]
+REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 
-
-@dataclass(frozen=True, slots=True)
-class DemoSignal:
-    signal_id: str
-    score: int
-    uncertainty: int
-    limit: int
-    warn_margin: int
-    metadata_complete: bool
-    policy_id: str = DEFAULT_POLICY_ID
-    policy_version: str = DEFAULT_POLICY_VERSION
-
-
-@dataclass(frozen=True, slots=True)
-class DemoEvidence:
-    schema_version: str
-    signal_id: str
-    verdict: Verdict
-    reason: str
-    audit_id: str
-    input_digest: str
-    policy_id: str
-    policy_version: str
-    replayable: bool
-    claim_boundary: dict[str, bool]
-    input: dict[str, Any]
-
-
-def canonical_json_bytes(value: Any) -> bytes:
-    return json.dumps(
-        value,
-        sort_keys=True,
-        separators=(",", ":"),
-        ensure_ascii=False,
-        allow_nan=False,
-    ).encode("utf-8")
-
-
-def sha256_tag(value: Any) -> str:
-    digest = hashlib.sha256(canonical_json_bytes(value)).hexdigest()
-    return f"sha256:{digest}"
-
-
-def require_nat(name: str, value: Any) -> int:
-    if isinstance(value, bool) or not isinstance(value, int):
-        raise ValueError(f"{name} must be an integer")
-    if value < 0:
-        raise ValueError(f"{name} must be non-negative")
-    return value
-
-
-def require_text(name: str, value: Any) -> str:
-    if not isinstance(value, str) or not value.strip():
-        raise ValueError(f"{name} must be a non-empty string")
-    return value
-
-
-def parse_signal(payload: dict[str, Any]) -> DemoSignal:
-    required = (
-        "signal_id",
-        "score",
-        "uncertainty",
-        "limit",
-        "warn_margin",
-        "metadata_complete",
-    )
-    for field in required:
-        if field not in payload:
-            raise ValueError(f"missing required field: {field}")
-
-    metadata_complete = payload["metadata_complete"]
-    if not isinstance(metadata_complete, bool):
-        raise ValueError("metadata_complete must be boolean")
-
-    signal = DemoSignal(
-        signal_id=require_text("signal_id", payload["signal_id"]),
-        score=require_nat("score", payload["score"]),
-        uncertainty=require_nat("uncertainty", payload["uncertainty"]),
-        limit=require_nat("limit", payload["limit"]),
-        warn_margin=require_nat("warn_margin", payload["warn_margin"]),
-        metadata_complete=metadata_complete,
-        policy_id=require_text(
-            "policy_id",
-            payload.get("policy_id", DEFAULT_POLICY_ID),
-        ),
-        policy_version=require_text(
-            "policy_version",
-            payload.get("policy_version", DEFAULT_POLICY_VERSION),
-        ),
-    )
-    validate_signal_bounds(signal)
-    return signal
-
-
-def validate_signal_bounds(signal: DemoSignal) -> None:
-    for name in ("score", "uncertainty", "limit"):
-        if getattr(signal, name) > SCORE_SCALE:
-            raise ValueError(f"{name} exceeds SCORE_SCALE")
-
-    if signal.warn_margin >= signal.limit:
-        raise ValueError("warn_margin must be lower than limit")
-
-    if signal.score + signal.uncertainty > 2 * SCORE_SCALE:
-        raise ValueError("score plus uncertainty exceeds bounded demo range")
-
-
-def derive_verdict(signal: DemoSignal) -> tuple[Verdict, str]:
-    if not signal.metadata_complete:
-        return "BLOCK", "Required metadata is incomplete."
-
-    upper_bound = signal.score + signal.uncertainty
-    safe_limit = signal.limit - signal.warn_margin
-
-    if upper_bound <= safe_limit:
-        return "PASS", "Score plus uncertainty is inside the safe envelope."
-
-    if upper_bound <= signal.limit:
-        return "WARN", "Score plus uncertainty requires review."
-
-    return "BLOCK", "Score plus uncertainty exceeds the allowed envelope."
-
-
-def build_evidence(signal: DemoSignal) -> DemoEvidence:
-    verdict, reason = derive_verdict(signal)
-    input_payload = asdict(signal)
-    input_digest = sha256_tag(input_payload)
-    evidence_material = {
-        "input_digest": input_digest,
-        "policy_id": signal.policy_id,
-        "policy_version": signal.policy_version,
-        "reason": reason,
-        "schema_version": "aos-demo-evidence/v1",
-        "signal_id": signal.signal_id,
-        "verdict": verdict,
-    }
-
-    return DemoEvidence(
-        schema_version="aos-demo-evidence/v1",
-        signal_id=signal.signal_id,
-        verdict=verdict,
-        reason=reason,
-        audit_id=sha256_tag(evidence_material),
-        input_digest=input_digest,
-        policy_id=signal.policy_id,
-        policy_version=signal.policy_version,
-        replayable=True,
-        claim_boundary={
-            "external_validation_claim": False,
-            "production_use_claim": False,
-            "regulated_use_claim": False,
-        },
-        input=input_payload,
-    )
-
-
-def verify_evidence(evidence_payload: dict[str, Any]) -> dict[str, Any]:
-    if "input" not in evidence_payload:
-        raise ValueError("evidence packet has no input field")
-
-    input_payload = evidence_payload["input"]
-    if not isinstance(input_payload, dict):
-        raise ValueError("evidence input must be an object")
-
-    replayed = asdict(build_evidence(parse_signal(input_payload)))
-    checked_fields = (
-        "schema_version",
-        "signal_id",
-        "verdict",
-        "reason",
-        "audit_id",
-        "input_digest",
-        "policy_id",
-        "policy_version",
-        "replayable",
-        "claim_boundary",
-    )
-    mismatches = [
-        {
-            "field": field,
-            "expected": replayed[field],
-            "observed": evidence_payload.get(field),
-        }
-        for field in checked_fields
-        if evidence_payload.get(field) != replayed[field]
-    ]
-
-    return {
-        "valid": not mismatches,
-        "mismatches": mismatches,
-        "replayed": replayed,
-    }
+from core.aos_public_core import (  # noqa: E402
+    build_signal_evidence,
+    canonical_json_bytes,
+    parse_signal,
+    verify_signal_evidence,
+)
 
 
 class AOSDemoGateHandler(BaseHTTPRequestHandler):
@@ -224,10 +38,11 @@ class AOSDemoGateHandler(BaseHTTPRequestHandler):
         try:
             payload = self.read_json()
             if path == "/v1/evaluate":
-                self.write_json(200, asdict(build_evidence(parse_signal(payload))))
+                evidence = build_signal_evidence(parse_signal(payload))
+                self.write_json(200, asdict(evidence))
                 return
             if path == "/v1/replay":
-                self.write_json(200, verify_evidence(payload))
+                self.write_json(200, verify_signal_evidence(payload))
                 return
             self.write_json(404, {"error": "not_found"})
         except ValueError as exc:
@@ -286,7 +101,8 @@ def write_json_file(path: str, payload: dict[str, Any]) -> None:
 
 
 def command_evaluate(args: argparse.Namespace) -> int:
-    payload = asdict(build_evidence(parse_signal(load_json_file(args.input))))
+    evidence = build_signal_evidence(parse_signal(load_json_file(args.input)))
+    payload = asdict(evidence)
     if args.output:
         write_json_file(args.output, payload)
     else:
@@ -295,7 +111,7 @@ def command_evaluate(args: argparse.Namespace) -> int:
 
 
 def command_replay(args: argparse.Namespace) -> int:
-    result = verify_evidence(load_json_file(args.evidence))
+    result = verify_signal_evidence(load_json_file(args.evidence))
     print(json.dumps(result, indent=2, sort_keys=True, ensure_ascii=False))
     return 0 if result["valid"] else 1
 

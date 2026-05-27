@@ -25,10 +25,14 @@ jobs:
         run: python benchmarks/run_llm_assurance_benchmark.py --check
       - name: Check hard-case benchmark artifacts
         run: python benchmarks/run_llm_hard_case_benchmark.py --check
+      - name: Check operational control replay artifacts
+        run: python benchmarks/run_operational_control_replay.py --check
       - name: Validate benchmark metrics
         run: python -m json.tool benchmarks/results/metrics.json > /dev/null
       - name: Python tests
         run: python -m pytest tests -q
+      - name: Verify public repository integrity
+        run: python tools/verify_public_integrity.py
       - name: Validate demonstrator manifest
         run: python -m json.tool evidence/demonstrator_manifest.json > /dev/null
       - name: Run hello-world example

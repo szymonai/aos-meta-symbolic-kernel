@@ -12,10 +12,10 @@ REPO_ROOT = ROOT.parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from benchmarks import run_e3_controlled_study  # noqa: E402
+from benchmarks import run_controlled_study  # noqa: E402
 
 SCHEMA_VERSION = "aos-frozen-public-output/v1"
-REQUIRED_METRICS = sorted(run_e3_controlled_study.REQUIRED_METRICS)
+REQUIRED_METRICS = sorted(run_controlled_study.REQUIRED_METRICS)
 
 
 def canonical_json_sha256(value: Any) -> str:
@@ -138,7 +138,7 @@ def build_manifest(records: list[dict[str, Any]]) -> dict[str, Any]:
     )
     model_count = len({str(record["model_id"]) for record in records})
     return {
-        "study_id": "ragtruth-hallucination-text-e3",
+        "study_id": "ragtruth-hallucination-text-controlled-study",
         "evaluation_profile": "hallucination_text",
         "frozen_model_outputs": True,
         "dataset_sources": [
@@ -147,7 +147,7 @@ def build_manifest(records: list[dict[str, Any]]) -> dict[str, Any]:
                 "url": "https://github.com/ParticleMedia/RAGTruth",
                 "license": "MIT",
                 "use": "RAG hallucination and grounding cases",
-                "e3_status": "near_direct_frozen_outputs",
+                "controlled_study_status": "near_direct_frozen_outputs",
             }
         ],
         "output_generation": {

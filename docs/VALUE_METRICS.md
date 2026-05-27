@@ -51,6 +51,35 @@ replay digest. It does not mean that the repository publishes a production audit
 ledger, signing infrastructure, HMAC key design, immutable log store, retention
 policy, or non-repudiation mechanism.
 
+## Operational Control Replay
+
+Source: `benchmarks/results/operational_control_replay_metrics.json`
+
+This is the strongest current public effectiveness artifact. It replays public
+frozen operational time-series traces from the Numenta Anomaly Benchmark through
+a deterministic signal extractor and the AOS public gate. It is offline
+shadow-mode evidence, not production deployment evidence.
+
+| Metric | Current value |
+| --- | ---: |
+| Schema version | `operational-control-replay/v1` |
+| Source series | 58 |
+| Evaluated records | 362,774 |
+| Labeled anomaly windows | 116 |
+| AOS anomaly-window review/block rate | 96.55% |
+| AOS anomaly-window silent pass rate | 3.45% |
+| AOS record-level anomaly review/block rate | 14.68% |
+| AOS false block rate | 8.69% |
+| AOS nominal intervention rate | 12.76% |
+| AOS audit coverage rate | 100.00% |
+| AOS replay success rate | 100.00% |
+
+These values are useful because they expose the trade-off directly: the AOS
+control gate catches nearly all labeled anomaly windows at least once, but it
+also creates review/intervention load on nominal records. The result is
+production-relevant control evidence over frozen traces; it is not a claim that
+AOS is an anomaly-detection model.
+
 ## How To Read Error Metrics
 
 The public benchmark is a three-verdict control test. For a safety-control

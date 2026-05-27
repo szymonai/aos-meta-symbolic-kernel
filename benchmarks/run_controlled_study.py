@@ -15,13 +15,13 @@ if str(REPO_ROOT) not in sys.path:
 from benchmarks import run_llm_assurance_benchmark as base  # noqa: E402
 
 RESULTS_DIR = ROOT / "results"
-DEFAULT_PREFIX = "e3_controlled_study"
+DEFAULT_PREFIX = "controlled_study"
 SCHEMA_VERSION = "llm-assurance-controlled-study/v1"
-PROTOCOL_E3_LEVEL = "E3_PROTOCOL_CONTROLLED_REPRODUCIBLE_STUDY"
-PROTOCOL_NOT_E3_LEVEL = "E3_PROTOCOL_RUN_NOT_E3"
-EFFECTIVENESS_E3_LEVEL = "E3_EFFECTIVENESS_READY_CONTROLLED_STUDY"
-PROTOCOL_ONLY_LEVEL = "E3_PROTOCOL_ONLY_NO_EFFECTIVENESS_CLAIM"
-EFFECTIVENESS_NOT_READY_LEVEL = "E3_EFFECTIVENESS_NOT_READY"
+PROTOCOL_READY_LEVEL = "CONTROLLED_STUDY_PROTOCOL_READY"
+PROTOCOL_NOT_READY_LEVEL = "CONTROLLED_STUDY_PROTOCOL_NOT_READY"
+EFFECTIVENESS_READY_LEVEL = "CONTROLLED_STUDY_EFFECTIVENESS_READY"
+PROTOCOL_ONLY_LEVEL = "CONTROLLED_STUDY_PROTOCOL_ONLY_NO_EFFECTIVENESS_CLAIM"
+EFFECTIVENESS_NOT_READY_LEVEL = "CONTROLLED_STUDY_EFFECTIVENESS_NOT_READY"
 
 REQUIRED_RECORD_FIELDS = {
     "category",
@@ -211,7 +211,7 @@ def aos_metrics(metrics: dict[str, Any]) -> dict[str, Any]:
     raise ValueError("missing aos_evidence_gate metrics")
 
 
-def build_e3_assessment(
+def build_controlled_study_assessment(
     records: list[dict[str, Any]],
     manifest: dict[str, Any],
     metrics: dict[str, Any],
@@ -267,7 +267,7 @@ def build_e3_assessment(
     protocol_ready = not missing
     design = effectiveness_design(manifest)
     effectiveness_criteria = {
-        "protocol_e3_criteria_satisfied": protocol_ready,
+        "protocol_criteria_satisfied": protocol_ready,
         "independent_signal_extraction": design.get("normalized_signals_source")
         == "independent_extractor",
         "labels_not_used_as_aos_signals": design.get("labels_used_as_aos_signals")
@@ -284,8 +284,8 @@ def build_e3_assessment(
         name for name, passed in effectiveness_criteria.items() if not passed
     )
     return {
-        "e3_criteria_satisfied": protocol_ready,
-        "protocol_e3_criteria_satisfied": protocol_ready,
+        "controlled_study_criteria_satisfied": protocol_ready,
+        "protocol_criteria_satisfied": protocol_ready,
         "criteria": criteria,
         "missing_criteria": missing,
         "effectiveness_criteria_satisfied": not missing_effectiveness,
@@ -315,13 +315,13 @@ def build_e3_assessment(
 
 def evidence_levels(assessment: dict[str, Any]) -> tuple[str, str]:
     protocol_level = (
-        PROTOCOL_E3_LEVEL
-        if assessment["protocol_e3_criteria_satisfied"]
-        else PROTOCOL_NOT_E3_LEVEL
+        PROTOCOL_READY_LEVEL
+        if assessment["protocol_criteria_satisfied"]
+        else PROTOCOL_NOT_READY_LEVEL
     )
     if assessment["effectiveness_criteria_satisfied"]:
-        effectiveness_level = EFFECTIVENESS_E3_LEVEL
-    elif assessment["protocol_e3_criteria_satisfied"]:
+        effectiveness_level = EFFECTIVENESS_READY_LEVEL
+    elif assessment["protocol_criteria_satisfied"]:
         effectiveness_level = PROTOCOL_ONLY_LEVEL
     else:
         effectiveness_level = EFFECTIVENESS_NOT_READY_LEVEL
@@ -337,7 +337,7 @@ def build_metrics(
 ) -> dict[str, Any]:
     validate_records(records)
     metrics = base.build_metrics(records)
-    assessment = build_e3_assessment(records, manifest, metrics)
+    assessment = build_controlled_study_assessment(records, manifest, metrics)
     protocol_level, effectiveness_level = evidence_levels(assessment)
 
     metrics["schema_version"] = SCHEMA_VERSION
@@ -362,10 +362,10 @@ def build_metrics(
         "failures/trade-offs. Neither establishes production readiness or "
         "external replication."
     )
-    metrics["claim_boundary"]["e3_protocol_claim"] = assessment[
-        "protocol_e3_criteria_satisfied"
+    metrics["claim_boundary"]["controlled_study_protocol_claim"] = assessment[
+        "protocol_criteria_satisfied"
     ]
-    metrics["claim_boundary"]["e3_effectiveness_claim"] = assessment[
+    metrics["claim_boundary"]["controlled_study_effectiveness_claim"] = assessment[
         "effectiveness_criteria_satisfied"
     ]
     metrics["controlled_study_assessment"] = assessment
@@ -415,7 +415,7 @@ def build_summary(metrics: dict[str, Any]) -> str:
             f"- manifest SHA-256: "
             f"`{metrics['benchmark_metadata']['study_manifest_canonical_sha256']}`",
             f"- protocol criteria satisfied: "
-            f"`{str(assessment['protocol_e3_criteria_satisfied']).lower()}`",
+            f"`{str(assessment['protocol_criteria_satisfied']).lower()}`",
             f"- effectiveness criteria satisfied: "
             f"`{str(assessment['effectiveness_criteria_satisfied']).lower()}`",
             "",

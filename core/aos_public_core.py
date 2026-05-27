@@ -3,10 +3,13 @@ from __future__ import annotations
 import hashlib
 import json
 import math
-from dataclasses import dataclass
-from typing import Literal, TypeAlias
+from dataclasses import asdict, dataclass
+from typing import Any, Literal, TypeAlias
 
 REFERENCE_IMPLEMENTATION_ONLY = True
+SCORE_SCALE = 10_000
+DEFAULT_POLICY_ID = "demo_gate_policy_v1"
+DEFAULT_POLICY_VERSION = "1.0.0"
 
 Verdict: TypeAlias = Literal["PASS", "WARN", "BLOCK"]
 
@@ -28,23 +31,35 @@ def _require_finite(name: str, value: object) -> float:
     return result
 
 
+def canonical_json_bytes(value: Any) -> bytes:
+    return json.dumps(
+        value,
+        sort_keys=True,
+        separators=(",", ":"),
+        ensure_ascii=False,
+        allow_nan=False,
+    ).encode("utf-8")
+
+
+def sha256_tag(value: Any) -> str:
+    digest = hashlib.sha256(canonical_json_bytes(value)).hexdigest()
+    return f"sha256:{digest}"
+
+
 def _canonical_demo_payload(
     value: float,
     uncertainty: float,
     limit: float,
     verdict: Verdict,
 ) -> bytes:
-    return json.dumps(
+    return canonical_json_bytes(
         {
             "limit": value_to_json_number(limit),
             "uncertainty": value_to_json_number(uncertainty),
             "value": value_to_json_number(value),
             "verdict": verdict,
-        },
-        sort_keys=True,
-        separators=(",", ":"),
-        allow_nan=False,
-    ).encode("utf-8")
+        }
+    )
 
 
 def value_to_json_number(value: float) -> float:
@@ -106,3 +121,180 @@ class DemoIntervalGate:
             verdict=verdict,
             audit_digest=digest,
         )
+
+
+@dataclass(frozen=True, slots=True)
+class DemoSignal:
+    signal_id: str
+    score: int
+    uncertainty: int
+    limit: int
+    warn_margin: int
+    metadata_complete: bool
+    policy_id: str = DEFAULT_POLICY_ID
+    policy_version: str = DEFAULT_POLICY_VERSION
+
+
+@dataclass(frozen=True, slots=True)
+class DemoEvidence:
+    schema_version: str
+    signal_id: str
+    verdict: Verdict
+    reason: str
+    audit_id: str
+    input_digest: str
+    policy_id: str
+    policy_version: str
+    replayable: bool
+    claim_boundary: dict[str, bool]
+    input: dict[str, Any]
+
+
+def require_nat(name: str, value: Any) -> int:
+    if isinstance(value, bool) or not isinstance(value, int):
+        raise ValueError(f"{name} must be an integer")
+    if value < 0:
+        raise ValueError(f"{name} must be non-negative")
+    return value
+
+
+def require_text(name: str, value: Any) -> str:
+    if not isinstance(value, str) or not value.strip():
+        raise ValueError(f"{name} must be a non-empty string")
+    return value
+
+
+def parse_signal(payload: dict[str, Any]) -> DemoSignal:
+    required = (
+        "signal_id",
+        "score",
+        "uncertainty",
+        "limit",
+        "warn_margin",
+        "metadata_complete",
+    )
+    for field in required:
+        if field not in payload:
+            raise ValueError(f"missing required field: {field}")
+
+    metadata_complete = payload["metadata_complete"]
+    if not isinstance(metadata_complete, bool):
+        raise ValueError("metadata_complete must be boolean")
+
+    signal = DemoSignal(
+        signal_id=require_text("signal_id", payload["signal_id"]),
+        score=require_nat("score", payload["score"]),
+        uncertainty=require_nat("uncertainty", payload["uncertainty"]),
+        limit=require_nat("limit", payload["limit"]),
+        warn_margin=require_nat("warn_margin", payload["warn_margin"]),
+        metadata_complete=metadata_complete,
+        policy_id=require_text(
+            "policy_id",
+            payload.get("policy_id", DEFAULT_POLICY_ID),
+        ),
+        policy_version=require_text(
+            "policy_version",
+            payload.get("policy_version", DEFAULT_POLICY_VERSION),
+        ),
+    )
+    validate_signal_bounds(signal)
+    return signal
+
+
+def validate_signal_bounds(signal: DemoSignal) -> None:
+    for name in ("score", "uncertainty", "limit"):
+        if getattr(signal, name) > SCORE_SCALE:
+            raise ValueError(f"{name} exceeds SCORE_SCALE")
+
+    if signal.warn_margin >= signal.limit:
+        raise ValueError("warn_margin must be lower than limit")
+
+    if signal.score + signal.uncertainty > 2 * SCORE_SCALE:
+        raise ValueError("score plus uncertainty exceeds bounded demo range")
+
+
+def derive_signal_verdict(signal: DemoSignal) -> tuple[Verdict, str]:
+    if not signal.metadata_complete:
+        return "BLOCK", "Required metadata is incomplete."
+
+    upper_bound = signal.score + signal.uncertainty
+    safe_limit = signal.limit - signal.warn_margin
+
+    if upper_bound <= safe_limit:
+        return "PASS", "Score plus uncertainty is inside the safe envelope."
+
+    if upper_bound <= signal.limit:
+        return "WARN", "Score plus uncertainty requires review."
+
+    return "BLOCK", "Score plus uncertainty exceeds the allowed envelope."
+
+
+def build_signal_evidence(signal: DemoSignal) -> DemoEvidence:
+    verdict, reason = derive_signal_verdict(signal)
+    input_payload = asdict(signal)
+    input_digest = sha256_tag(input_payload)
+    evidence_material = {
+        "input_digest": input_digest,
+        "policy_id": signal.policy_id,
+        "policy_version": signal.policy_version,
+        "reason": reason,
+        "schema_version": "aos-demo-evidence/v1",
+        "signal_id": signal.signal_id,
+        "verdict": verdict,
+    }
+
+    return DemoEvidence(
+        schema_version="aos-demo-evidence/v1",
+        signal_id=signal.signal_id,
+        verdict=verdict,
+        reason=reason,
+        audit_id=sha256_tag(evidence_material),
+        input_digest=input_digest,
+        policy_id=signal.policy_id,
+        policy_version=signal.policy_version,
+        replayable=True,
+        claim_boundary={
+            "external_validation_claim": False,
+            "production_use_claim": False,
+            "regulated_use_claim": False,
+        },
+        input=input_payload,
+    )
+
+
+def verify_signal_evidence(evidence_payload: dict[str, Any]) -> dict[str, Any]:
+    if "input" not in evidence_payload:
+        raise ValueError("evidence packet has no input field")
+
+    input_payload = evidence_payload["input"]
+    if not isinstance(input_payload, dict):
+        raise ValueError("evidence input must be an object")
+
+    replayed = asdict(build_signal_evidence(parse_signal(input_payload)))
+    checked_fields = (
+        "schema_version",
+        "signal_id",
+        "verdict",
+        "reason",
+        "audit_id",
+        "input_digest",
+        "policy_id",
+        "policy_version",
+        "replayable",
+        "claim_boundary",
+    )
+    mismatches = [
+        {
+            "field": field,
+            "expected": replayed[field],
+            "observed": evidence_payload.get(field),
+        }
+        for field in checked_fields
+        if evidence_payload.get(field) != replayed[field]
+    ]
+
+    return {
+        "valid": not mismatches,
+        "mismatches": mismatches,
+        "replayed": replayed,
+    }

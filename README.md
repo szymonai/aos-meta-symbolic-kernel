@@ -1,6 +1,6 @@
 # AOS Meta-Symbolic Kernel
 
-[![AOS Limited Demonstrator CI](https://github.com/szymonai/aos-meta-symbolic-kernel/actions/workflows/aos-core-ci.yml/badge.svg)](https://github.com/szymonai/aos-meta-symbolic-kernel/actions/workflows/aos-core-ci.yml)
+[![AOS Limited Demonstrator CI](https://github.com/szymonhetnar/aos-meta-symbolic-kernel/actions/workflows/aos-core-ci.yml/badge.svg)](https://github.com/szymonhetnar/aos-meta-symbolic-kernel/actions/workflows/aos-core-ci.yml)
 
 Public demonstrator version: `0.1.0`
 
@@ -22,10 +22,11 @@ AI output -> quality / uncertainty / risk signal -> explicit policy
 This repository is a limited public demonstrator of that control pattern. It is
 not a production SDK, regulated-use product, or production implementation.
 
-Current public evidence status: insufficient for a high-quality public
-effectiveness proof. The included benchmarks are reproducible smoke,
-hard-case, and protocol checks; they are not yet a strong empirical proof that
-AOS improves real LLM or agent behavior under realistic conditions.
+Current public evidence status: bounded demonstrator evidence plus one
+production-relevant offline replay. The strongest empirical artifact is the
+operational control replay over public frozen time-series traces. It is not a
+production deployment proof, external validation, or a general effectiveness
+claim for all AOS applications.
 
 ## Why Meta-Symbolic Kernel?
 
@@ -44,8 +45,10 @@ Verification is one function of the kernel, alongside gating, routing, audit
 evidence generation, and policy-boundary enforcement.
 
 The public Lean surface verifies selected integrity properties of the abstract
-verdict model. It does not prove model correctness, production runtime
-correctness, Python-to-Lean refinement, or regulated-use safety.
+verdict model. This is sufficient for the narrow claim that the published
+verdict contract has selected formal invariants. It is not sufficient for model
+correctness, production runtime correctness, Python-to-Lean refinement,
+effectiveness, or regulated-use safety.
 
 This repository does not publish model internals, training pipelines, production
 domain adapters, or a full neural-symbolic research stack.
@@ -104,10 +107,12 @@ scheme, key-management design, or security recommendation.
 python -m pip install -r requirements-dev.txt
 python -m ruff check .
 python -m pytest tests -q
+python tools/verify_public_integrity.py
 python benchmarks/run_benchmarks.py --check
 python benchmarks/run_llm_assurance_benchmark.py --check
 python benchmarks/run_llm_hard_case_benchmark.py --check
-python benchmarks/run_e3_controlled_study.py --help
+python benchmarks/run_operational_control_replay.py --check
+python benchmarks/run_controlled_study.py --help
 python -m json.tool benchmarks/results/metrics.json
 lake build AOSPublicCore
 ```
@@ -136,7 +141,8 @@ python examples/api-gate/aos_api_gate.py replay \
 | API shape | Neutral `/v1/evaluate` and `/v1/replay` demonstrator |
 | Evidence | JSON evidence and local demonstrator audit digests |
 | Benchmarks | Synthetic scenarios with reproducible metrics |
-| Formal surface | Lean proof surface for abstract verdict logic |
+| Formal surface | Lean proof surface for selected abstract verdict invariants |
+| Runtime substrates | Python/Lean public substrate boundary and optional native/GPU backend roles |
 | Boundaries | Machine-readable claim flags and publication checks |
 
 ## Evidence And Verification
@@ -144,13 +150,23 @@ python examples/api-gate/aos_api_gate.py replay \
 | Claim type | Public source |
 | --- | --- |
 | Synthetic benchmark behavior | [Benchmark summary](benchmarks/results/summary.md), [metrics JSON](benchmarks/results/metrics.json) |
-| LLM and agent assurance profile | [LLM assurance benchmark](benchmarks/results/llm_assurance_summary.md), [LLM assurance metrics](benchmarks/results/llm_assurance_metrics.json), [hard-case summary](benchmarks/results/llm_hard_case_summary.md), [controlled-study runner](benchmarks/run_e3_controlled_study.py), [evaluation standard](docs/LLM_ASSURANCE_EVALUATION.md) |
+| LLM and agent assurance profile | [LLM assurance benchmark](benchmarks/results/llm_assurance_summary.md), [LLM assurance metrics](benchmarks/results/llm_assurance_metrics.json), [hard-case summary](benchmarks/results/llm_hard_case_summary.md), [controlled-study runner](benchmarks/run_controlled_study.py), [evaluation standard](docs/LLM_ASSURANCE_EVALUATION.md) |
+| Operational control replay | [Operational replay summary](benchmarks/results/operational_control_replay_summary.md), [operational replay metrics](benchmarks/results/operational_control_replay_metrics.json), [replay profile](docs/OPERATIONAL_CONTROL_REPLAY.md) |
+| Public assessment | [Usefulness, scalability, and evidence assessment](docs/PUBLIC_ASSESSMENT.md) |
+| Technical diligence boundary | [Technical diligence](docs/TECHNICAL_DILIGENCE.md) |
 | Metric interpretation | [Value metrics](docs/VALUE_METRICS.md), [Demonstrator comparison](docs/DEMONSTRATOR_COMPARISON.md) |
-| Public evidence boundaries | [Demonstrator manifest](evidence/demonstrator_manifest.json) |
+| Public evidence boundaries | [Demonstrator manifest](evidence/demonstrator_manifest.json), [Integrity manifest](evidence/integrity_manifest.json) |
 | Formal verdict scope | [Scope of Proof](SCOPE_OF_PROOF.md), [Formal Claims Boundary](docs/FORMAL_CLAIMS_BOUNDARY.md), [Lean proof surface](lean/AOSPublicCore.lean) |
 | API-shaped replay | [API gate example](examples/api-gate) |
 
 Current evidence status is summarized in [Evidence status](docs/EVIDENCE_STATUS.md).
+
+Formal proof status:
+
+- `lake build AOSPublicCore` verifies the public Lean target;
+- the public integrity checker rejects incomplete Lean proof placeholders;
+- the result is an abstract verdict-integrity proof, not an effectiveness proof
+  or full-system verification claim.
 
 The controlled-study runner separates protocol evidence from effectiveness
 evidence. Frozen outputs and replayable metrics can satisfy the protocol gate;
@@ -198,14 +214,19 @@ and [Formal Claims Boundary](docs/FORMAL_CLAIMS_BOUNDARY.md).
 ## Documentation Map
 
 - [Public architecture](docs/architecture.md)
+- [Control spec](docs/CONTROL_SPEC.md)
 - [Public surfaces](docs/PUBLIC_SURFACES.md)
+- [Runtime substrates](docs/RUNTIME_SUBSTRATES.md)
 - [Scope of Proof](SCOPE_OF_PROOF.md)
 - [Formal Claims Boundary](docs/FORMAL_CLAIMS_BOUNDARY.md)
 - [Demonstrator comparison](docs/DEMONSTRATOR_COMPARISON.md)
 - [Value metrics](docs/VALUE_METRICS.md)
 - [Evidence status](docs/EVIDENCE_STATUS.md)
+- [Public assessment](docs/PUBLIC_ASSESSMENT.md)
+- [Technical diligence](docs/TECHNICAL_DILIGENCE.md)
 - [LLM assurance evaluation](docs/LLM_ASSURANCE_EVALUATION.md)
-- [Controlled-study dataset profile](docs/E3_PUBLIC_DATASETS.md)
+- [Operational control replay](docs/OPERATIONAL_CONTROL_REPLAY.md)
+- [Controlled-study dataset profile](docs/CONTROLLED_STUDY_DATASETS.md)
 - [Integrity anchors](docs/INTEGRITY_ANCHORS.md)
 - [Dataset provenance](docs/DATASET_PROVENANCE.md)
 - [Clean-room test](docs/CLEAN_ROOM_TEST.md)

@@ -1,0 +1,249 @@
+{
+  "schema_version": "aos-public-integrity-manifest/v1",
+  "repository_role": "limited_public_demonstrator",
+  "manifest_date": "2026-05-26",
+  "integrity_command": "python tools/verify_public_integrity.py",
+  "interpretation": "Selected artifact hash consistency only. This is not effectiveness evidence, production evidence, external validation, or a proof of AI behavior.",
+  "artifact_count": 46,
+  "claim_boundary": {
+    "aos_effectiveness_claim": false,
+    "external_validation_claim": false,
+    "high_quality_public_effectiveness_proof_claim": false,
+    "production_runtime_claim": false,
+    "regulated_use_claim": false,
+    "release_signature_claim": false,
+    "supply_chain_attestation_claim": false
+  },
+  "artifacts": [
+    {
+      "path": "README.md",
+      "role": "public_entrypoint",
+      "sha256": "0426143d33955932633b1bc0ce9e8c86d23fe049484aff914b4aa9d640e4b141"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "role": "contribution_validation_contract",
+      "sha256": "4b15f84db34f7c5d04b5f26ba140931b6bd6a1d7549b36a9ccd9f58336ace08e"
+    },
+    {
+      "path": ".gitignore",
+      "role": "local_artifact_exclusions",
+      "sha256": "3e0e8ff308f3ba634838605b797ebe5618b298dac54e112aab3bdb6f4bbb3847"
+    },
+    {
+      "path": "SCOPE_OF_PROOF.md",
+      "role": "proof_scope_boundary",
+      "sha256": "263d7381e94460a423cc5b0ea1e2e6581e39256ed1d044a6b236fe934af812b3"
+    },
+    {
+      "path": "docs/CONTROL_SPEC.md",
+      "role": "control_contract",
+      "sha256": "ec19699f4115857ff4cd08671936d644cedbbf54ebab0f29780eadae203db97c"
+    },
+    {
+      "path": "docs/architecture.md",
+      "role": "public_architecture",
+      "sha256": "fba1a3c380262cabe0e53917705717dd76d6f591f258b543b662c78d9cc70078"
+    },
+    {
+      "path": "docs/ABSTRACTION_MAP.md",
+      "role": "public_abstraction_map",
+      "sha256": "37683226f9c6ee1f6172ced5d0f8b9d1f067c61379ce81b07e08f424e69593f0"
+    },
+    {
+      "path": "docs/RUNTIME_SUBSTRATES.md",
+      "role": "runtime_substrate_boundary",
+      "sha256": "3c00bb9ba36a4c40cbac5c04c6f30687822368015c7f12d6be13696437e97d30"
+    },
+    {
+      "path": "docs/PUBLIC_ASSESSMENT.md",
+      "role": "usefulness_scalability_evidence_assessment",
+      "sha256": "0daa130f8280e5be0db772aee125d6bbc432d642dd6acfc085f9af62301f1975"
+    },
+    {
+      "path": "docs/TECHNICAL_DILIGENCE.md",
+      "role": "technical_diligence_boundary",
+      "sha256": "11478a7fc1cc2a4f9aa38f03f9dfd2667d0bbbe66d145bd4c07879a85519af63"
+    },
+    {
+      "path": "docs/EVIDENCE_STATUS.md",
+      "role": "evidence_boundary",
+      "sha256": "ef1ab1b3566479ebe0c2b224b0a1f022ad64f7504150af0ed31db66b35a54dd1"
+    },
+    {
+      "path": "docs/FORMAL_CLAIMS_BOUNDARY.md",
+      "role": "formal_claim_boundary",
+      "sha256": "3483cfcb5b7a1ab293755ee901154485e826207398f2e1542d6fd94529164e82"
+    },
+    {
+      "path": "docs/INTEGRITY_ANCHORS.md",
+      "role": "integrity_anchor_boundary",
+      "sha256": "714baf1272a57a6781c46164a251d75e0ae8d3ea3f12eb37679c3ebbb4faf616"
+    },
+    {
+      "path": "docs/PUBLIC_BOUNDARY.md",
+      "role": "publication_boundary",
+      "sha256": "6606f002e8e72a8c1f06a08f1053baa621013048fcadfa5211066b19a1bee836"
+    },
+    {
+      "path": "docs/PUBLIC_SURFACES.md",
+      "role": "public_surface_map",
+      "sha256": "1c8ce606dffe20e49769981dc47d306d5c4e8e148ca320335bad19a407ae7ad1"
+    },
+    {
+      "path": "docs/LLM_ASSURANCE_EVALUATION.md",
+      "role": "llm_assurance_evaluation_boundary",
+      "sha256": "9b1bf033f71f2dacd402d6398d5fce7d5dd65613ee535a163a2bd4e2a3958928"
+    },
+    {
+      "path": "docs/CONTROLLED_STUDY_DATASETS.md",
+      "role": "controlled_study_dataset_profile",
+      "sha256": "2d8e6c01c97fb47d7f3781fbc4d91522c2906031f7d8aa064f820c5badeb5e4c"
+    },
+    {
+      "path": "docs/OPERATIONAL_CONTROL_REPLAY.md",
+      "role": "operational_control_replay_boundary",
+      "sha256": "da51529d47c15596b4ed47b86672efc0e655c10dfa711f5ad6bcf024094594c2"
+    },
+    {
+      "path": "docs.json",
+      "role": "docs_navigation",
+      "sha256": "49d30489262e9fb7030de1af2d36559b1c6f9c53e4be75afff9e2599cf3351db"
+    },
+    {
+      "path": "evidence/demonstrator_manifest.json",
+      "role": "claim_flags",
+      "sha256": "0e7e891b0957c304db79e6471307dce2ced0a09b9565925b21a81b25ddb3d76c"
+    },
+    {
+      "path": "core/aos_public_core.py",
+      "role": "canonical_public_runtime",
+      "sha256": "5744505a5d32f0cc12ec5f9413f20267d4d8a4f0004405d927bcebee2a2187c2"
+    },
+    {
+      "path": "examples/api-gate/aos_api_gate.py",
+      "role": "api_shaped_runtime_surface",
+      "sha256": "19c27464a430300668466f6641d175c7c79fb64acae410435416d0d3294f6d43"
+    },
+    {
+      "path": "benchmarks/run_benchmarks.py",
+      "role": "synthetic_benchmark_runner",
+      "sha256": "9d53196aa384d0e351b5c562f8a36b1920952563d199b4a98e900688a04c2165"
+    },
+    {
+      "path": "benchmarks/run_llm_assurance_benchmark.py",
+      "role": "llm_assurance_benchmark_runner",
+      "sha256": "03de96d9a0476354a784e8d7c83b1c778cd4f0ca5daafc076c41ace02c8fced4"
+    },
+    {
+      "path": "benchmarks/run_llm_hard_case_benchmark.py",
+      "role": "hard_case_benchmark_runner",
+      "sha256": "86ba53c0c859f4305c9a89eac1fad2eb0c439467c898654d3eda5b9e5f952fca"
+    },
+    {
+      "path": "benchmarks/controlled_study_manifest.example.json",
+      "role": "controlled_study_manifest_template",
+      "sha256": "4d2d9dadc1c1e32a568bd651022311db4ad45ba4b290cee10ba6a85ca021470e"
+    },
+    {
+      "path": "benchmarks/run_controlled_study.py",
+      "role": "controlled_study_protocol_runner",
+      "sha256": "f735fc25c8422355b1eb419347844f35685fd1059c1c08213b96b4c854966784"
+    },
+    {
+      "path": "benchmarks/run_ragtruth_public_benchmark.py",
+      "role": "ragtruth_public_benchmark_runner",
+      "sha256": "6342a750016a6fd621ff5b7f4babc85d11b421fac28228f84d45f1c7b5b72c4c"
+    },
+    {
+      "path": "benchmarks/run_operational_control_replay.py",
+      "role": "operational_control_replay_runner",
+      "sha256": "6d1bef7eb76b6da9c6324d12db1282f2cc0f4cc40586867c9e1509cf4ac39996"
+    },
+    {
+      "path": "benchmarks/results/metrics.json",
+      "role": "synthetic_benchmark_metrics",
+      "sha256": "3d9b627c526e77bf825ecb935cf5c86ac807cf20e8f7342856b6e36c7417194d"
+    },
+    {
+      "path": "benchmarks/results/llm_assurance_metrics.json",
+      "role": "llm_assurance_metrics",
+      "sha256": "c57c910f4d5f0da91082e64f169bc06f55be1740e73318e24e596471ce32c534"
+    },
+    {
+      "path": "benchmarks/results/llm_hard_case_metrics.json",
+      "role": "hard_case_metrics",
+      "sha256": "7512af7c990fe2864c7b4e883c396205621b030741e7cc260d29d2abc90a84e3"
+    },
+    {
+      "path": "benchmarks/results/operational_control_replay_metrics.json",
+      "role": "operational_control_replay_metrics",
+      "sha256": "ba2596243186d5907cbac2009158d96ce0613687cf9b4c1cbfc113cd8190bd9c"
+    },
+    {
+      "path": "benchmarks/results/operational_control_replay_summary.md",
+      "role": "operational_control_replay_summary",
+      "sha256": "7c771080998d7a57d02c8972e6a1826e3f0616a87ad2545a6d0c98165b6cde03"
+    },
+    {
+      "path": "lakefile.lean",
+      "role": "lean_build_definition",
+      "sha256": "8239e5db4763f694b65aa958db8b2f7de9a5aec6da77ec771bc085622c748a7b"
+    },
+    {
+      "path": "lean/AOSPublicCore.lean",
+      "role": "formal_verdict_surface",
+      "sha256": "b0e07ecefa66ca90cf68e74544d62aa82ef012ea998f97990c456a58b333d65f"
+    },
+    {
+      "path": "tests/test_runtime_correspondence.py",
+      "role": "runtime_correspondence_tests",
+      "sha256": "7c3ad480eb38833992adff6bc10cc75f3736faad14bef8bfa1789b3d758cfda0"
+    },
+    {
+      "path": "tests/test_benchmarks.py",
+      "role": "benchmark_regression_tests",
+      "sha256": "642b027f0f4035ef91deee6398fd6c362557a15deebc690e54dc87d280d08bde"
+    },
+    {
+      "path": "tests/fixtures/operational_control_replay/NAB/data/realKnownCause/fixture.csv",
+      "role": "operational_replay_test_fixture_series",
+      "sha256": "09b0471de4d7b1d032d16fa20cf35b8fe138dc89d0894163e51437df33d8087e"
+    },
+    {
+      "path": "tests/fixtures/operational_control_replay/NAB/labels/combined_windows.json",
+      "role": "operational_replay_test_fixture_labels",
+      "sha256": "69ae52e9381966a81a7d7144fa08b88218c02ef32ff165bab688c95d8240f1f6"
+    },
+    {
+      "path": "tests/test_publication_safety.py",
+      "role": "publication_safety_tests",
+      "sha256": "cd37648eeff879f00172699a8e886309b72a59019c1ebeee0a4073d29983e926"
+    },
+    {
+      "path": "tests/test_public_integrity.py",
+      "role": "public_integrity_tests",
+      "sha256": "f84bc66bf8aafd2478b9a99b1af32ae60b9e255925d43ae1cf5c79253b32df16"
+    },
+    {
+      "path": "tools/verify_public_integrity.py",
+      "role": "public_integrity_checker",
+      "sha256": "af824abc18f559373f79670aa30bb827044ab3f8235084dba85cad8011af8e09"
+    },
+    {
+      "path": ".github/CODEOWNERS",
+      "role": "public_ownership_boundary",
+      "sha256": "18b3eab91efcf539b13c524312b7c82c53427d7c14b0eed12fe1f3e88b5c14ab"
+    },
+    {
+      "path": ".github/pull_request_template.md",
+      "role": "public_review_checklist",
+      "sha256": "e6cc63fc2c0853639b719de487ee7bbe2cd7e4731b674244305fd1f463ba2b4b"
+    },
+    {
+      "path": ".github/workflows/aos-core-ci.yml",
+      "role": "public_ci_gate",
+      "sha256": "8718a799108f98b9d778c0669829972b9772f7e0049dca3ea90404e187905150"
+    }
+  ]
+}

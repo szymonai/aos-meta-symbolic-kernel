@@ -17,12 +17,15 @@ build/
 .env.*
 public_release_exports/
 
-# Local E3 public-dataset runs are generated evidence candidates, not committed
-# demonstrator evidence.
+# Local public-dataset diagnostic runs are generated working artifacts, not
+# committed demonstrator evidence.
 benchmarks/results/frozen_outputs.jsonl
-benchmarks/results/*_e3_manifest.json
-benchmarks/results/*_e3_metrics.json
-benchmarks/results/*_e3_summary.md
+benchmarks/results/*_controlled_study_manifest.json
+benchmarks/results/*_controlled_study_metrics.json
+benchmarks/results/*_controlled_study_summary.md
+benchmarks/results/ragtruth_*.jsonl
+benchmarks/results/ragtruth_*.json
+benchmarks/results/ragtruth_*.md
 
 # Medical or model artifacts must not be committed to the public demonstrator.
 data/
@@ -31,6 +34,10 @@ images/
 masks/
 models/
 checkpoints/
+
+# Small committed fixtures may use public dataset-like directory shapes.
+!tests/fixtures/operational_control_replay/NAB/data/
+!tests/fixtures/operational_control_replay/NAB/data/**
 *.dcm
 *.dicom
 *.nii

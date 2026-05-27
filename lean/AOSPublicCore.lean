@@ -7,16 +7,16 @@ inductive Verdict where
   deriving DecidableEq, Repr
 
 inductive EvidenceLevel where
-  | e1
-  | e2
-  | e3ProtocolRun
-  | e3
+  | fixedOutputSmoke
+  | fixedOutputHardCase
+  | controlledStudyProtocolRun
+  | controlledStudyProtocolReady
   deriving DecidableEq, Repr
 
 inductive PublicEvidenceLevel where
-  | notE3
-  | e3Protocol
-  | e3Effectiveness
+  | insufficient
+  | controlledStudyProtocol
+  | controlledStudyEffectiveness
   deriving DecidableEq, Repr
 
 def verdictRank : Verdict -> Nat
@@ -114,11 +114,14 @@ def studyAuditReady (criteria : StudyCriteria) : Bool :=
     criteria.replaySucceeded &&
     criteria.auditCoverageComplete
 
-def e3Ready (criteria : StudyCriteria) : Bool :=
+def controlledStudyReady (criteria : StudyCriteria) : Bool :=
   studyDesignReady criteria && studyAuditReady criteria
 
 def studyEvidenceLevel (criteria : StudyCriteria) : EvidenceLevel :=
-  if e3Ready criteria then EvidenceLevel.e3 else EvidenceLevel.e3ProtocolRun
+  if controlledStudyReady criteria then
+    EvidenceLevel.controlledStudyProtocolReady
+  else
+    EvidenceLevel.controlledStudyProtocolRun
 
 def effectivenessReady (criteria : EffectivenessCriteria) : Bool :=
   criteria.independentSignalExtraction &&
@@ -132,13 +135,13 @@ def effectivenessReady (criteria : EffectivenessCriteria) : Bool :=
 def publicEvidenceLevel
     (criteria : StudyCriteria)
     (effectiveness : EffectivenessCriteria) : PublicEvidenceLevel :=
-  if e3Ready criteria then
+  if controlledStudyReady criteria then
     if effectivenessReady effectiveness then
-      PublicEvidenceLevel.e3Effectiveness
+      PublicEvidenceLevel.controlledStudyEffectiveness
     else
-      PublicEvidenceLevel.e3Protocol
+      PublicEvidenceLevel.controlledStudyProtocol
   else
-    PublicEvidenceLevel.notE3
+    PublicEvidenceLevel.insufficient
 
 def jsonInputWellFormed (input : JsonGateInput) : Prop :=
   0 <= input.score ∧
@@ -263,17 +266,17 @@ theorem exactBlockDecisionNotSilent
   rw [hObservedBlock] at hObservedPass
   contradiction
 
-theorem e3AssessmentSound
+theorem controlledStudyAssessmentSound
     (criteria : StudyCriteria) :
-    e3Ready criteria = true ->
-    studyEvidenceLevel criteria = EvidenceLevel.e3 := by
+    controlledStudyReady criteria = true ->
+    studyEvidenceLevel criteria = EvidenceLevel.controlledStudyProtocolReady := by
   intro hReady
   simp [studyEvidenceLevel, hReady]
 
-theorem e3AssessmentDoesNotOverclaim
+theorem controlledStudyAssessmentDoesNotOverclaim
     (criteria : StudyCriteria) :
-    e3Ready criteria = false ->
-    studyEvidenceLevel criteria = EvidenceLevel.e3ProtocolRun := by
+    controlledStudyReady criteria = false ->
+    studyEvidenceLevel criteria = EvidenceLevel.controlledStudyProtocolRun := by
   intro hReady
   simp [studyEvidenceLevel, hReady]
 
@@ -281,10 +284,10 @@ theorem publicEffectivenessEvidenceRequiresProtocol
     (criteria : StudyCriteria)
     (effectiveness : EffectivenessCriteria) :
     publicEvidenceLevel criteria effectiveness =
-      PublicEvidenceLevel.e3Effectiveness ->
-    e3Ready criteria = true := by
+      PublicEvidenceLevel.controlledStudyEffectiveness ->
+    controlledStudyReady criteria = true := by
   intro h
-  by_cases hReady : e3Ready criteria = true
+  by_cases hReady : controlledStudyReady criteria = true
   · exact hReady
   · simp [publicEvidenceLevel, hReady] at h
 
@@ -292,10 +295,10 @@ theorem publicEffectivenessEvidenceRequiresEffectivenessReady
     (criteria : StudyCriteria)
     (effectiveness : EffectivenessCriteria) :
     publicEvidenceLevel criteria effectiveness =
-      PublicEvidenceLevel.e3Effectiveness ->
+      PublicEvidenceLevel.controlledStudyEffectiveness ->
     effectivenessReady effectiveness = true := by
   intro h
-  by_cases hReady : e3Ready criteria = true
+  by_cases hReady : controlledStudyReady criteria = true
   · simp [publicEvidenceLevel, hReady] at h
     by_cases hEffectiveness : effectivenessReady effectiveness = true
     · exact hEffectiveness
@@ -309,30 +312,30 @@ theorem labelMappingBlocksEffectivenessReady
   intro h
   simp [effectivenessReady, h]
 
-theorem e3ReadyRequiresAudit
+theorem controlledStudyReadyRequiresAudit
     (criteria : StudyCriteria) :
-    e3Ready criteria = true ->
+    controlledStudyReady criteria = true ->
     studyAuditReady criteria = true := by
   intro hReady
-  simp [e3Ready] at hReady
+  simp [controlledStudyReady] at hReady
   exact hReady.2
 
-theorem e3ReadyRequiresDesign
+theorem controlledStudyReadyRequiresDesign
     (criteria : StudyCriteria) :
-    e3Ready criteria = true ->
+    controlledStudyReady criteria = true ->
     studyDesignReady criteria = true := by
   intro hReady
-  simp [e3Ready] at hReady
+  simp [controlledStudyReady] at hReady
   exact hReady.1
 
-theorem missingMinimumCasesBlocksE3
+theorem missingMinimumCasesBlocksControlledStudy
     (criteria : StudyCriteria) :
     criteria.scenarioCount < 500 ->
-    e3Ready criteria = false := by
+    controlledStudyReady criteria = false := by
   intro hCount
   have hMinimum : decide (500 <= criteria.scenarioCount) = false := by
     simp [Nat.not_le_of_gt hCount]
-  simp [e3Ready, studyDesignReady, hMinimum]
+  simp [controlledStudyReady, studyDesignReady, hMinimum]
 
 theorem jsonWellFormedHasNonnegativeUncertainty
     (input : JsonGateInput) :

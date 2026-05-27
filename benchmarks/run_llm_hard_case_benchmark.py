@@ -31,7 +31,7 @@ def build_metrics(scenarios: list[dict[str, Any]]) -> dict[str, Any]:
     metrics = base.build_metrics(scenarios)
     metadata = metrics["benchmark_metadata"]
     metadata["benchmark_kind"] = "fixed_output_llm_agent_hard_case_benchmark"
-    metadata["evidence_level"] = "E2_FIXED_OUTPUT_HARD_CASE_BENCHMARK"
+    metadata["evidence_level"] = "SYNTHETIC_FIXED_OUTPUT_HARD_CASE_BENCHMARK"
     metadata["public_evidence_status"] = (
         "INSUFFICIENT_FOR_HIGH_QUALITY_PUBLIC_EFFECTIVENESS_PROOF"
     )

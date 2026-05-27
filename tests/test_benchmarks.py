@@ -1,15 +1,18 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 from benchmarks import (
     freeze_public_outputs,
     freeze_ragtruth_outputs,
     generate_llm_assurance_hard_cases,
-    run_e3_controlled_study,
+    run_controlled_study,
     run_latency_benchmark,
     run_llm_assurance_benchmark,
     run_llm_hard_case_benchmark,
+    run_operational_control_replay,
+    run_ragtruth_public_benchmark,
 )
 from benchmarks.run_benchmarks import (
     METRICS_PATH,
@@ -142,6 +145,118 @@ def test_latency_benchmark_reports_bounded_smoke_metrics() -> None:
         assert guard["p99_us"] >= 0
 
 
+def write_operational_replay_fixture() -> object:
+    return (
+        Path(__file__).parent
+        / "fixtures"
+        / "operational_control_replay"
+        / "NAB"
+    )
+
+
+def operational_guard_by_name(
+    metrics: dict[str, object],
+    name: str,
+) -> dict[str, object]:
+    guards = metrics["guards"]
+    assert isinstance(guards, list)
+    for guard in guards:
+        assert isinstance(guard, dict)
+        if guard["name"] == name:
+            return guard
+    raise AssertionError(f"missing operational replay guard metrics: {name}")
+
+
+def test_operational_control_replay_builds_fixture_metrics() -> None:
+    nab_root = write_operational_replay_fixture()
+    metrics = run_operational_control_replay.build_metrics(
+        nab_root=nab_root,
+        rolling_window=3,
+        min_history=3,
+    )
+    parsed = json.loads(run_operational_control_replay.metrics_to_json(metrics))
+
+    assert parsed["schema_version"] == "operational-control-replay/v1"
+    assert parsed["series_count"] == 1
+    assert parsed["anomaly_window_count"] == 1
+    assert parsed["claim_boundary"]["production_deployment_claim"] is False
+    assert parsed["benchmark_metadata"]["dataset_redistributed_in_repo"] is False
+    assert parsed["production_relevance_profile"]["claim_type"] == (
+        "production_relevant_offline_replay"
+    )
+    assert parsed["production_relevance_profile"][
+        "labels_used_as_aos_input_signals"
+    ] is False
+    assert parsed["scalability_profile"]["gate_complexity_per_signal"] == "O(1)"
+    assert parsed["auditability_profile"][
+        "aos_audit_record_expected_per_evaluated_record"
+    ] is True
+    assert parsed["falsification_profile"]["check_command"] == (
+        "python benchmarks/run_operational_control_replay.py --check"
+    )
+
+    pass_through = operational_guard_by_name(parsed, "pass_through_baseline")
+    aos = operational_guard_by_name(parsed, "aos_control_gate")
+
+    assert pass_through["anomaly_window_silent_pass_rate"] == 1.0
+    assert aos["anomaly_window_review_or_block_rate"] == 1.0
+    assert aos["audit_coverage_rate"] == 1.0
+    assert aos["replay_success_rate"] == 1.0
+    assert "offline shadow-mode" in run_operational_control_replay.build_summary(
+        parsed
+    )
+
+
+def test_committed_operational_control_replay_artifacts_are_bounded() -> None:
+    metrics_path = (
+        run_operational_control_replay.RESULTS_DIR
+        / "operational_control_replay_metrics.json"
+    )
+    summary_path = (
+        run_operational_control_replay.RESULTS_DIR
+        / "operational_control_replay_summary.md"
+    )
+    metrics = json.loads(metrics_path.read_text(encoding="utf-8"))
+    summary = summary_path.read_text(encoding="utf-8")
+
+    assert metrics["schema_version"] == "operational-control-replay/v1"
+    assert metrics["benchmark_metadata"]["dataset"] == "Numenta Anomaly Benchmark"
+    assert metrics["benchmark_metadata"]["dataset_redistributed_in_repo"] is False
+    assert metrics["claim_boundary"]["production_deployment_claim"] is False
+    assert metrics["claim_boundary"]["anomaly_detector_superiority_claim"] is False
+    assert "not a production deployment proof" in summary
+    assert "Production-Relevant Proof Profile" in summary
+    assert "Falsification Criteria" in summary
+
+    production_relevance = metrics["production_relevance_profile"]
+    scalability = metrics["scalability_profile"]
+    auditability = metrics["auditability_profile"]
+    falsification = metrics["falsification_profile"]
+
+    assert production_relevance["claim_type"] == "production_relevant_offline_replay"
+    assert production_relevance["public_operational_data"] is True
+    assert production_relevance["offline_shadow_mode"] is True
+    assert production_relevance["labels_used_as_aos_input_signals"] is False
+    assert scalability["evaluated_record_count"] == metrics["evaluated_record_count"]
+    assert scalability["series_count"] == metrics["series_count"]
+    assert scalability["gate_complexity_per_signal"] == "O(1)"
+    assert auditability["aggregate_decision_stream_sha256"] == (
+        metrics["aggregate_decision_stream_sha256"]
+    )
+    assert auditability["per_series_source_sha256"] is True
+    assert "AOS replay success falls below 100%" in " ".join(
+        falsification["falsification_conditions"]
+    )
+
+    aos = operational_guard_by_name(metrics, "aos_control_gate")
+    block_only = operational_guard_by_name(metrics, "block_only_score_baseline")
+    assert aos["anomaly_window_review_or_block_rate"] >= (
+        block_only["anomaly_window_review_or_block_rate"]
+    )
+    assert aos["audit_coverage_rate"] == 1.0
+    assert aos["replay_success_rate"] == 1.0
+
+
 def llm_guard_by_name(metrics: dict[str, object], name: str) -> dict[str, object]:
     guards = metrics["guards"]
     assert isinstance(guards, list)
@@ -166,21 +281,23 @@ def test_llm_assurance_benchmark_reports_agent_and_llm_surfaces() -> None:
 
     metadata = parsed["benchmark_metadata"]
     assert metadata["benchmark_kind"] == "fixed_output_llm_assurance_smoke"
-    assert metadata["evidence_level"] == "E1_FIXED_OUTPUT_OFFLINE_SMOKE"
+    assert metadata["evidence_level"] == "FIXED_OUTPUT_SMOKE"
     assert metadata["public_evidence_status"] == (
         "INSUFFICIENT_FOR_HIGH_QUALITY_PUBLIC_EFFECTIVENESS_PROOF"
     )
     assert metadata["claim_strength"] == "smoke_test_only"
     assert "fixed smoke benchmark" in metadata["candidate_technical_claim"]
     assert metadata["confidence_interval_method"] == "Wilson score interval, 95%"
-    assert metadata["minimum_e3_upgrade"]["minimum_scenarios"] == 500
-    assert metadata["minimum_e3_upgrade"]["target_evidence_level"] == (
-        "E3_EFFECTIVENESS_READY_CONTROLLED_STUDY"
+    assert metadata["minimum_controlled_study_upgrade"]["minimum_scenarios"] == 500
+    assert metadata["minimum_controlled_study_upgrade"]["target_evidence_level"] == (
+        "CONTROLLED_STUDY_EFFECTIVENESS_READY"
     )
-    assert "independent_signal_extraction" in metadata["minimum_e3_upgrade"][
+    assert "independent_signal_extraction" in metadata[
+        "minimum_controlled_study_upgrade"
+    ][
         "required_effectiveness_gates"
     ]
-    required_difficulty = metadata["minimum_e3_upgrade"][
+    required_difficulty = metadata["minimum_controlled_study_upgrade"][
         "required_difficulty_classes"
     ]
     assert any("prompt-injection" in item for item in required_difficulty)
@@ -243,7 +360,7 @@ def test_llm_hard_case_benchmark_reports_e2_scale_and_difficulty() -> None:
 
     assert parsed["scenario_count"] == 540
     assert parsed["benchmark_metadata"]["evidence_level"] == (
-        "E2_FIXED_OUTPUT_HARD_CASE_BENCHMARK"
+        "SYNTHETIC_FIXED_OUTPUT_HARD_CASE_BENCHMARK"
     )
     assert parsed["benchmark_metadata"]["public_evidence_status"] == (
         "INSUFFICIENT_FOR_HIGH_QUALITY_PUBLIC_EFFECTIVENESS_PROOF"
@@ -277,7 +394,7 @@ def test_llm_hard_case_artifacts_match_runner_output() -> None:
     ) == run_llm_hard_case_benchmark.build_summary(metrics) + "\n"
 
 
-def e3_fixture_records() -> list[dict[str, object]]:
+def controlled_study_fixture_records() -> list[dict[str, object]]:
     records: list[dict[str, object]] = []
     for record in generate_llm_assurance_hard_cases.build_scenarios():
         output = str(record["model_output"])
@@ -287,17 +404,17 @@ def e3_fixture_records() -> list[dict[str, object]]:
                 "freeze_schema_version": "aos-frozen-public-output/v1",
                 "source_dataset": "public-fixture",
                 "source_split": "test",
-                "source_record_sha256": run_e3_controlled_study.text_sha256(
+                "source_record_sha256": run_controlled_study.text_sha256(
                     record["id"]
                 ),
                 "model_id": "fixture-model-v1",
-                "model_output_sha256": run_e3_controlled_study.text_sha256(output),
+                "model_output_sha256": run_controlled_study.text_sha256(output),
             }
         )
     return records
 
 
-def e3_manifest(
+def controlled_study_manifest(
     *,
     frozen: bool = True,
     effectiveness_ready: bool = False,
@@ -323,7 +440,7 @@ def e3_manifest(
             "tradeoff_metrics_reported": True,
         }
     return {
-        "study_id": "fixture-e3-study",
+        "study_id": "fixture-controlled-study",
         "evaluation_profile": "full_stack",
         "frozen_model_outputs": frozen,
         "effectiveness_design": effectiveness_design,
@@ -347,26 +464,26 @@ def e3_manifest(
             {"name": "prompt_guardrail_sim", "version": "local"},
             {"name": "aos_evidence_gate", "version": "local"},
         ],
-        "predefined_metrics": sorted(run_e3_controlled_study.REQUIRED_METRICS),
+        "predefined_metrics": sorted(run_controlled_study.REQUIRED_METRICS),
     }
 
 
-def test_e3_controlled_study_protocol_can_satisfy_e3_criteria() -> None:
-    metrics = run_e3_controlled_study.build_metrics(
-        e3_fixture_records(),
-        e3_manifest(),
+def test_controlled_study_protocol_can_satisfy_protocol_criteria() -> None:
+    metrics = run_controlled_study.build_metrics(
+        controlled_study_fixture_records(),
+        controlled_study_manifest(),
     )
     assessment = metrics["controlled_study_assessment"]
 
     assert metrics["schema_version"] == "llm-assurance-controlled-study/v1"
     assert metrics["benchmark_metadata"]["evidence_level"] == (
-        "E3_PROTOCOL_ONLY_NO_EFFECTIVENESS_CLAIM"
+        "CONTROLLED_STUDY_PROTOCOL_ONLY_NO_EFFECTIVENESS_CLAIM"
     )
     assert metrics["benchmark_metadata"]["protocol_evidence_level"] == (
-        "E3_PROTOCOL_CONTROLLED_REPRODUCIBLE_STUDY"
+        "CONTROLLED_STUDY_PROTOCOL_READY"
     )
-    assert assessment["e3_criteria_satisfied"] is True
-    assert assessment["protocol_e3_criteria_satisfied"] is True
+    assert assessment["controlled_study_criteria_satisfied"] is True
+    assert assessment["protocol_criteria_satisfied"] is True
     assert assessment["effectiveness_criteria_satisfied"] is False
     assert assessment["missing_criteria"] == []
     assert "labels_not_used_as_aos_signals" in assessment[
@@ -384,50 +501,50 @@ def test_e3_controlled_study_protocol_can_satisfy_e3_criteria() -> None:
     assert assessment["criteria"]["aos_audit_coverage"] is True
 
 
-def test_e3_controlled_study_protocol_does_not_overclaim() -> None:
-    records = e3_fixture_records()[:20]
-    metrics = run_e3_controlled_study.build_metrics(
+def test_controlled_study_protocol_does_not_overclaim() -> None:
+    records = controlled_study_fixture_records()[:20]
+    metrics = run_controlled_study.build_metrics(
         records,
-        e3_manifest(frozen=False),
+        controlled_study_manifest(frozen=False),
     )
     assessment = metrics["controlled_study_assessment"]
 
     assert metrics["benchmark_metadata"]["evidence_level"] == (
-        "E3_EFFECTIVENESS_NOT_READY"
+        "CONTROLLED_STUDY_EFFECTIVENESS_NOT_READY"
     )
     assert metrics["benchmark_metadata"]["protocol_evidence_level"] == (
-        "E3_PROTOCOL_RUN_NOT_E3"
+        "CONTROLLED_STUDY_PROTOCOL_NOT_READY"
     )
-    assert assessment["e3_criteria_satisfied"] is False
+    assert assessment["controlled_study_criteria_satisfied"] is False
     assert assessment["effectiveness_criteria_satisfied"] is False
     assert "minimum_500_cases" in assessment["missing_criteria"]
     assert "frozen_model_outputs" in assessment["missing_criteria"]
-    assert "protocol_e3_criteria_satisfied" in assessment[
+    assert "protocol_criteria_satisfied" in assessment[
         "missing_effectiveness_criteria"
     ]
 
 
-def test_e3_effectiveness_claim_requires_independent_normalization_design() -> None:
-    metrics = run_e3_controlled_study.build_metrics(
-        e3_fixture_records(),
-        e3_manifest(effectiveness_ready=True),
+def test_effectiveness_claim_requires_independent_normalization_design() -> None:
+    metrics = run_controlled_study.build_metrics(
+        controlled_study_fixture_records(),
+        controlled_study_manifest(effectiveness_ready=True),
     )
     assessment = metrics["controlled_study_assessment"]
 
     assert metrics["benchmark_metadata"]["evidence_level"] == (
-        "E3_EFFECTIVENESS_READY_CONTROLLED_STUDY"
+        "CONTROLLED_STUDY_EFFECTIVENESS_READY"
     )
     assert metrics["benchmark_metadata"]["protocol_evidence_level"] == (
-        "E3_PROTOCOL_CONTROLLED_REPRODUCIBLE_STUDY"
+        "CONTROLLED_STUDY_PROTOCOL_READY"
     )
-    assert assessment["protocol_e3_criteria_satisfied"] is True
+    assert assessment["protocol_criteria_satisfied"] is True
     assert assessment["effectiveness_criteria_satisfied"] is True
     assert assessment["missing_effectiveness_criteria"] == []
-    assert metrics["claim_boundary"]["e3_protocol_claim"] is True
-    assert metrics["claim_boundary"]["e3_effectiveness_claim"] is True
+    assert metrics["claim_boundary"]["controlled_study_protocol_claim"] is True
+    assert metrics["claim_boundary"]["controlled_study_effectiveness_claim"] is True
 
 
-def test_e3_text_profile_does_not_require_agent_categories() -> None:
+def test_controlled_text_profile_does_not_require_agent_categories() -> None:
     records: list[dict[str, object]] = []
     for difficulty in [f"D{index}" for index in range(1, 7)]:
         for category in ("SUPPORTED", "UNSUPPORTED"):
@@ -440,12 +557,12 @@ def test_e3_text_profile_does_not_require_agent_categories() -> None:
                         "freeze_schema_version": "aos-frozen-public-output/v1",
                         "source_dataset": "public-text-fixture",
                         "source_split": "test",
-                        "source_record_sha256": run_e3_controlled_study.text_sha256(
+                        "source_record_sha256": run_controlled_study.text_sha256(
                             f"{difficulty}-{category}-{index}"
                         ),
                         "model_id": "fixture-model-v1",
                         "model_output": output,
-                        "model_output_sha256": run_e3_controlled_study.text_sha256(
+                        "model_output_sha256": run_controlled_study.text_sha256(
                             output
                         ),
                         "category": category,
@@ -462,19 +579,92 @@ def test_e3_text_profile_does_not_require_agent_categories() -> None:
                     }
                 )
 
-    manifest = e3_manifest()
+    manifest = controlled_study_manifest()
     manifest["evaluation_profile"] = "hallucination_text"
-    metrics = run_e3_controlled_study.build_metrics(records, manifest)
+    metrics = run_controlled_study.build_metrics(records, manifest)
     assessment = metrics["controlled_study_assessment"]
 
     assert metrics["benchmark_metadata"]["evidence_level"] == (
-        "E3_PROTOCOL_ONLY_NO_EFFECTIVENESS_CLAIM"
+        "CONTROLLED_STUDY_PROTOCOL_ONLY_NO_EFFECTIVENESS_CLAIM"
     )
     assert assessment["effectiveness_criteria_satisfied"] is False
-    assert assessment["evaluation_profile"] == "hallucination_text"
-    assert assessment["required_categories"] == ["SUPPORTED", "UNSUPPORTED"]
-    assert assessment["criteria"]["required_categories_covered"] is True
-    assert assessment["criteria"]["required_difficulties_covered"] is True
+
+
+def test_ragtruth_public_normalizer_does_not_use_labels_as_aos_signals() -> None:
+    supported = run_ragtruth_public_benchmark.normalize_row(
+        {
+            "id": 1,
+            "source_id": 10,
+            "model": "fixture-model",
+            "split": "test",
+            "quality": "good",
+            "labels": [],
+            "response": "Paris is the capital of France.",
+            "source_info": "France has Paris as its capital city.",
+            "prompt": "Answer from the provided source.",
+            "task_type": "QA",
+        }
+    )
+    unsupported = run_ragtruth_public_benchmark.normalize_row(
+        {
+            "id": 2,
+            "source_id": 11,
+            "model": "fixture-model",
+            "split": "test",
+            "quality": "good",
+            "labels": [{"start": 0, "end": 5, "label_type": "hallucination"}],
+            "response": "The system supports private production credentials.",
+            "source_info": "The public demo contains no production credentials.",
+            "prompt": "Answer from the provided source.",
+            "task_type": "QA",
+        }
+    )
+
+    assert supported["category"] == "SUPPORTED"
+    assert supported["expected_aos_verdict"] == "PASS"
+    assert unsupported["category"] == "UNSUPPORTED"
+    assert unsupported["expected_aos_verdict"] == "BLOCK"
+    assert supported["signal_extraction"]["labels_used_as_aos_signals"] is False
+    assert unsupported["signal_extraction"]["labels_used_as_aos_signals"] is False
+    assert supported["warn_source_coverage_threshold"] == 0.85
+    assert unsupported["warn_source_coverage_threshold"] == 0.85
+    assert "ragtruth_label_count" in unsupported
+    assert "unsupported_claim_count" in unsupported
+
+
+def test_ragtruth_public_manifest_keeps_effectiveness_boundary() -> None:
+    records = [
+        run_ragtruth_public_benchmark.normalize_row(
+            {
+                "id": 1,
+                "source_id": 10,
+                "model": "fixture-model",
+                "split": "test",
+                "quality": "good",
+                "labels": [],
+                "response": "Paris is the capital of France.",
+                "source_info": "France has Paris as its capital city.",
+                "prompt": "Answer from the provided source.",
+                "task_type": "QA",
+            }
+        )
+    ]
+    manifest = run_ragtruth_public_benchmark.build_manifest(
+        records,
+        dataset="leobianco/ragtruth",
+        config="default",
+        split="test",
+        fetched_rows=1,
+        warn_source_coverage_threshold=0.85,
+    )
+
+    design = manifest["effectiveness_design"]
+    policy = manifest["aos_policy"]
+    assert design["normalized_signals_source"] == "independent_extractor"
+    assert design["labels_used_as_aos_signals"] is False
+    assert design["held_out_manual_audit_present"] is False
+    assert policy["warn_source_coverage_threshold"] == 0.85
+    assert "not a production-readiness" in manifest["claim_boundary"]
 
 
 def test_ragtruth_freezer_creates_text_profile_records() -> None:
@@ -536,7 +726,7 @@ def test_ragtruth_freezer_creates_text_profile_records() -> None:
     assert records[1]["expected_aos_verdict"] == "BLOCK"
 
 
-def test_freeze_public_outputs_creates_e3_compatible_records() -> None:
+def test_freeze_public_outputs_creates_controlled_study_compatible_records() -> None:
     row = {
         "id": "public-001",
         "model_output": "The claim is supported by the supplied evidence.",

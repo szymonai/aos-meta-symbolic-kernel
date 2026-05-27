@@ -11,6 +11,7 @@ without expanding the public technical boundary.
 | Interactive sandbox | `examples/gradio-sandbox/` | Synthetic `PASS` / `WARN` / `BLOCK` demo |
 | Code-quality gate | `sonar-project.properties` | Optional SonarQube Cloud project configuration |
 | Load smoke test | `benchmarks/k6/` | Synthetic API smoke benchmark for the demo gate |
+| Integrity check | `tools/verify_public_integrity.py` | Local consistency check for selected public artifacts |
 
 ## Boundary
 

@@ -24,6 +24,7 @@
             "group": "Architecture",
             "pages": [
               "docs/architecture",
+              "docs/ENGINEERING_PROOF",
               "docs/CONTROL_SPEC",
               "docs/ABSTRACTION_MAP",
               "docs/RUNTIME_SUBSTRATES",

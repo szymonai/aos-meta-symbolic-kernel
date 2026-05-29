@@ -64,6 +64,8 @@ REQUIRED_INTEGRITY_PATHS = {
     "examples/minimal-runtime/minimal_runtime.py",
     "lakefile.lean",
     "lean/AOSPublicCore.lean",
+    "pyproject.toml",
+    "tests/test_aos_public_core.py",
     "tests/fixtures/operational_control_replay/NAB/data/realKnownCause/fixture.csv",
     "tests/fixtures/operational_control_replay/NAB/labels/combined_windows.json",
     "tests/test_engineering_examples.py",

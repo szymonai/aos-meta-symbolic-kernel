@@ -4,6 +4,7 @@ import hashlib
 import json
 import math
 from dataclasses import asdict, dataclass
+from decimal import Decimal, InvalidOperation
 from typing import Any, Literal, TypeAlias
 
 REFERENCE_IMPLEMENTATION_ONLY = True
@@ -15,6 +16,18 @@ Verdict: TypeAlias = Literal["PASS", "WARN", "BLOCK"]
 
 
 def derive_verdict(upper_bound: float, limit: float, warn_margin: float) -> Verdict:
+    return _derive_verdict_decimal(
+        _decimal_from_number("upper_bound", upper_bound),
+        _decimal_from_number("limit", limit),
+        _decimal_from_number("warn_margin", warn_margin),
+    )
+
+
+def _derive_verdict_decimal(
+    upper_bound: Decimal,
+    limit: Decimal,
+    warn_margin: Decimal,
+) -> Verdict:
     if upper_bound > limit:
         return "BLOCK"
     if upper_bound > limit - warn_margin:
@@ -27,6 +40,18 @@ def _require_finite(name: str, value: object) -> float:
         raise TypeError(f"{name} must be numeric")
     result = float(value)
     if not math.isfinite(result):
+        raise ValueError(f"{name} must be finite")
+    return result
+
+
+def _decimal_from_number(name: str, value: object) -> Decimal:
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        raise TypeError(f"{name} must be numeric")
+    try:
+        result = Decimal(str(value))
+    except InvalidOperation as exc:
+        raise ValueError(f"{name} must be finite") from exc
+    if not result.is_finite():
         raise ValueError(f"{name} must be finite")
     return result
 
@@ -109,8 +134,13 @@ class DemoIntervalGate:
         if uncertainty < 0:
             raise ValueError("uncertainty must be non-negative")
 
-        upper_bound = _require_finite("upper_bound", value + uncertainty)
-        verdict = derive_verdict(upper_bound, self.limit, self.warn_margin)
+        _require_finite("upper_bound", value + uncertainty)
+        verdict = _derive_verdict_decimal(
+            _decimal_from_number("value", value)
+            + _decimal_from_number("uncertainty", uncertainty),
+            _decimal_from_number("limit", self.limit),
+            _decimal_from_number("warn_margin", self.warn_margin),
+        )
         payload = _canonical_demo_payload(value, uncertainty, self.limit, verdict)
         digest = hashlib.sha256(payload).hexdigest()
 

@@ -139,7 +139,7 @@ separating public evidence from production-system material.
 Source: `docs/CLEAN_ROOM_TEST.md`
 
 The clean-room test is the public repeatability check. A reviewer should be able
-to clone the repository, install development requirements, run linting and
+to clone the repository, install development dependencies, run linting and
 tests, rebuild the benchmark metrics, parse the evidence JSON files, and build
 the public Lean target using only the repository contents.
 

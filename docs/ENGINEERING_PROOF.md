@@ -82,6 +82,25 @@ Included application surfaces:
 These are not deployments. They are concrete input-to-verdict checks that show
 how the same minimal runtime is applied across domains.
 
+## Production Hardening Gates
+
+These gates are not part of the current public proof surface. They are the
+minimum engineering layers required before stronger production claims.
+
+| Gate | Current public status | Required artifact |
+| --- | --- | --- |
+| Real online deployment | not included | live or shadow service run with traffic, SLOs, incident handling, and replayed logs |
+| Stateful multi-agent governance | not included | state machine, tool/session identity, policy conflict handling, and replayable agent traces |
+| Adversarial replay attacks | not established | anti-replay model, tamper tests, nonce or timestamp policy, and malicious replay suite |
+| Trusted uncertainty extraction | not established | calibrated extractor, provenance checks, drift tests, and independent extraction audit |
+| Policy DSL | not included | versioned grammar, parser, semantics, fixtures, and migration tests |
+| Signed audit attestations | not included | signing format, key-management boundary, verifier, rotation policy, and negative tests |
+| Formal runtime correspondence proof | not included | Python-to-Lean or spec-to-runtime refinement proof covering parser and verdict behavior |
+
+Until those artifacts exist, the public claim remains bounded to deterministic
+runtime behavior, executable examples, replay checks, benchmark regression, and
+the abstract Lean verdict surface.
+
 ## Hard Failure Conditions
 
 The public engineering claim fails if:

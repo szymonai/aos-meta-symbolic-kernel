@@ -90,7 +90,7 @@ scheme, key-management design, or security recommendation.
 ## Quickstart
 
 ```bash
-python -m pip install -r requirements-dev.txt
+python -m pip install -e .[dev]
 python -m ruff check .
 python -m pytest tests -q
 python tools/verify_public_integrity.py
@@ -103,6 +103,13 @@ python benchmarks/run_operational_control_replay.py --check
 python benchmarks/run_controlled_study.py --help
 python -m json.tool benchmarks/results/metrics.json
 lake build AOSPublicCore
+```
+
+Optional local mutation check:
+
+```bash
+python -m pip install -e .[mutation]
+python -m mutmut run
 ```
 
 Minimal example:

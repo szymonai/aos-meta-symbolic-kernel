@@ -29,6 +29,7 @@
 
 ## Validation
 
+- [ ] `python -m pip install -e .[dev]`
 - [ ] `python -m ruff check .`
 - [ ] `python -m pytest tests -q`
 - [ ] `python tools/verify_public_integrity.py`

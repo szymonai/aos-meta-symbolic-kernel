@@ -1,3 +1,33 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aos-meta-symbolic-kernel"
+version = "0.1.0"
+description = "Limited public demonstrator for a meta-symbolic AI control kernel."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "Szymon Hetnar" }]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.2.0",
+    "ruff>=0.6.0",
+]
+mutation = [
+    "mutmut>=3.2.0",
+]
+
+[tool.setuptools.packages.find]
+include = ["benchmarks*", "core*"]
+exclude = ["tests*"]
+
+[tool.pytest.ini_options]
+addopts = "-p no:cacheprovider"
+
 [tool.ruff]
 line-length = 88
 target-version = "py310"

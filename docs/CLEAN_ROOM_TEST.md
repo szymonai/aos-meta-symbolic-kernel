@@ -6,7 +6,7 @@ fresh public checkout using only the repository contents.
 ## Commands
 
 ```bash
-python -m pip install -r requirements-dev.txt
+python -m pip install -e .[dev]
 python -m ruff check .
 python -m pytest tests -q
 python tools/verify_public_integrity.py

@@ -28,6 +28,14 @@ def test_pass_warn_block_boundaries() -> None:
     assert gate.evaluate(99.0, 1.1).verdict == "BLOCK"
 
 
+def test_decimal_interval_boundaries_for_non_integer_inputs() -> None:
+    gate = DemoIntervalGate(limit=0.3, warn_margin=0.1)
+
+    assert gate.evaluate(0.1, 0.1).verdict == "PASS"
+    assert gate.evaluate(0.1, 0.2).verdict == "WARN"
+    assert gate.evaluate(0.1, 0.20000000000000004).verdict == "BLOCK"
+
+
 def test_demo_audit_digest_detects_tampering() -> None:
     record = DemoIntervalGate(100.0, 5.0).evaluate(90.0, 2.0)
 
@@ -90,6 +98,50 @@ def test_canonical_signal_evidence_replays() -> None:
     assert evidence.audit_id.startswith("sha256:")
     assert result["valid"] is True
     assert result["mismatches"] == []
+
+
+def test_demo_signal_evidence_contract_is_unchanged() -> None:
+    signal = parse_signal(
+        {
+            "limit": 9000,
+            "metadata_complete": True,
+            "score": 8200,
+            "signal_id": "demo-signal-001",
+            "uncertainty": 1200,
+            "warn_margin": 1000,
+        }
+    )
+
+    assert asdict(build_signal_evidence(signal)) == {
+        "audit_id": (
+            "sha256:e545f9db7dac16f41dd2aef400efb377e47d4d8afee34a6736a408b1254bca7e"
+        ),
+        "claim_boundary": {
+            "external_validation_claim": False,
+            "production_use_claim": False,
+            "regulated_use_claim": False,
+        },
+        "input": {
+            "limit": 9000,
+            "metadata_complete": True,
+            "policy_id": "demo_gate_policy_v1",
+            "policy_version": "1.0.0",
+            "score": 8200,
+            "signal_id": "demo-signal-001",
+            "uncertainty": 1200,
+            "warn_margin": 1000,
+        },
+        "input_digest": (
+            "sha256:fc96f9b6deb3d6c25efed961dcff5888fb0b20f68e89e3cbab4a5edc47ccb8fc"
+        ),
+        "policy_id": "demo_gate_policy_v1",
+        "policy_version": "1.0.0",
+        "reason": "Score plus uncertainty exceeds the allowed envelope.",
+        "replayable": True,
+        "schema_version": "aos-demo-evidence/v1",
+        "signal_id": "demo-signal-001",
+        "verdict": "BLOCK",
+    }
 
 
 def test_incomplete_signal_blocks_before_numeric_band() -> None:

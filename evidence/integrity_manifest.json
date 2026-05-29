@@ -4,7 +4,7 @@
   "manifest_date": "2026-05-26",
   "integrity_command": "python tools/verify_public_integrity.py",
   "interpretation": "Selected artifact hash consistency only. This is not effectiveness evidence, production evidence, external validation, or a proof of AI behavior.",
-  "artifact_count": 53,
+  "artifact_count": 55,
   "claim_boundary": {
     "aos_effectiveness_claim": false,
     "external_validation_claim": false,
@@ -18,12 +18,12 @@
     {
       "path": "README.md",
       "role": "public_entrypoint",
-      "sha256": "c57cc3a395230ef4951284922649b9ff7ecf5f2e28ee282b6b009971adb01535"
+      "sha256": "3ac0b700da66c7fb27782881d5169e771b00784e5623a5bc311e49ad9f0b23e4"
     },
     {
       "path": "CONTRIBUTING.md",
       "role": "contribution_validation_contract",
-      "sha256": "8c425c5e26745c0353aa3dfa41b004d4199cfe202f9c761c561dcb7e573ad6d4"
+      "sha256": "1f5f0dea32e1fa5c09a0476373d7ccd8b87b79b72a2b773b8f0475d38a371c49"
     },
     {
       "path": ".gitignore",
@@ -34,6 +34,11 @@
       "path": "SCOPE_OF_PROOF.md",
       "role": "proof_scope_boundary",
       "sha256": "263d7381e94460a423cc5b0ea1e2e6581e39256ed1d044a6b236fe934af812b3"
+    },
+    {
+      "path": "pyproject.toml",
+      "role": "python_project_configuration",
+      "sha256": "6b5b87763dcbed1d0cf8ae2fca120ecbd699bbb3da3e00dbce8d9420a6ba47b9"
     },
     {
       "path": "docs/CONTROL_SPEC.md",
@@ -103,7 +108,7 @@
     {
       "path": "docs/ENGINEERING_PROOF.md",
       "role": "engineering_proof_surface",
-      "sha256": "0daa20c9bde3489f98c6dc648b13f921b6b548c256b50ce7ca380ba18eff8461"
+      "sha256": "5303593f72a28a6ec190ab1bf7dffd8605f032d2bd86a9abdce5f41679f88b17"
     },
     {
       "path": "docs/OPERATIONAL_CONTROL_REPLAY.md",
@@ -148,7 +153,7 @@
     {
       "path": "core/aos_public_core.py",
       "role": "canonical_public_runtime",
-      "sha256": "5744505a5d32f0cc12ec5f9413f20267d4d8a4f0004405d927bcebee2a2187c2"
+      "sha256": "e3c255cea543c91fd6d93757fdd6fd36a819ad7d7a46532e0d143999138e582b"
     },
     {
       "path": "examples/api-gate/aos_api_gate.py",
@@ -231,6 +236,11 @@
       "sha256": "7c3ad480eb38833992adff6bc10cc75f3736faad14bef8bfa1789b3d758cfda0"
     },
     {
+      "path": "tests/test_aos_public_core.py",
+      "role": "public_runtime_contract_tests",
+      "sha256": "1e2446ab6a59f45d2f79a5fbe56b76620f6ff55a7766b127351c71735878335a"
+    },
+    {
       "path": "tests/test_benchmarks.py",
       "role": "benchmark_regression_tests",
       "sha256": "642b027f0f4035ef91deee6398fd6c362557a15deebc690e54dc87d280d08bde"
@@ -248,7 +258,7 @@
     {
       "path": "tests/test_publication_safety.py",
       "role": "publication_safety_tests",
-      "sha256": "cb2cf0345f406e46508056182d3365ee82f91c4c73890f67da71b2bf41ab5191"
+      "sha256": "23f9cb0377e660704759088e5aaa65a5377ec49f6f5501a3e0312b4aeade9d6a"
     },
     {
       "path": "tests/test_public_integrity.py",
@@ -263,7 +273,7 @@
     {
       "path": "tools/verify_public_integrity.py",
       "role": "public_integrity_checker",
-      "sha256": "2c1b959a8cfaf3f4085ae4ad48cc0b18a086e4c17497298e5df7e7b603c219ce"
+      "sha256": "fb9f3f60b74a0befd0a8befcc8875919c823943e9bc5600c2e8c36a63ffbd728"
     },
     {
       "path": ".github/CODEOWNERS",
@@ -273,12 +283,12 @@
     {
       "path": ".github/pull_request_template.md",
       "role": "public_review_checklist",
-      "sha256": "2f45d22a367a0cf8f5968e144170a3c0ba249d8d36524b7dc5f30f154b5d69e2"
+      "sha256": "d8f306c5d3c667b78d5f1fe597f47c6455b0601cc4170e0a946acb20e495209c"
     },
     {
       "path": ".github/workflows/aos-core-ci.yml",
       "role": "public_ci_gate",
-      "sha256": "0e54b59be60a32e7b09b6efaafd29f6df90e60b9b09e1064f751f597fb8f692d"
+      "sha256": "8fe2ff9f5e4db558fec04009e01b034c3f9b182672f98f0008814bf8164d5125"
     }
   ]
 }

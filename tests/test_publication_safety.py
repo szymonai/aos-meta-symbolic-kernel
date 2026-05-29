@@ -435,6 +435,14 @@ def test_engineering_proof_surface_is_executable_and_concrete() -> None:
         "Minimal Runtime",
         "Concrete Application Cases",
         "Quantum job gate",
+        "Production Hardening Gates",
+        "Real online deployment",
+        "Stateful multi-agent governance",
+        "Adversarial replay attacks",
+        "Trusted uncertainty extraction",
+        "Policy DSL",
+        "Signed audit attestations",
+        "Formal runtime correspondence proof",
         "Hard Failure Conditions",
     ):
         assert phrase in text
